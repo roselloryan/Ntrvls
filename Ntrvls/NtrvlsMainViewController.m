@@ -5,20 +5,26 @@
 
 #import "NtrvlsMainViewController.h"
 #import "TimerPrepVC.h"
+#import "UIColor+UIColorExtension.h"
+#import "NtrvlsDataStore.h"
+//#import "NtrvlWorkout.h"
+#import "NtrvlWorkout+CoreDataProperties.h"
+
 
 CGFloat const iPhone4sHeight = 480.0f;
 static CGFloat const topConstraintConstantFor4s = 0.0f;
 static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 
+
 @interface NtrvlsMainViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) NtrvlsDataStore *sharedNtrvlsDataStore;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
 
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSArray *workoutsArray;
 
 @end
 
@@ -30,8 +36,10 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-
     
+    self.sharedNtrvlsDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
+    
+    [self createTabataWorkout];
     
     // adjust constraints for tiny 4s screen
     if (self.view.frame.size.height == iPhone4sHeight) {
@@ -43,9 +51,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     else {
         self.tableView.rowHeight = self.tableView.frame.size.height / 8;
     }
-    
-    self.workoutsArray = @[@"TABATA Intervals", @"40 / 20's", @"50 / 50's", @"15 Second Sprints", @"Over/Unders"];
-
 }
 
 
@@ -54,17 +59,77 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     
     [self.navigationController setNavigationBarHidden:YES];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.toolbar.tintColor = [UIColor whiteColor];
     
     NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
     if (selectedIndexPath) {
         [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
     }
+    
+    [self.sharedNtrvlsDataStore fetchWorkouts];
 }
 
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    
+    [self.tableView reloadData];
+}
 
+
+#pragma mark - create preset workouts 
+
+- (void)createTabataWorkout {
+    
+    NtrvlWorkout *tabata = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
+    tabata.workoutTitle = @"TABATA";
+    tabata.creationDate = [NSDate timeIntervalSinceReferenceDate];
+    
+    for (NSUInteger i = 0; i < 10; i++) {
+
+        if (i == 0) {
+            
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 60;
+            getReadyInterval.screenColor = @"yellow";
+            getReadyInterval.intervalDescription = @"Get ready to start";
+            getReadyInterval.workout = tabata;
+            getReadyInterval.positionNumberInWorkout = 0;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 5) {
+            
+            Ntrvl *longBreakInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
+            longBreakInterval.intervalDuration = 120;
+            longBreakInterval.screenColor = @"grey";
+            longBreakInterval.intervalDescription = @"2 minute recovery";
+            longBreakInterval.workout = tabata;
+            longBreakInterval.positionNumberInWorkout = i;
+        }
+        
+        else if (i % 2 != 0) {
+            Ntrvl *firstInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
+            firstInterval.intervalDuration = 90;
+            firstInterval.screenColor = @"red";
+            firstInterval.intervalDescription = @"Full Speed!";
+            firstInterval.workout = tabata;
+            firstInterval.positionNumberInWorkout = i;
+        }
+        else {
+            Ntrvl *secondInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
+            secondInterval.intervalDuration = 10;
+            secondInterval.screenColor = @"blue";
+            secondInterval.intervalDescription = @"Complete rest";
+            secondInterval.workout = tabata;
+            secondInterval.positionNumberInWorkout = i;
+        }
+    }
+    
+    NSLog(@"TABATA: %@", tabata.interval);
+    
+    [self.sharedNtrvlsDataStore saveContext];
+    
 }
 
 
@@ -78,7 +143,7 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.workoutsArray.count;
+    return self.sharedNtrvlsDataStore.workoutsArray.count;
 }
 
 
@@ -86,11 +151,11 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workoutCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = self.workoutsArray[indexPath.row];
+    cell.textLabel.text = ((NtrvlWorkout *)self.sharedNtrvlsDataStore.workoutsArray[indexPath.row]).workoutTitle;
     cell.backgroundColor = [UIColor clearColor];
     
     UIView *selectedView = [UIView new];
-    selectedView.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.4];
+    selectedView.backgroundColor = [[UIColor ntrvlsRed] colorWithAlphaComponent:0.5];
     cell.selectedBackgroundView = selectedView;
     
     return cell;
@@ -140,7 +205,8 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     if ([segue.identifier isEqualToString:@"timerPrepSegue"]) {
         TimerPrepVC *destinationVC = segue.destinationViewController;
         NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
-        destinationVC.workoutTitle = self.workoutsArray[selectedIndexPath.row];
+        
+        destinationVC.selectedWorkout = self.sharedNtrvlsDataStore.workoutsArray[selectedIndexPath.row];
     }
     
 }

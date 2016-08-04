@@ -4,15 +4,19 @@
 
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface Ntrvl : NSObject
+NS_ASSUME_NONNULL_BEGIN
 
-@property (assign, nonatomic) NSTimeInterval duration;
-@property (strong, nonatomic) NSString *intervalDescription;
-@property (strong, nonatomic) NSString *nextSegment;
+@interface Ntrvl : NSManagedObject
 
+// Insert code here to declare functionality of your managed object subclass
 
+- (Ntrvl *)initWithScreenColor:(NSString *)screenColor intervalDuration:(NSInteger)intervalDuration andIntervalDescription:(NSString *)intervalDescription;
 
-- (Ntrvl *)initWithIntervalDescription:(NSString *)intervalDescription andDuration:(NSTimeInterval)duration;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Ntrvl+CoreDataProperties.h"

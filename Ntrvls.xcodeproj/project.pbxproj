@@ -18,9 +18,24 @@
 		1B03196F1D10B89E003C06CE /* NtrvlsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B03196E1D10B89E003C06CE /* NtrvlsMainViewController.m */; };
 		1B0319851D11C7EE003C06CE /* TimerPrepVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0319841D11C7EE003C06CE /* TimerPrepVC.m */; };
 		1B03198B1D12E68F003C06CE /* TimerPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B03198A1D12E68F003C06CE /* TimerPlayVC.m */; };
-		1B0319931D1320CF003C06CE /* Ntrvl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0319921D1320CF003C06CE /* Ntrvl.m */; };
+		1B2CA0DC1D412AC2008B44F4 /* CustomNtrvlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CA0DB1D412AC2008B44F4 /* CustomNtrvlView.m */; };
+		1B3577771D241BA4006E7140 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 1B3577761D241BA4006E7140 /* Podfile */; };
 		1B58DCB31D1CCEAB0031EE94 /* DescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58DCB21D1CCEAB0031EE94 /* DescriptionView.m */; };
 		1B58DCC91D1F62FD0031EE94 /* BreakAwayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */; };
+		1BFB03631D2C67A100E54FF7 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03621D2C67A100E54FF7 /* Constants.m */; };
+		1BFB03681D2C747300E54FF7 /* UIColor+UIColorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03671D2C747300E54FF7 /* UIColor+UIColorExtension.m */; };
+		1BFB036B1D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03691D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld */; };
+		1BFB03731D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03701D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.m */; };
+		1BFB03741D2C952F00E54FF7 /* Ntrvl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03721D2C952F00E54FF7 /* Ntrvl.m */; };
+		1BFB03791D2DFC5800E54FF7 /* NtrvlWorkout+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03761D2DFC5800E54FF7 /* NtrvlWorkout+CoreDataProperties.m */; };
+		1BFB037A1D2DFC5800E54FF7 /* NtrvlWorkout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03781D2DFC5800E54FF7 /* NtrvlWorkout.m */; };
+		1BFB037D1D36B12200E54FF7 /* NtrvlsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB037C1D36B12200E54FF7 /* NtrvlsAPIClient.m */; };
+		1BFB037F1D3AD22700E54FF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BFB037E1D3AD22700E54FF7 /* Security.framework */; };
+		1BFB03851D3B375000E54FF7 /* JNKeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */; };
+		1BFB03881D3E78AC00E54FF7 /* IntervalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03871D3E78AC00E54FF7 /* IntervalLabel.m */; };
+		2041DFD90591EA5C01BA5199 /* libPods-NtrvlsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CFABEAE4C23C83B2913CA9A /* libPods-NtrvlsTests.a */; };
+		5E1641A88B643CF4B0F3FD02 /* libPods-NtrvlsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC3482DAAA2D92EEA6A1AC3 /* libPods-NtrvlsUITests.a */; };
+		C3D189D7B3DDD40073E84866 /* libPods-Ntrvls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C465709F70A6CECD465B2A35 /* libPods-Ntrvls.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14C97EB25DE9109C6DEB5345 /* Pods-NtrvlsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1B03192F1D10AFA6003C06CE /* Ntrvls.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ntrvls.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B0319331D10AFA6003C06CE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1B0319351D10AFA6003C06CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -63,12 +79,41 @@
 		1B0319841D11C7EE003C06CE /* TimerPrepVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerPrepVC.m; sourceTree = "<group>"; };
 		1B0319891D12E68F003C06CE /* TimerPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerPlayVC.h; sourceTree = "<group>"; };
 		1B03198A1D12E68F003C06CE /* TimerPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerPlayVC.m; sourceTree = "<group>"; };
-		1B0319911D1320CF003C06CE /* Ntrvl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ntrvl.h; sourceTree = "<group>"; };
-		1B0319921D1320CF003C06CE /* Ntrvl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ntrvl.m; sourceTree = "<group>"; };
+		1B2CA0DA1D412AC2008B44F4 /* CustomNtrvlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNtrvlView.h; sourceTree = "<group>"; };
+		1B2CA0DB1D412AC2008B44F4 /* CustomNtrvlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNtrvlView.m; sourceTree = "<group>"; };
+		1B3577761D241BA4006E7140 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1B58DCB11D1CCEAB0031EE94 /* DescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionView.h; sourceTree = "<group>"; };
 		1B58DCB21D1CCEAB0031EE94 /* DescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionView.m; sourceTree = "<group>"; };
 		1B58DCC71D1F62FD0031EE94 /* BreakAwayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakAwayView.h; sourceTree = "<group>"; };
 		1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakAwayView.m; sourceTree = "<group>"; };
+		1B8818A9C280394CAEB57622 /* Pods-NtrvlsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1BFB03611D2C67A100E54FF7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../../../../.Trash/Constants.h; sourceTree = "<group>"; };
+		1BFB03621D2C67A100E54FF7 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ../../../../.Trash/Constants.m; sourceTree = "<group>"; };
+		1BFB03661D2C747300E54FF7 /* UIColor+UIColorExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+UIColorExtension.h"; sourceTree = "<group>"; };
+		1BFB03671D2C747300E54FF7 /* UIColor+UIColorExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+UIColorExtension.m"; sourceTree = "<group>"; };
+		1BFB036A1D2C90DA00E54FF7 /* NtrvlModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NtrvlModel.xcdatamodel; sourceTree = "<group>"; };
+		1BFB036F1D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ntrvl+CoreDataProperties.h"; sourceTree = "<group>"; };
+		1BFB03701D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Ntrvl+CoreDataProperties.m"; sourceTree = "<group>"; };
+		1BFB03711D2C952F00E54FF7 /* Ntrvl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ntrvl.h; sourceTree = "<group>"; };
+		1BFB03721D2C952F00E54FF7 /* Ntrvl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ntrvl.m; sourceTree = "<group>"; };
+		1BFB03751D2DFC5800E54FF7 /* NtrvlWorkout+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NtrvlWorkout+CoreDataProperties.h"; sourceTree = "<group>"; };
+		1BFB03761D2DFC5800E54FF7 /* NtrvlWorkout+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NtrvlWorkout+CoreDataProperties.m"; sourceTree = "<group>"; };
+		1BFB03771D2DFC5800E54FF7 /* NtrvlWorkout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NtrvlWorkout.h; sourceTree = "<group>"; };
+		1BFB03781D2DFC5800E54FF7 /* NtrvlWorkout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NtrvlWorkout.m; sourceTree = "<group>"; };
+		1BFB037B1D36B12200E54FF7 /* NtrvlsAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NtrvlsAPIClient.h; sourceTree = "<group>"; };
+		1BFB037C1D36B12200E54FF7 /* NtrvlsAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NtrvlsAPIClient.m; sourceTree = "<group>"; };
+		1BFB037E1D3AD22700E54FF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1BFB03831D3B375000E54FF7 /* JNKeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNKeychainWrapper.h; sourceTree = "<group>"; };
+		1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNKeychainWrapper.m; sourceTree = "<group>"; };
+		1BFB03861D3E78AC00E54FF7 /* IntervalLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalLabel.h; sourceTree = "<group>"; };
+		1BFB03871D3E78AC00E54FF7 /* IntervalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalLabel.m; sourceTree = "<group>"; };
+		1CFABEAE4C23C83B2913CA9A /* libPods-NtrvlsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NtrvlsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BC3482DAAA2D92EEA6A1AC3 /* libPods-NtrvlsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NtrvlsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7273701622D2FE24CB896AD0 /* Pods-Ntrvls.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ntrvls.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls.release.xcconfig"; sourceTree = "<group>"; };
+		995FD37EA1F8D7902E2AF155 /* Pods-NtrvlsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests.release.xcconfig"; sourceTree = "<group>"; };
+		C465709F70A6CECD465B2A35 /* libPods-Ntrvls.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ntrvls.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD690E9C954684FA2EAF9132 /* Pods-Ntrvls.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ntrvls.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls.debug.xcconfig"; sourceTree = "<group>"; };
+		F5AE2E2BBFAD5D92F8324E75 /* Pods-NtrvlsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +121,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BFB037F1D3AD22700E54FF7 /* Security.framework in Frameworks */,
+				C3D189D7B3DDD40073E84866 /* libPods-Ntrvls.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2041DFD90591EA5C01BA5199 /* libPods-NtrvlsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E1641A88B643CF4B0F3FD02 /* libPods-NtrvlsUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,9 +149,12 @@
 			isa = PBXGroup;
 			children = (
 				1B0319311D10AFA6003C06CE /* Ntrvls */,
+				1B3577761D241BA4006E7140 /* Podfile */,
 				1B03194B1D10AFA7003C06CE /* NtrvlsTests */,
 				1B0319561D10AFA7003C06CE /* NtrvlsUITests */,
 				1B0319301D10AFA6003C06CE /* Products */,
+				F3BD041A37876F29E0D4C389 /* Pods */,
+				585D9A8E12C400E3823C9B18 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,8 +171,16 @@
 		1B0319311D10AFA6003C06CE /* Ntrvls */ = {
 			isa = PBXGroup;
 			children = (
-				1B0319351D10AFA6003C06CE /* AppDelegate.h */,
+				1BFB03831D3B375000E54FF7 /* JNKeychainWrapper.h */,
+				1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */,
 				1B0319361D10AFA6003C06CE /* AppDelegate.m */,
+				1B0319351D10AFA6003C06CE /* AppDelegate.h */,
+				1BFB03661D2C747300E54FF7 /* UIColor+UIColorExtension.h */,
+				1BFB03671D2C747300E54FF7 /* UIColor+UIColorExtension.m */,
+				1BFB03611D2C67A100E54FF7 /* Constants.h */,
+				1BFB03621D2C67A100E54FF7 /* Constants.m */,
+				1BFB037B1D36B12200E54FF7 /* NtrvlsAPIClient.h */,
+				1BFB037C1D36B12200E54FF7 /* NtrvlsAPIClient.m */,
 				1B03196A1D10B1B0003C06CE /* NtrvlsDataStore.h */,
 				1B03196B1D10B1B0003C06CE /* NtrvlsDataStore.m */,
 				1B03193B1D10AFA6003C06CE /* Main.storyboard */,
@@ -177,8 +237,15 @@
 		1B0319691D10B126003C06CE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1B0319911D1320CF003C06CE /* Ntrvl.h */,
-				1B0319921D1320CF003C06CE /* Ntrvl.m */,
+				1BFB03751D2DFC5800E54FF7 /* NtrvlWorkout+CoreDataProperties.h */,
+				1BFB03761D2DFC5800E54FF7 /* NtrvlWorkout+CoreDataProperties.m */,
+				1BFB03771D2DFC5800E54FF7 /* NtrvlWorkout.h */,
+				1BFB03781D2DFC5800E54FF7 /* NtrvlWorkout.m */,
+				1BFB036F1D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.h */,
+				1BFB03701D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.m */,
+				1BFB03711D2C952F00E54FF7 /* Ntrvl.h */,
+				1BFB03721D2C952F00E54FF7 /* Ntrvl.m */,
+				1BFB03691D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -186,12 +253,40 @@
 		1B58DCB01D1CCE490031EE94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B2CA0DA1D412AC2008B44F4 /* CustomNtrvlView.h */,
+				1B2CA0DB1D412AC2008B44F4 /* CustomNtrvlView.m */,
+				1BFB03861D3E78AC00E54FF7 /* IntervalLabel.h */,
+				1BFB03871D3E78AC00E54FF7 /* IntervalLabel.m */,
 				1B58DCB11D1CCEAB0031EE94 /* DescriptionView.h */,
 				1B58DCB21D1CCEAB0031EE94 /* DescriptionView.m */,
 				1B58DCC71D1F62FD0031EE94 /* BreakAwayView.h */,
 				1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		585D9A8E12C400E3823C9B18 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1BFB037E1D3AD22700E54FF7 /* Security.framework */,
+				C465709F70A6CECD465B2A35 /* libPods-Ntrvls.a */,
+				1CFABEAE4C23C83B2913CA9A /* libPods-NtrvlsTests.a */,
+				3BC3482DAAA2D92EEA6A1AC3 /* libPods-NtrvlsUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F3BD041A37876F29E0D4C389 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CD690E9C954684FA2EAF9132 /* Pods-Ntrvls.debug.xcconfig */,
+				7273701622D2FE24CB896AD0 /* Pods-Ntrvls.release.xcconfig */,
+				14C97EB25DE9109C6DEB5345 /* Pods-NtrvlsTests.debug.xcconfig */,
+				995FD37EA1F8D7902E2AF155 /* Pods-NtrvlsTests.release.xcconfig */,
+				F5AE2E2BBFAD5D92F8324E75 /* Pods-NtrvlsUITests.debug.xcconfig */,
+				1B8818A9C280394CAEB57622 /* Pods-NtrvlsUITests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,9 +296,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B03195C1D10AFA7003C06CE /* Build configuration list for PBXNativeTarget "Ntrvls" */;
 			buildPhases = (
+				5C58F87B26C49D04B8F8241C /* 📦 Check Pods Manifest.lock */,
 				1B03192B1D10AFA6003C06CE /* Sources */,
 				1B03192C1D10AFA6003C06CE /* Frameworks */,
 				1B03192D1D10AFA6003C06CE /* Resources */,
+				9614713BFFFCC3DBAB952D7E /* 📦 Embed Pods Frameworks */,
+				E33F4BEB8D86C95B5AFB31FA /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -218,9 +316,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B03195F1D10AFA7003C06CE /* Build configuration list for PBXNativeTarget "NtrvlsTests" */;
 			buildPhases = (
+				705374DE7803783B876899FD /* 📦 Check Pods Manifest.lock */,
 				1B0319441D10AFA7003C06CE /* Sources */,
 				1B0319451D10AFA7003C06CE /* Frameworks */,
 				1B0319461D10AFA7003C06CE /* Resources */,
+				7BBC39889BBE1D7A2074A611 /* 📦 Embed Pods Frameworks */,
+				EF6D5B7125E083CECEE439AA /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,9 +337,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B0319621D10AFA7003C06CE /* Build configuration list for PBXNativeTarget "NtrvlsUITests" */;
 			buildPhases = (
+				C3C469535F6F9801DC3F595F /* 📦 Check Pods Manifest.lock */,
 				1B03194F1D10AFA7003C06CE /* Sources */,
 				1B0319501D10AFA7003C06CE /* Frameworks */,
 				1B0319511D10AFA7003C06CE /* Resources */,
+				0240425AD90F611B5D8B30DF /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -261,6 +364,7 @@
 				TargetAttributes = {
 					1B03192E1D10AFA6003C06CE = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = PZ83QFGZ4V;
 					};
 					1B0319471D10AFA7003C06CE = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -299,6 +403,7 @@
 			files = (
 				1B0319421D10AFA6003C06CE /* LaunchScreen.storyboard in Resources */,
 				1B03193F1D10AFA6003C06CE /* Assets.xcassets in Resources */,
+				1B3577771D241BA4006E7140 /* Podfile in Resources */,
 				1B03193D1D10AFA6003C06CE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,20 +424,153 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0240425AD90F611B5D8B30DF /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C58F87B26C49D04B8F8241C /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		705374DE7803783B876899FD /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7BBC39889BBE1D7A2074A611 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9614713BFFFCC3DBAB952D7E /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3C469535F6F9801DC3F595F /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E33F4BEB8D86C95B5AFB31FA /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF6D5B7125E083CECEE439AA /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1B03192B1D10AFA6003C06CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1B0319851D11C7EE003C06CE /* TimerPrepVC.m in Sources */,
-				1B0319931D1320CF003C06CE /* Ntrvl.m in Sources */,
+				1BFB036B1D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld in Sources */,
 				1B03196C1D10B1B0003C06CE /* NtrvlsDataStore.m in Sources */,
+				1BFB03681D2C747300E54FF7 /* UIColor+UIColorExtension.m in Sources */,
+				1BFB03791D2DFC5800E54FF7 /* NtrvlWorkout+CoreDataProperties.m in Sources */,
+				1BFB037A1D2DFC5800E54FF7 /* NtrvlWorkout.m in Sources */,
+				1BFB03741D2C952F00E54FF7 /* Ntrvl.m in Sources */,
+				1BFB03881D3E78AC00E54FF7 /* IntervalLabel.m in Sources */,
 				1B58DCB31D1CCEAB0031EE94 /* DescriptionView.m in Sources */,
 				1B0319371D10AFA6003C06CE /* AppDelegate.m in Sources */,
+				1BFB03731D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.m in Sources */,
+				1BFB03631D2C67A100E54FF7 /* Constants.m in Sources */,
+				1BFB03851D3B375000E54FF7 /* JNKeychainWrapper.m in Sources */,
 				1B03196F1D10B89E003C06CE /* NtrvlsMainViewController.m in Sources */,
+				1B2CA0DC1D412AC2008B44F4 /* CustomNtrvlView.m in Sources */,
 				1B03198B1D12E68F003C06CE /* TimerPlayVC.m in Sources */,
 				1B0319341D10AFA6003C06CE /* main.m in Sources */,
 				1B58DCC91D1F62FD0031EE94 /* BreakAwayView.m in Sources */,
+				1BFB037D1D36B12200E54FF7 /* NtrvlsAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,28 +711,37 @@
 		};
 		1B03195D1D10AFA7003C06CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD690E9C954684FA2EAF9132 /* Pods-Ntrvls.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Ntrvls/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RAR.Ntrvls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		1B03195E1D10AFA7003C06CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7273701622D2FE24CB896AD0 /* Pods-Ntrvls.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Ntrvls/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RAR.Ntrvls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
 		1B0319601D10AFA7003C06CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14C97EB25DE9109C6DEB5345 /* Pods-NtrvlsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = NtrvlsTests/Info.plist;
@@ -507,6 +754,7 @@
 		};
 		1B0319611D10AFA7003C06CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 995FD37EA1F8D7902E2AF155 /* Pods-NtrvlsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = NtrvlsTests/Info.plist;
@@ -519,6 +767,7 @@
 		};
 		1B0319631D10AFA7003C06CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5AE2E2BBFAD5D92F8324E75 /* Pods-NtrvlsUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = NtrvlsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -530,6 +779,7 @@
 		};
 		1B0319641D10AFA7003C06CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B8818A9C280394CAEB57622 /* Pods-NtrvlsUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = NtrvlsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -579,6 +829,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1BFB03691D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1BFB036A1D2C90DA00E54FF7 /* NtrvlModel.xcdatamodel */,
+			);
+			currentVersion = 1BFB036A1D2C90DA00E54FF7 /* NtrvlModel.xcdatamodel */;
+			path = NtrvlModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1B0319271D10AFA6003C06CE /* Project object */;
 }

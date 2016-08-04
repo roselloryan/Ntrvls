@@ -100,7 +100,7 @@
 //            //            [self removeFromSuperview];
 //        }];
         
-        [UIView animateWithDuration: 0.7 delay: 0.0 options: 0 animations:^{
+        [UIView animateWithDuration: 0.8 delay: 0.0 options: 0 animations:^{
             
             
             topLeftImageView.frame = CGRectMake(-self.frame.size.width/3, -self.frame.size.height * 2/5, self.frame.size.width/3, self.frame.size.height * 2/5);

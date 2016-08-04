@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
+    <entity name="Ntrvl" representedClassName="Ntrvl" syncable="YES">
+        <attribute name="intervalDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="intervalDuration" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="positionNumberInWorkout" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="screenColor" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NtrvlWorkout" inverseName="interval" inverseEntity="NtrvlWorkout" syncable="YES"/>
+    </entity>
+    <entity name="NtrvlWorkout" representedClassName="NtrvlWorkout" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="workoutTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="interval" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Ntrvl" inverseName="workout" inverseEntity="Ntrvl" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Ntrvl" positionX="-153" positionY="-18" width="128" height="118"/>
+        <element name="NtrvlWorkout" positionX="-344" positionY="-9" width="128" height="88"/>
+    </elements>
+</model>

@@ -5,6 +5,7 @@
 
 #import "TimerPlayVC.h"
 #import "BreakAwayView.h"
+#import "UIColor+UIColorExtension.h"
 
 @interface TimerPlayVC ()
 
@@ -19,14 +20,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 
-@property (strong, nonatomic) NSTimer *intervalTimer;
 @property (strong, nonatomic) NSTimer *labelTimer;
 
-@property (strong, nonatomic) NSDate *onStartTime;
-@property (strong, nonatomic) NSDate *workoutStartTime;
-
-@property (assign, nonatomic) NSTimeInterval totalTimeElapsed;
-@property (assign, nonatomic) NSTimeInterval timeLeftInInterval;
+@property (assign, nonatomic) NSUInteger totalTimeElapsed;
+@property (assign, nonatomic) NSUInteger timeLeftInInterval;
 
 @property (assign, nonatomic) NSInteger intervalNumber;
 
@@ -45,27 +42,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.workoutLabel.text = self.workoutTitle;
+    self.workoutLabel.text = self.selectedWorkout.workoutTitle;
     
-    // hard coded interval sequence
-    self.intervalNumber = 0;
-    Ntrvl *startNtrvl = [[Ntrvl alloc]initWithIntervalDescription:@"-Get Ready-" andDuration:5];
-    Ntrvl *firstNtrvl = [[Ntrvl alloc]initWithIntervalDescription:@"work hard!" andDuration:10];
-    Ntrvl *secondNtrvl = [[Ntrvl alloc]initWithIntervalDescription:@"Rest" andDuration:15];
-    Ntrvl *thirdNtrvl = [[Ntrvl alloc]initWithIntervalDescription:@"NOW HARDER!" andDuration:10];
-    Ntrvl *fourthNtrvl = [[Ntrvl alloc]initWithIntervalDescription:@"Rest" andDuration:15];
-    
-    self.workoutArray = @[startNtrvl, firstNtrvl, secondNtrvl, thirdNtrvl, fourthNtrvl];
-    
-    
+
+    self.startButton.layer.borderWidth = 1.0;
+    self.startButton.layer.borderColor = [UIColor ntrvlsGreen].CGColor;
+    self.startButton.layer.cornerRadius = 5.0f;
+    self.startButton.layer.masksToBounds = YES;
     
     self.pauseButton.layer.borderWidth = 1.0;
-    self.pauseButton.layer.borderColor = [[UIColor yellowColor] colorWithAlphaComponent: 0.7].CGColor;
+    self.pauseButton.layer.borderColor = [UIColor ntrvlsYellow].CGColor;
     self.pauseButton.layer.cornerRadius = 5.0f;
     self.pauseButton.layer.masksToBounds = YES;
     
     self.stopButton.layer.borderWidth = 1.0;
-    self.stopButton.layer.borderColor = [[UIColor redColor] colorWithAlphaComponent: 0.7].CGColor;
+    self.stopButton.layer.borderColor = [UIColor ntrvlsRed].CGColor;
     self.stopButton.layer.cornerRadius = 5.0f;
     self.stopButton.layer.masksToBounds = YES;
     
@@ -76,9 +67,14 @@
     
     self.pauseButtonOriginalFrame = self.pauseButton.frame;
     self.stopButtonOriginalFrame = self.stopButton.frame;
-
-
     
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    //    [self.navigationController setNavigationBarHidden:YES];
 }
 
 
@@ -86,27 +82,20 @@
     
     [self animatePauseAndStopButtons];
     
-     self.currentIntervalView.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent: 0.5];
+    self.currentIntervalView.backgroundColor = [UIColor ntrvlsYellow];
     
     if (!self.playerIsPaused) {
-        
-        self.workoutStartTime = [NSDate date];
         
         NSTimer *labelTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target: self selector:@selector(labelTimerFired:) userInfo:nil repeats:YES];
         self.labelTimer = labelTimer;
     
-        
-        // fire updates labels and advances intervals
-        NSTimer *intervalTimer = [NSTimer scheduledTimerWithTimeInterval: ((Ntrvl *)self.workoutArray[self.intervalNumber]).duration target: self selector:@selector(intervalTimerFired:) userInfo:nil repeats:NO];
-        self.intervalTimer = intervalTimer;
-        
-        self.onStartTime = [NSDate dateWithTimeInterval: ((Ntrvl *)self.workoutArray[self.intervalNumber]).duration + 1 sinceDate:[NSDate date]];
+        Ntrvl *currentInterval = self.selectedWorkout.interval[self.intervalNumber];
+        self.timeLeftInInterval = currentInterval.intervalDuration;
         
         // update labels
-        self.totalTimeElapsedLabel.text = [self timeStringFromInterval:[[NSDate date] timeIntervalSinceDate: self.workoutStartTime]];
-        self.timeIntervalLabel.text = [self timeStringFromInterval:((Ntrvl *)self.workoutArray[self.intervalNumber]).duration];
-        self.currentIntervalDescriptionLabel.text = [NSString stringWithFormat: @"%@",((Ntrvl *)self.workoutArray[self.intervalNumber]).intervalDescription];
-        self.nextIntervalLabel.text = [NSString stringWithFormat: @"Next: %@", ((Ntrvl *)self.workoutArray[self.intervalNumber + 1]).intervalDescription];
+        self.timeIntervalLabel.text = [self timeStringFromSecondsCount: currentInterval.intervalDuration];
+        self.currentIntervalDescriptionLabel.text = [NSString stringWithFormat:@"%@", currentInterval.intervalDescription];
+        self.nextIntervalLabel.text = self.selectedWorkout.interval[self.intervalNumber].intervalDescription;
     }
     
 
@@ -118,19 +107,10 @@
     if (!self.playerIsPaused) {
         
         self.playerIsPaused = YES;
-    
-        NSTimeInterval totalTimeElapsed = [[NSDate date] timeIntervalSinceDate:self.workoutStartTime];
         
-        NSTimeInterval timeLeft = -[[NSDate date] timeIntervalSinceDate:self.onStartTime];
-    
-        self.totalTimeElapsed = totalTimeElapsed;
-        self.timeLeftInInterval = timeLeft;
-    
-        NSLog(@"totalTimeElapsed: %.0f", totalTimeElapsed);
-        NSLog(@"timeLeftInInterval: %.0f", timeLeft);
-    
-        [self.intervalTimer invalidate];
         [self.labelTimer invalidate];
+        
+        // if we save the count we don't have to do any fancy time keeping
         
         [self.pauseButton setTitle:@"-Go-" forState:UIControlStateNormal];
         [self flashButton: self.pauseButton];
@@ -140,18 +120,9 @@
     else {
         self.playerIsPaused = NO;
         
-        self.workoutStartTime = [NSDate dateWithTimeInterval: -self.totalTimeElapsed sinceDate:[NSDate date]];
-        self.onStartTime = [NSDate dateWithTimeInterval:self.timeLeftInInterval sinceDate:[NSDate date]];
-        
         NSTimer *labelTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target: self selector:@selector(labelTimerFired:) userInfo:nil repeats:YES];
         self.labelTimer = labelTimer;
-        
-        NSTimer *intervalTimer = [NSTimer scheduledTimerWithTimeInterval: self.timeLeftInInterval target: self selector:@selector(intervalTimerFired:) userInfo:nil repeats:NO];
-        self.intervalTimer = intervalTimer;
-        
-        // update labels
-        self.timeIntervalLabel.text = [self timeStringFromInterval: self.timeLeftInInterval];
-        self.nextIntervalLabel.text = [NSString stringWithFormat: @"Next: %@", ((Ntrvl *)self.workoutArray[self.intervalNumber + 1]).intervalDescription];
+    
         
         [self.pauseButton setTitle:@"Pause" forState:UIControlStateNormal];
         
@@ -163,45 +134,46 @@
             }
         }
     }
-    
 }
 
 
 - (IBAction)stopButtonTapped:(UIButton *)sender {
     
     
-    self.onStartTime = nil;
-    self.workoutStartTime = nil;
     self.intervalNumber = 0;
     
-    [self.intervalTimer invalidate];
     [self.labelTimer invalidate];
 }
 
 
 -(void)labelTimerFired:(NSTimer *)timer {
     
-    NSTimeInterval timeLeft = -[[NSDate date] timeIntervalSinceDate: self.onStartTime];
-    NSTimeInterval totalTime = [[NSDate date] timeIntervalSinceDate: self.workoutStartTime];
-
-    NSString *timeleftString = [self timeStringFromInterval: timeLeft];
-    NSString *totalTimeString =  [self timeStringFromInterval: totalTime];
+    // don't increment total time during warm up
+    if (self.intervalNumber != 0) {
+        self.totalTimeElapsed ++;
+    }
     
+    if (self.timeLeftInInterval == 1) {
+        self.timeLeftInInterval --;
+        [self intervalCompleted];
+    }
+    else {
+        self.timeLeftInInterval --;
+    }
 
-    self.timeIntervalLabel.text = [NSString stringWithFormat: @"%@", timeleftString];
-    self.totalTimeElapsedLabel.text = [NSString stringWithFormat: @"%@", totalTimeString];
+    self.timeIntervalLabel.text = [self timeStringFromSecondsCount: self.timeLeftInInterval];
+    self.totalTimeElapsedLabel.text = [self timeStringFromSecondsCount: self.totalTimeElapsed];
 }
 
 
--(void)intervalTimerFired:(NSTimer *)timer {
+-(void)intervalCompleted {
     
-    // stole this. So Learn it!!!
+    // stole this. Learn it!!!
     UIGraphicsBeginImageContext(self.view.frame.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
-    [self.view.layer renderInContext:context];
+    [self.view.layer renderInContext: context];
     UIImage *screenShot = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
     
     BreakAwayView *viewToFlash = [[BreakAwayView alloc]initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) andImage:screenShot];
     [self.view addSubview:viewToFlash];
@@ -209,33 +181,25 @@
     
     // proceed to next interval
     self.intervalNumber += 1;
-    
-    NSTimer *intervalTimer = [NSTimer scheduledTimerWithTimeInterval: ((Ntrvl *)self.workoutArray[self.intervalNumber]).duration  target: self selector:@selector(intervalTimerFired:) userInfo: nil repeats: NO];
-    self.intervalTimer = intervalTimer;
-    
-    self.onStartTime = [NSDate dateWithTimeInterval: ((Ntrvl *)self.workoutArray[self.intervalNumber]).duration sinceDate:[NSDate date]];
-    
+    Ntrvl *currentInterval = self.selectedWorkout.interval[self.intervalNumber];
+    self.timeLeftInInterval = currentInterval.intervalDuration;
     
     // update label text
-    self.timeIntervalLabel.text = [self timeStringFromInterval: ((Ntrvl *)self.workoutArray[self.intervalNumber]).duration];
-    self.currentIntervalDescriptionLabel.text = [NSString stringWithFormat:@"%@",((Ntrvl *)self.workoutArray[self.intervalNumber]).intervalDescription];
-   self.nextIntervalLabel.text = [NSString stringWithFormat:@"Next: %@",((Ntrvl *)self.workoutArray[self.intervalNumber + 1]).intervalDescription];
+    self.timeIntervalLabel.text = [self timeStringFromSecondsCount: self.timeLeftInInterval];
+    self.currentIntervalDescriptionLabel.text = currentInterval.intervalDescription;
+    self.nextIntervalLabel.text = [NSString stringWithFormat:@"%@",((Ntrvl *)self.selectedWorkout.interval[self.intervalNumber + 1]).intervalDescription];
     
-    
-    
-    // background hard coded for demo
-    if (self.intervalNumber == 0) {
-        self.currentIntervalView.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent: 0.4];
+    // update interval screen color
+    if ([currentInterval.screenColor isEqualToString:@"red"]) {
+        self.currentIntervalView.backgroundColor = [UIColor ntrvlsRed];
     }
-    else if (self.intervalNumber % 2 == 0) {
+    else if ([currentInterval.screenColor isEqualToString:@"blue"]) {
         self.currentIntervalView.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent: 0.3];
     }
     else {
-        self.currentIntervalView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent: 0.5];
+        self.currentIntervalView.backgroundColor = [UIColor ntrvlsYellow];
     }
-
 }
-
 
 
 -(void)animatePauseAndStopButtons {
@@ -248,7 +212,7 @@
         self.stopButton.hidden = NO;
     
     [UIButton animateKeyframesWithDuration: 0.5 delay: 0.0 options: 0 animations:^{
-        // key frames
+        
         [UIButton addKeyframeWithRelativeStartTime: 0.0 relativeDuration: 0.40 animations:^{
             
             self.startButton.alpha = 0.0;
@@ -271,22 +235,9 @@
             self.pauseButton.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width / 4, -60);
             self.stopButton.transform = CGAffineTransformMakeTranslation(-self.view.frame.size.width / 4, -60);
         }];
-
-        
     } completion:^(BOOL finished) {
         // anything else?
     }];
-    
-}
-
-- (NSString *)timeStringFromInterval:(NSTimeInterval)interval {
-    
-    NSDateComponentsFormatter *dateCompFormatter = [[NSDateComponentsFormatter alloc]init];
-    dateCompFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
-    dateCompFormatter.allowedUnits = (NSCalendarUnitMinute | NSCalendarUnitSecond);
-    NSString *timeString = [NSString stringWithFormat:@"%@", [dateCompFormatter stringFromTimeInterval:interval]];
-    
-     return timeString;
 }
 
 -(void)flashButton:(UIButton *)button {
@@ -294,7 +245,7 @@
     UIView *flashView = [[UIView alloc]initWithFrame: button.frame];
     flashView.tag = 1;
     
-    flashView.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.2];
+    flashView.backgroundColor = [[UIColor ntrvlsGreen] colorWithAlphaComponent:0.2];
     flashView.layer.cornerRadius = 5.0f;
     flashView.layer.masksToBounds = YES;
     [self.view addSubview: flashView];
@@ -307,6 +258,59 @@
         // anything
     }];
 }
+
+- (NSString *)timeStringFromSecondsCount:(NSUInteger)secondsCount {
+   
+    NSUInteger hours = 0;
+    NSUInteger minutes = 0;
+    NSUInteger seconds = 0;
+    
+    if (secondsCount > 3600) {
+        hours =  secondsCount / 3600;
+        seconds = secondsCount % 3600;
+    }
+    if (seconds > 60) {
+        minutes = seconds / 60;
+        seconds = seconds % 60;
+    }
+    else {
+        seconds = secondsCount;
+    }
+    
+    NSString *hoursString = @"";
+    NSString *minutesString = @"";
+    NSString *secondsString = @"";
+    
+    if (hours < 10) {
+        hoursString = [NSString stringWithFormat:@"0%lu", hours];
+    }
+    else {
+        hoursString = [NSString stringWithFormat:@"%lu", hours];
+    }
+    if (minutes < 10) {
+        minutesString = [NSString stringWithFormat:@"0%lu", minutes];
+    }
+    else {
+        minutesString = [NSString stringWithFormat:@"%lu", minutes];
+    }
+    if (seconds < 10) {
+        secondsString = [NSString stringWithFormat:@"0%lu", seconds];
+    }
+    else {
+        secondsString = [NSString stringWithFormat:@"%lu", seconds];
+    }
+    
+    NSString *timeString = @"";
+    if (hours == 0) {
+        timeString = [NSString stringWithFormat:@"%@:%@", minutesString, secondsString];
+    }
+    else {
+        timeString = [NSString stringWithFormat:@"%@:%@:%@", hoursString, minutesString, secondsString];
+    }
+     return timeString;
+}
+
+
 /*
 #pragma mark - Navigation
 

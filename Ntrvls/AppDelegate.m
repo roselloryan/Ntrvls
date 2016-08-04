@@ -4,6 +4,8 @@
 
 
 #import "AppDelegate.h"
+#import "NtrvlsAPIClient.h"
+
 
 @interface AppDelegate ()
 
@@ -14,6 +16,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+
+    return YES;
+}
+
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    
+    NSLog(@"\nWe 3were opened because someone went to %@", url);
+    
+    [NtrvlsAPIClient completeTokenExchangeWithResponseURL: url];
 
     return YES;
 }
