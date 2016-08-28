@@ -1,7 +1,3 @@
-//
-//  AppDelegate.m
-//  Ntrvls
-
 
 #import "AppDelegate.h"
 #import "NtrvlsAPIClient.h"

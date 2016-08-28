@@ -1,7 +1,3 @@
-//
-//  descriptionView.m
-//  Ntrvls
-
 
 #import "DescriptionView.h"
 

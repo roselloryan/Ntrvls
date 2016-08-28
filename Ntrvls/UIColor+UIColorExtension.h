@@ -1,7 +1,3 @@
-//
-//  UIColor+UIColorExtension.h
-//  Ntrvls
-
 
 #import <UIKit/UIKit.h>
 

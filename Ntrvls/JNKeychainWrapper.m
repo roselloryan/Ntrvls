@@ -1,14 +1,3 @@
-//
-//  JNKeychainWrapper.m
-//  Ntrvls
-
-
-//  JNKeychain.m
-//
-//  Created by Jeremias Nunez on 5/10/13.
-//  Copyright (c) 2013 Jeremias Nunez. All rights reserved.
-//
-//  jeremias.np@gmail.com
 
 #import "JNKeychainWrapper.h"
 

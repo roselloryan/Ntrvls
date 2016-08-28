@@ -1,10 +1,3 @@
-//
-//  IntervalLabel.m
-//  Ntrvls
-//
-//  Created by RYAN ROSELLO on 7/19/16.
-//  Copyright © 2016 RYAN ROSELLO. All rights reserved.
-//
 
 #import "IntervalLabel.h"
 

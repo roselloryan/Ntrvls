@@ -187,9 +187,9 @@
 				1B03193E1D10AFA6003C06CE /* Assets.xcassets */,
 				1B0319401D10AFA6003C06CE /* LaunchScreen.storyboard */,
 				1B0319431D10AFA6003C06CE /* Info.plist */,
+				1B0319691D10B126003C06CE /* Models */,
 				1B58DCB01D1CCE490031EE94 /* Views */,
 				1B0319681D10B0EA003C06CE /* View Controllers */,
-				1B0319691D10B126003C06CE /* Models */,
 				1B0319321D10AFA6003C06CE /* Supporting Files */,
 			);
 			path = Ntrvls;

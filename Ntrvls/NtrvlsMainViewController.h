@@ -1,7 +1,3 @@
-//
-//  NtrvlsMainViewController.h
-//  Ntrvls
-
 
 #import <UIKit/UIKit.h>
 

@@ -1,6 +1,3 @@
-//
-//  TimerPrepVC.h
-//  Ntrvls
 
 #import <UIKit/UIKit.h>
 #import "NtrvlWorkout.h"

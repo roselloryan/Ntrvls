@@ -2,7 +2,7 @@
 //  NtrvlWorkout+CoreDataProperties.h
 //  Ntrvls
 //
-//  Created by RYAN ROSELLO on 7/12/16.
+//  Created by RYAN ROSELLO on 8/26/16.
 //  Copyright © 2016 RYAN ROSELLO. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,8 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NtrvlWorkout (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *workoutTitle;
 @property (nonatomic) NSTimeInterval creationDate;
+@property (nullable, nonatomic, retain) NSString *workoutTitle;
+@property (nonatomic) int64_t totalTime;
+@property (nullable, nonatomic, retain) NSString *workoutType;
 @property (nullable, nonatomic, retain) NSOrderedSet<Ntrvl *> *interval;
 
 @end

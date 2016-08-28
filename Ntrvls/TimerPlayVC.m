@@ -1,7 +1,3 @@
-//
-//  TimerPlayVC.m
-//  Ntrvls
-
 
 #import "TimerPlayVC.h"
 #import "BreakAwayView.h"
@@ -24,7 +20,6 @@
 
 @property (assign, nonatomic) NSUInteger totalTimeElapsed;
 @property (assign, nonatomic) NSUInteger timeLeftInInterval;
-
 @property (assign, nonatomic) NSInteger intervalNumber;
 
 @property (assign, nonatomic) BOOL playerIsPaused;
@@ -42,9 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.workoutLabel.text = self.selectedWorkout.workoutTitle;
+    self.workoutLabel.text = self.workoutTitle;
     
-
     self.startButton.layer.borderWidth = 1.0;
     self.startButton.layer.borderColor = [UIColor ntrvlsGreen].CGColor;
     self.startButton.layer.cornerRadius = 5.0f;
@@ -67,12 +61,15 @@
     
     self.pauseButtonOriginalFrame = self.pauseButton.frame;
     self.stopButtonOriginalFrame = self.stopButton.frame;
-    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    UIBarButtonItem *backButton =[[UIBarButtonItem alloc]initWithTitle:@"<edit" style:UIBarButtonItemStyleDone target:self action:@selector(navigateBackToTimerPrepVC)];
+    [backButton setTitleTextAttributes: @{NSFontAttributeName : [UIFont systemFontOfSize:20.0 weight:UIFontWeightThin]} forState: UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = backButton;
 
     //    [self.navigationController setNavigationBarHidden:YES];
 }
@@ -97,8 +94,6 @@
         self.currentIntervalDescriptionLabel.text = [NSString stringWithFormat:@"%@", currentInterval.intervalDescription];
         self.nextIntervalLabel.text = self.selectedWorkout.interval[self.intervalNumber].intervalDescription;
     }
-    
-
 }
 
 
@@ -165,7 +160,7 @@
     self.totalTimeElapsedLabel.text = [self timeStringFromSecondsCount: self.totalTimeElapsed];
 }
 
-
+// TODO: Add completed workout logic and alert to post to Strava athlete feed
 -(void)intervalCompleted {
     
     // stole this. Learn it!!!
@@ -187,14 +182,26 @@
     // update label text
     self.timeIntervalLabel.text = [self timeStringFromSecondsCount: self.timeLeftInInterval];
     self.currentIntervalDescriptionLabel.text = currentInterval.intervalDescription;
-    self.nextIntervalLabel.text = [NSString stringWithFormat:@"%@",((Ntrvl *)self.selectedWorkout.interval[self.intervalNumber + 1]).intervalDescription];
     
-    // update interval screen color
+    if (self.intervalNumber == self.selectedWorkout.interval.count - 1) {
+        self.nextIntervalLabel.text = @"FINSHED";
+    }
+    else {
+        self.nextIntervalLabel.text = [NSString stringWithFormat:@"%@",((Ntrvl *)self.selectedWorkout.interval[self.intervalNumber + 1]).intervalDescription];
+    }
+    
+    // update interval screen color using colors from UIColorExtension
     if ([currentInterval.screenColor isEqualToString:@"red"]) {
         self.currentIntervalView.backgroundColor = [UIColor ntrvlsRed];
     }
     else if ([currentInterval.screenColor isEqualToString:@"blue"]) {
-        self.currentIntervalView.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent: 0.3];
+        self.currentIntervalView.backgroundColor = [UIColor ntrvlsBlue];
+    }
+    else if ([currentInterval.screenColor isEqualToString:@"green"]) {
+        self.currentIntervalView.backgroundColor = [UIColor ntrvlsGreen];
+    }
+    else if ([currentInterval.screenColor isEqualToString:@"grey"]) {
+        self.currentIntervalView.backgroundColor = [UIColor ntrvlsGrey];
     }
     else {
         self.currentIntervalView.backgroundColor = [UIColor ntrvlsYellow];
@@ -244,7 +251,6 @@
     
     UIView *flashView = [[UIView alloc]initWithFrame: button.frame];
     flashView.tag = 1;
-    
     flashView.backgroundColor = [[UIColor ntrvlsGreen] colorWithAlphaComponent:0.2];
     flashView.layer.cornerRadius = 5.0f;
     flashView.layer.masksToBounds = YES;
@@ -261,59 +267,41 @@
 
 - (NSString *)timeStringFromSecondsCount:(NSUInteger)secondsCount {
    
-    NSUInteger hours = 0;
     NSUInteger minutes = 0;
     NSUInteger seconds = 0;
     
-    if (secondsCount > 3600) {
-        hours =  secondsCount / 3600;
-        seconds = secondsCount % 3600;
-    }
-    if (seconds > 60) {
-        minutes = seconds / 60;
-        seconds = seconds % 60;
+    if (secondsCount > 60) {
+        minutes = secondsCount / 60;
+        seconds = secondsCount % 60;
     }
     else {
         seconds = secondsCount;
     }
     
-    NSString *hoursString = @"";
-    NSString *minutesString = @"";
+    NSString *minutesString =  [NSString stringWithFormat: @"%lu", minutes];
     NSString *secondsString = @"";
     
-    if (hours < 10) {
-        hoursString = [NSString stringWithFormat:@"0%lu", hours];
-    }
-    else {
-        hoursString = [NSString stringWithFormat:@"%lu", hours];
-    }
-    if (minutes < 10) {
-        minutesString = [NSString stringWithFormat:@"0%lu", minutes];
-    }
-    else {
-        minutesString = [NSString stringWithFormat:@"%lu", minutes];
-    }
     if (seconds < 10) {
-        secondsString = [NSString stringWithFormat:@"0%lu", seconds];
+        secondsString = [NSString stringWithFormat: @"0%lu", seconds];
     }
     else {
-        secondsString = [NSString stringWithFormat:@"%lu", seconds];
+        secondsString = [NSString stringWithFormat: @"%lu", seconds];
     }
     
-    NSString *timeString = @"";
-    if (hours == 0) {
-        timeString = [NSString stringWithFormat:@"%@:%@", minutesString, secondsString];
-    }
-    else {
-        timeString = [NSString stringWithFormat:@"%@:%@:%@", hoursString, minutesString, secondsString];
-    }
+    NSString *timeString = [NSString stringWithFormat: @"%@:%@", minutesString, secondsString];
+    
      return timeString;
 }
 
 
-/*
+
 #pragma mark - Navigation
 
+- (void)navigateBackToTimerPrepVC {
+    [self.navigationController popViewControllerAnimated: YES];
+}
+
+/*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

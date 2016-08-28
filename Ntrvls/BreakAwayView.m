@@ -1,10 +1,3 @@
-//
-//  BreakAwayView.m
-//  Ntrvls
-//
-//  Created by RYAN ROSELLO on 6/25/16.
-//  Copyright © 2016 RYAN ROSELLO. All rights reserved.
-//
 
 #import "BreakAwayView.h"
 

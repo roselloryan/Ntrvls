@@ -1,7 +1,3 @@
-//
-//  Ntrvl.m
-//  Ntrvls
-
 
 #import "Ntrvl.h"
 

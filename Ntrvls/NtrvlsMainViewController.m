@@ -1,13 +1,8 @@
-//
-//  NtrvlsMainViewController.m
-//  Ntrvls
-
 
 #import "NtrvlsMainViewController.h"
 #import "TimerPrepVC.h"
 #import "UIColor+UIColorExtension.h"
 #import "NtrvlsDataStore.h"
-//#import "NtrvlWorkout.h"
 #import "NtrvlWorkout+CoreDataProperties.h"
 
 
@@ -29,6 +24,7 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 @end
 
 
+
 @implementation NtrvlsMainViewController
 
 - (void)viewDidLoad {
@@ -39,7 +35,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     
     self.sharedNtrvlsDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
     
-    [self createTabataWorkout];
     
     // adjust constraints for tiny 4s screen
     if (self.view.frame.size.height == iPhone4sHeight) {
@@ -66,72 +61,27 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
     }
     
-    [self.sharedNtrvlsDataStore fetchWorkouts];
+    // TODO: decide when to write saved workouts
+    if (self.sharedNtrvlsDataStore.workoutsArray.count == 0) {
+        [self.sharedNtrvlsDataStore createTabataWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                
+                [self.sharedNtrvlsDataStore fetchWorkouts];
+
+//                NSLog(@"ShareDataStore.workoutsArray: %@", self.sharedNtrvlsDataStore.workoutsArray);
+                
+                [self.tableView reloadData];
+            }
+        }];
+    }
 }
 
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    
     [self.tableView reloadData];
 }
-
-
-#pragma mark - create preset workouts 
-
-- (void)createTabataWorkout {
-    
-    NtrvlWorkout *tabata = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
-    tabata.workoutTitle = @"TABATA";
-    tabata.creationDate = [NSDate timeIntervalSinceReferenceDate];
-    
-    for (NSUInteger i = 0; i < 10; i++) {
-
-        if (i == 0) {
-            
-            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
-            getReadyInterval.intervalDuration = 60;
-            getReadyInterval.screenColor = @"yellow";
-            getReadyInterval.intervalDescription = @"Get ready to start";
-            getReadyInterval.workout = tabata;
-            getReadyInterval.positionNumberInWorkout = 0;
-            getReadyInterval.positionNumberInWorkout = i;
-        }
-        else if (i == 5) {
-            
-            Ntrvl *longBreakInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
-            longBreakInterval.intervalDuration = 120;
-            longBreakInterval.screenColor = @"grey";
-            longBreakInterval.intervalDescription = @"2 minute recovery";
-            longBreakInterval.workout = tabata;
-            longBreakInterval.positionNumberInWorkout = i;
-        }
-        
-        else if (i % 2 != 0) {
-            Ntrvl *firstInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
-            firstInterval.intervalDuration = 90;
-            firstInterval.screenColor = @"red";
-            firstInterval.intervalDescription = @"Full Speed!";
-            firstInterval.workout = tabata;
-            firstInterval.positionNumberInWorkout = i;
-        }
-        else {
-            Ntrvl *secondInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: self.sharedNtrvlsDataStore.managedObjectContext];
-            secondInterval.intervalDuration = 10;
-            secondInterval.screenColor = @"blue";
-            secondInterval.intervalDescription = @"Complete rest";
-            secondInterval.workout = tabata;
-            secondInterval.positionNumberInWorkout = i;
-        }
-    }
-    
-    NSLog(@"TABATA: %@", tabata.interval);
-    
-    [self.sharedNtrvlsDataStore saveContext];
-    
-}
-
 
 
 #pragma mark - Table view data source
@@ -151,8 +101,11 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workoutCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = ((NtrvlWorkout *)self.sharedNtrvlsDataStore.workoutsArray[indexPath.row]).workoutTitle;
+    NtrvlWorkout *cellWorkout = self.sharedNtrvlsDataStore.workoutsArray[indexPath.row];
+    
+    cell.textLabel.text = cellWorkout.workoutTitle;
     cell.backgroundColor = [UIColor clearColor];
+    cell.detailTextLabel.text = [self timeStringFromSecondsCount: cellWorkout.totalTime];
     
     UIView *selectedView = [UIView new];
     selectedView.backgroundColor = [[UIColor ntrvlsRed] colorWithAlphaComponent:0.5];
@@ -161,6 +114,8 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     return cell;
 }
 
+
+// TODO: allow editing of user created workouts!
 
 /*
  // Override to support conditional editing of the table view.
@@ -208,7 +163,36 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         
         destinationVC.selectedWorkout = self.sharedNtrvlsDataStore.workoutsArray[selectedIndexPath.row];
     }
+}
+
+#pragma mark - time string method
+
+- (NSString *)timeStringFromSecondsCount:(NSUInteger)secondsCount {
     
+    NSUInteger minutes = 0;
+    NSUInteger seconds = 0;
+    
+    if (secondsCount > 60) {
+        minutes = secondsCount / 60;
+        seconds = secondsCount % 60;
+    }
+    else {
+        seconds = secondsCount;
+    }
+    
+    NSString *minutesString =  [NSString stringWithFormat: @"%lu", minutes];
+    NSString *secondsString = @"";
+    
+    if (seconds < 10) {
+        secondsString = [NSString stringWithFormat: @"0%lu", seconds];
+    }
+    else {
+        secondsString = [NSString stringWithFormat: @"%lu", seconds];
+    }
+    
+    NSString *timeString = [NSString stringWithFormat: @"%@:%@", minutesString, secondsString];
+    
+    return timeString;
 }
 
 

@@ -1,7 +1,3 @@
-//
-//  descriptionView.h
-//  Ntrvls
-
 
 #import <UIKit/UIKit.h>
 
