@@ -5,8 +5,10 @@
 
 + (UIColor *) ntrvlsRed;
 + (UIColor *) ntrvlsGrey;
++ (UIColor *) ntrvlsDarkGrey;
 + (UIColor *) ntrvlsYellow;
 + (UIColor *) ntrvlsGreen;
 + (UIColor *) ntrvlsBlue;
++ (UIColor *) ntrvlsOrange;
 
 @end

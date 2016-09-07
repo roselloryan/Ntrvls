@@ -4,6 +4,7 @@
 #import "NtrvlWorkout+CoreDataProperties.h"
 #import "Ntrvl+CoreDataProperties.h"
 
+
 @implementation NtrvlsDataStore
 
 
@@ -53,7 +54,7 @@
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"NtrvlWorkout"];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"workoutTitle" ascending: NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending: NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
@@ -102,7 +103,7 @@
     NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
     
     NtrvlWorkout *newWorkout = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
-    newWorkout.workoutTitle = @"RARCopy";
+    newWorkout.workoutTitle = kWorkoutCopyName;
     newWorkout.creationDate = [NSDate timeIntervalSinceReferenceDate];
     newWorkout.workoutType = ntrvlWorkout.workoutType;
     newWorkout.totalTime = ntrvlWorkout.totalTime;
@@ -124,7 +125,7 @@
     return newWorkout;
 }
 
-- (void)saveNewWorkoutWithTitle:(NSString *)workoutTitle {
+- (void)saveCopyAsNewWorkoutWithTitle:(NSString *)workoutTitle {
     
     NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
     
@@ -155,14 +156,14 @@
     
     NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
     
-    NSFetchRequest *RARCopyFetch = [NSFetchRequest fetchRequestWithEntityName: @"NtrvlWorkout"];
-    NSString *copyString = @"RARCopy";
-    RARCopyFetch.predicate = [NSPredicate predicateWithFormat: @"workoutTitle == %@", copyString];
-    
+    NSFetchRequest *workoutTitleFetch = [NSFetchRequest fetchRequestWithEntityName: @"NtrvlWorkout"];
+    workoutTitleFetch.predicate = [NSPredicate predicateWithFormat: @"workoutTitle == %@", title];
     NSError *error;
-    NSArray *fetchArray = [sharedDataStore.managedObjectContext executeFetchRequest: RARCopyFetch error: &error];
+    NSArray *fetchArray = [sharedDataStore.managedObjectContext executeFetchRequest: workoutTitleFetch error: &error];
     
     if (fetchArray) {
+        NSLog(@"fetchArray: %@", fetchArray);
+        
         for (NSManagedObject *ntrvlWorkout in fetchArray) {
             [sharedDataStore.managedObjectContext deleteObject: ntrvlWorkout];
         }
@@ -195,13 +196,13 @@
 - (void)saveWorkoutType:(NSString *)workoutType forNtrvlWorkout:(NtrvlWorkout *)ntrvlWorkout {
     
     NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
-    
-    NSFetchRequest *RARCopyFetch = [NSFetchRequest fetchRequestWithEntityName: @"NtrvlWorkout"];
-    NSString *copyString = @"RARCopy";
-    RARCopyFetch.predicate = [NSPredicate predicateWithFormat: @"workoutTitle == %@", copyString];
+
+    NSFetchRequest *workoutFetch = [NSFetchRequest fetchRequestWithEntityName: @"NtrvlWorkout"];
+    NSString *copyString = ntrvlWorkout.workoutTitle;
+    workoutFetch.predicate = [NSPredicate predicateWithFormat: @"workoutTitle == %@", copyString];
     
     NSError *error;
-    NSArray *fetchArray = [sharedDataStore.managedObjectContext executeFetchRequest: RARCopyFetch error: &error];
+    NSArray *fetchArray = [sharedDataStore.managedObjectContext executeFetchRequest: workoutFetch error: &error];
     
     if (fetchArray) {
         NtrvlWorkout *fetchedWorkout = fetchArray[0];
@@ -222,8 +223,8 @@
     
     Ntrvl *newNtrvl = [NSEntityDescription insertNewObjectForEntityForName: @"Ntrvl" inManagedObjectContext:sharedDataStore.managedObjectContext];
     
-    // -2 adds the new interval to end of workout, but before the last cool down interval
-    newNtrvl.positionNumberInWorkout = ntrvlWorkout.interval.count - 2;
+    // -1   adds the new interval to end of workout, but before the last cool down interval
+    newNtrvl.positionNumberInWorkout = ntrvlWorkout.interval.count - 1;
     
     //change postition number of cooldown interval
     Ntrvl *cooldownNtrvl = [ntrvlWorkout.interval lastObject];
@@ -240,11 +241,11 @@
 
     NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
 
-    NSFetchRequest *RARCopyFetch = [NSFetchRequest fetchRequestWithEntityName: @"NtrvlWorkout"];
-    NSString *copyString = @"RARCopy";
-    RARCopyFetch.predicate = [NSPredicate predicateWithFormat: @"workoutTitle == %@", copyString];
+    NSFetchRequest *workoutFetch = [NSFetchRequest fetchRequestWithEntityName: @"NtrvlWorkout"];
+    NSString *copyString = ntrvlWorkout.workoutTitle;
+    workoutFetch.predicate = [NSPredicate predicateWithFormat: @"workoutTitle == %@", copyString];
     NSError *error;
-    NSArray *fetchArray = [sharedDataStore.managedObjectContext executeFetchRequest: RARCopyFetch error: &error];
+    NSArray *fetchArray = [sharedDataStore.managedObjectContext executeFetchRequest: workoutFetch error: &error];
     
     if (fetchArray) {
         
@@ -252,13 +253,14 @@
         
         for (Ntrvl *interval in workoutToEdit.interval) {
             
-            NSLog(@"interval.positionNumberInWorkout: %lld\nntrvl.positionNumberInWorkout: %lld", interval.positionNumberInWorkout, ntrvl.positionNumberInWorkout);
+            NSLog(@"\ninterval.positionNumberInWorkout: %lld\nntrvl.positionNumberInWorkout: %lld", interval.positionNumberInWorkout, ntrvl.positionNumberInWorkout);
             
             if (interval.positionNumberInWorkout == ntrvl.positionNumberInWorkout) {
                 [sharedDataStore.managedObjectContext deleteObject: interval];
                 
             }
             else if (interval.positionNumberInWorkout > ntrvl.positionNumberInWorkout) {
+                NSLog(@"interval.positionNumberInWorkout: %lld", interval.positionNumberInWorkout);
                 interval.positionNumberInWorkout --;
             }
         }
@@ -323,30 +325,22 @@
         if (i == 0) {
             Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
             getReadyInterval.intervalDuration = 10;
-            getReadyInterval.screenColor = @"yellow";
-            getReadyInterval.intervalDescription = @"Get ready to start";
+            getReadyInterval.screenColor = @"grey";
+            getReadyInterval.intervalDescription = @"Get Ready";
             getReadyInterval.workout = tabata;
             getReadyInterval.positionNumberInWorkout = i;
         }
-        else if (i == 5) {
-            Ntrvl *longBreakInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
-            longBreakInterval.intervalDuration = 10;
-            longBreakInterval.screenColor = @"grey";
-            longBreakInterval.intervalDescription = @"2 minute recovery";
-            longBreakInterval.workout = tabata;
-            longBreakInterval.positionNumberInWorkout = i;
-        }
         else if (i == 9) {
-            Ntrvl *recoverInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
-            recoverInterval.intervalDuration = 120;
-            recoverInterval.screenColor = @"grey";
-            recoverInterval.intervalDescription = @"Post-Workout cool down";
-            recoverInterval.workout = tabata;
-            recoverInterval.positionNumberInWorkout = i;
+            Ntrvl *coolDownInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            coolDownInterval.intervalDuration = 120;
+            coolDownInterval.screenColor = @"grey";
+            coolDownInterval.intervalDescription = @"Cool Down";
+            coolDownInterval.workout = tabata;
+            coolDownInterval.positionNumberInWorkout = i;
         }
         else if (i % 2 != 0) {
             Ntrvl *firstInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
-            firstInterval.intervalDuration = 15;
+            firstInterval.intervalDuration = 20;
             firstInterval.screenColor = @"red";
             firstInterval.intervalDescription = @"Full Speed!";
             firstInterval.workout = tabata;
@@ -369,24 +363,161 @@
     completionBlock(YES);
 }
 
-         
+- (void)createNewWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock {
+    
+    NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
+    
+    NtrvlWorkout *newWorkout = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
+    newWorkout.workoutTitle = @"New Workout";
+    newWorkout.creationDate = [NSDate timeIntervalSinceReferenceDate];
+    
+    for (NSUInteger i = 0; i < 2; i++) {
+        
+        if (i == 0) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 10;
+            getReadyInterval.screenColor = @"grey";
+            getReadyInterval.intervalDescription = @"Get Ready";
+            getReadyInterval.workout = newWorkout;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 1) {
+            Ntrvl *coolDownInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            // TODO: decide cool down time 
+            coolDownInterval.intervalDuration = 120;
+            coolDownInterval.screenColor = @"grey";
+            coolDownInterval.intervalDescription = @"Cool Down";
+            coolDownInterval.workout = newWorkout;
+            coolDownInterval.positionNumberInWorkout = i;
+        }
+    }
+    newWorkout.totalTime = [self totalTimeForWorkout: newWorkout];
+    NSLog(@"In Data Store. Created New Workout: %@", newWorkout.interval);
+    
+    [sharedDataStore saveContext];
+    
+    completionBlock(YES);
+}
+
+- (void)createOverUndersWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock {
+    
+    NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
+    
+    NtrvlWorkout *overUndersWorkout = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
+    overUndersWorkout.workoutTitle = @"Over/Unders";
+    overUndersWorkout.creationDate = [NSDate timeIntervalSinceReferenceDate];
+    
+    for (NSUInteger i = 0; i < 21; i++) {
+        
+        if (i == 0) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 10;
+            getReadyInterval.screenColor = @"grey";
+            getReadyInterval.intervalDescription = @"Get Ready";
+            getReadyInterval.workout = overUndersWorkout;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 5 || i == 10 || i == 15 || i == 20) {
+            Ntrvl *overInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            overInterval.intervalDuration = 5 * 60;
+            overInterval.screenColor = @"blue";
+            overInterval.intervalDescription = @"Long Break";
+            overInterval.workout = overUndersWorkout;
+            overInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 20) {
+            Ntrvl *coolDownInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            // TODO: decide cool down time
+            coolDownInterval.intervalDuration = 120;
+            coolDownInterval.screenColor = @"grey";
+            coolDownInterval.intervalDescription = @"Cool Down";
+            coolDownInterval.workout = overUndersWorkout;
+            coolDownInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 1 || i == 3 || i == 6 || i == 8 || i == 11 || i == 13 || i == 16 || i == 18) {
+            Ntrvl *underInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            underInterval.intervalDuration = 4 * 60;
+            underInterval.screenColor = @"green";
+            underInterval.intervalDescription = @"Under";
+            underInterval.workout = overUndersWorkout;
+            underInterval.positionNumberInWorkout = i;
+        }
+        else {
+            Ntrvl *overInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            overInterval.intervalDuration = 60;
+            overInterval.screenColor = @"orange";
+            overInterval.intervalDescription = @"Over";
+            overInterval.workout = overUndersWorkout;
+            overInterval.positionNumberInWorkout = i;
+        }
+ 
+    }
+    overUndersWorkout.totalTime = [self totalTimeForWorkout: overUndersWorkout];
+    NSLog(@"In Data Store. Created Over/Unders Workout: %@", overUndersWorkout.interval);
+    
+    [sharedDataStore saveContext];
+    
+    completionBlock(YES);
+}
+
+- (void)createDemoWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock {
+    
+    NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
+    
+    NtrvlWorkout *demoWorkout = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
+    demoWorkout.workoutTitle = @"Ntrvls Demo";
+    demoWorkout.creationDate = [NSDate timeIntervalSinceReferenceDate];
+    
+    for (NSUInteger i = 0; i < 2; i++) {
+        
+        if (i == 0) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 5;
+            getReadyInterval.screenColor = @"grey";
+            getReadyInterval.intervalDescription = @"Get Ready";
+            getReadyInterval.workout = demoWorkout;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 1) {
+            Ntrvl *coolDownInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            // TODO: decide cool down time
+            coolDownInterval.intervalDuration = 5;
+            coolDownInterval.screenColor = @"grey";
+            coolDownInterval.intervalDescription = @"Cool Down";
+            coolDownInterval.workout = demoWorkout;
+            coolDownInterval.positionNumberInWorkout = i;
+        }
+    }
+    demoWorkout.totalTime = [self totalTimeForWorkout: demoWorkout];
+    NSLog(@"In Data Store. Created demoWorkout Workout: %@", demoWorkout.interval);
+    
+    [sharedDataStore saveContext];
+    
+    completionBlock(YES);
+}
+
 # pragma mark - String method
 
 - (NSInteger)totalTimeForWorkout:(NtrvlWorkout *)ntrvlWorkout {
-    
+    // skip 10 second pepare interval
     NSInteger timeSum = 0;
-    for (Ntrvl *interval in ntrvlWorkout.interval) {
-        timeSum += interval.intervalDuration;
+    for (NSUInteger i = 1; i < ntrvlWorkout.interval.count; i++) {
+        timeSum += ntrvlWorkout.interval[i].intervalDuration;
     }
     return timeSum;
 }
 
-         
+
 - (NSString *)timeStringFromSecondsCount:(NSUInteger)secondsCount {
     
+    NSUInteger hours = 0;
     NSUInteger minutes = 0;
     NSUInteger seconds = 0;
     
+    if (secondsCount > 3600) {
+        hours = secondsCount / 3600;
+        secondsCount = secondsCount - (hours * 3600);
+    }
     if (secondsCount > 60) {
         minutes = secondsCount / 60;
         seconds = secondsCount % 60;
@@ -395,9 +526,16 @@
         seconds = secondsCount;
     }
     
+    NSString *hoursString =  [NSString stringWithFormat: @"%lu", hours];
     NSString *minutesString =  [NSString stringWithFormat: @"%lu", minutes];
     NSString *secondsString = @"";
     
+    if (minutes < 10) {
+        minutesString = [NSString stringWithFormat: @"0%lu", minutes];
+    }
+    else {
+        minutesString = [NSString stringWithFormat: @"%lu", minutes];
+    }
     if (seconds < 10) {
         secondsString = [NSString stringWithFormat: @"0%lu", seconds];
     }
@@ -405,7 +543,13 @@
         secondsString = [NSString stringWithFormat: @"%lu", seconds];
     }
     
-    NSString *timeString = [NSString stringWithFormat: @"%@:%@", minutesString, secondsString];
+    NSString *timeString = [[NSString alloc]init];
+    if (hours == 0) {
+        timeString = [NSString stringWithFormat: @"%@:%@", minutesString, secondsString];
+    }
+    else {
+        timeString = [NSString stringWithFormat: @"%@:%@:%@", hoursString, minutesString, secondsString];
+    }
     
     return timeString;
 }

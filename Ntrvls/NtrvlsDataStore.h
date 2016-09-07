@@ -2,6 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "NtrvlWorkout.h"
+#import "Constants.h"
 
 @interface NtrvlsDataStore : NSObject
 
@@ -16,9 +17,15 @@
 
 - (void)createTabataWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock;
 
+- (void)createNewWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock;
+
+- (void)createOverUndersWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock;
+
+- (void)createDemoWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock;
+
 - (NtrvlWorkout *)copyNtrvlWorkout:(NtrvlWorkout *)ntrvlWorkout;
 
-- (void)saveNewWorkoutWithTitle:(NSString *)workoutTitle;
+- (void)saveCopyAsNewWorkoutWithTitle:(NSString *)workoutTitle;
 
 - (void)deleteWorkoutWithTitle:(NSString *)title;
 

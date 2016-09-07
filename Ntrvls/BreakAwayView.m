@@ -16,7 +16,7 @@
         UIImageView *topLeftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width/3, self.frame.size.height * 2/5)];
         topLeftImageView.image = self.image;
         topLeftImageView.contentMode = UIViewContentModeTopLeft;
-        topLeftImageView.backgroundColor = [UIColor yellowColor];
+//        topLeftImageView.backgroundColor = [UIColor yellowColor];
         topLeftImageView.clipsToBounds = YES;
         [self addSubview:topLeftImageView];
         
@@ -24,49 +24,49 @@
         topCenterImageView.image = self.image;
         topCenterImageView.contentMode = UIViewContentModeTop;
         topCenterImageView.clipsToBounds = YES;
-        topCenterImageView.backgroundColor = [UIColor yellowColor];
+//        topCenterImageView.backgroundColor = [UIColor yellowColor];
         [self addSubview:topCenterImageView];
         
         UIImageView *topRightImageView = [[UIImageView alloc]initWithFrame: CGRectMake(self.frame.size.width * 2/3, 0, self.frame.size.width/3, self.frame.size.height * 2/5)];
         topRightImageView.image = self.image;
         topRightImageView.contentMode = UIViewContentModeTopRight;
         topRightImageView.clipsToBounds = YES;
-        topRightImageView.backgroundColor = [UIColor yellowColor];
+//        topRightImageView.backgroundColor = [UIColor yellowColor];
         [self addSubview:topRightImageView];
         
         UIImageView *leftImageView = [[UIImageView alloc]initWithFrame: CGRectMake(0, self.frame.size.height * 2/5, self.frame.size.width/2, self.frame.size.height * 1/5)];
         leftImageView.image = self.image;
         leftImageView.contentMode = UIViewContentModeLeft;
         leftImageView.clipsToBounds = YES;
-        leftImageView.backgroundColor = [UIColor yellowColor];
+//        leftImageView.backgroundColor = [UIColor yellowColor];
         [self addSubview:leftImageView];
         
         UIImageView *rightImageView = [[UIImageView alloc]initWithFrame: CGRectMake(self.frame.size.width/2 , self.frame.size.height * 2/5, self.frame.size.width/2, self.frame.size.height * 1/5)];
         rightImageView.image = self.image;
         rightImageView.contentMode = UIViewContentModeRight;
         rightImageView.clipsToBounds = YES;
-        rightImageView.backgroundColor = [UIColor yellowColor];
+//        rightImageView.backgroundColor = [UIColor yellowColor];
         [self addSubview:rightImageView];
         
         UIImageView *bottomLeftImageView = [[UIImageView alloc]initWithFrame: CGRectMake(0, self.frame.size.height * 3/5, self.frame.size.width/3, self.frame.size.height * 2/5)];
         bottomLeftImageView.image = self.image;
         bottomLeftImageView.contentMode = UIViewContentModeBottomLeft;
         bottomLeftImageView.clipsToBounds = YES;
-        bottomLeftImageView.backgroundColor = [UIColor yellowColor];
+//        bottomLeftImageView.backgroundColor = [UIColor yellowColor];
         [self addSubview:bottomLeftImageView];
         
         UIImageView *bottomCenterImageView = [[UIImageView alloc]initWithFrame: CGRectMake(self.frame.size.width/3, self.frame.size.height * 3/5, self.frame.size.width/3, self.frame.size.height * 2/5)];
         bottomCenterImageView.image = self.image;
         bottomCenterImageView.contentMode = UIViewContentModeBottom;
         bottomCenterImageView.clipsToBounds = YES;
-        bottomCenterImageView.backgroundColor = [UIColor yellowColor];
+//        bottomCenterImageView.backgroundColor = [UIColor yellowColor];
         [self addSubview:bottomCenterImageView];
         
         UIImageView *bottomRightImageView = [[UIImageView alloc]initWithFrame: CGRectMake(self.frame.size.width * 2/3, self.frame.size.height * 3/5, self.frame.size.width/3, self.frame.size.height * 2/5)];
         bottomRightImageView.image = self.image;
         bottomRightImageView.contentMode = UIViewContentModeBottomRight;
         bottomRightImageView.clipsToBounds = YES;
-        bottomRightImageView.backgroundColor = [UIColor yellowColor];
+//        bottomRightImageView.backgroundColor = [UIColor yellowColor];
         [self addSubview:bottomRightImageView];
         
         
@@ -93,33 +93,74 @@
 //            //            [self removeFromSuperview];
 //        }];
         
-        [UIView animateWithDuration: 0.8 delay: 0.0 options: 0 animations:^{
+//        [UIView animateWithDuration: 0.8 delay: 0.0 options: 0 animations:^{
+//            
+//            
+//            topLeftImageView.frame = CGRectMake(-self.frame.size.width/3, -self.frame.size.height * 2/5, self.frame.size.width/3, self.frame.size.height * 2/5);
+//            topLeftImageView.backgroundColor = [UIColor greenColor];
+//            
+//            topCenterImageView.frame = CGRectMake(self.frame.size.width/3, -self.frame.size.height * 2/5, self.frame.size.width/3, self.frame.size.height * 2/5);
+//            topCenterImageView.backgroundColor = [UIColor greenColor];
+//            
+//            topRightImageView.frame = CGRectMake(self.frame.size.width*1.3, -self.frame.size.height * 2/5, self.frame.size.width/3, self.frame.size.height * 2/5);
+//            topRightImageView.backgroundColor = [UIColor greenColor];
+//            
+//            leftImageView.frame = CGRectMake(-self.frame.size.width * 1.5, self.frame.size.height * 2/5, self.frame.size.width/2, self.frame.size.height * 1/5);
+//            leftImageView.backgroundColor = [UIColor greenColor];
+//            
+//            rightImageView.frame = CGRectMake(self.frame.size.width * 1.5, self.frame.size.height * 2/5, self.frame.size.width/2, self.frame.size.height * 1/5);
+//            rightImageView.backgroundColor = [UIColor greenColor];
+//            
+//            bottomLeftImageView.frame = CGRectMake(-self.frame.size.width/3, self.frame.size.height, self.frame.size.width/3, self.frame.size.height * 2/5);
+//            bottomLeftImageView.backgroundColor = [UIColor greenColor];
+//            
+//            bottomCenterImageView.frame = CGRectMake(self.frame.size.width/3, self.frame.size.height, self.frame.size.width/3, self.frame.size.height * 2/5);
+//            bottomCenterImageView.backgroundColor = [UIColor greenColor];
+//            
+//            bottomRightImageView.frame = CGRectMake(self.frame.size.width*1.3, self.frame.size.height, self.frame.size.width/3, self.frame.size.height * 2/5);
+//            bottomRightImageView.backgroundColor = [UIColor greenColor];
+//            
+//            
+//        } completion: ^(BOOL finished) {
+//            // remove from superview
+//            [self removeFromSuperview];
+//        }];
+        
+        [UIView animateWithDuration: 0.75 delay: 0.0 options: 0 animations:^{
             
             
             topLeftImageView.frame = CGRectMake(-self.frame.size.width/3, -self.frame.size.height * 2/5, self.frame.size.width/3, self.frame.size.height * 2/5);
-            topLeftImageView.backgroundColor = [UIColor greenColor];
+//            topLeftImageView.backgroundColor = [UIColor greenColor];
             
             topCenterImageView.frame = CGRectMake(self.frame.size.width/3, -self.frame.size.height * 2/5, self.frame.size.width/3, self.frame.size.height * 2/5);
-            topCenterImageView.backgroundColor = [UIColor greenColor];
+//            topCenterImageView.backgroundColor = [UIColor greenColor];
             
             topRightImageView.frame = CGRectMake(self.frame.size.width*1.3, -self.frame.size.height * 2/5, self.frame.size.width/3, self.frame.size.height * 2/5);
-            topRightImageView.backgroundColor = [UIColor greenColor];
+//            topRightImageView.backgroundColor = [UIColor greenColor];
             
             leftImageView.frame = CGRectMake(-self.frame.size.width * 1.5, self.frame.size.height * 2/5, self.frame.size.width/2, self.frame.size.height * 1/5);
-            leftImageView.backgroundColor = [UIColor greenColor];
+//            leftImageView.backgroundColor = [UIColor greenColor];
             
             rightImageView.frame = CGRectMake(self.frame.size.width * 1.5, self.frame.size.height * 2/5, self.frame.size.width/2, self.frame.size.height * 1/5);
-            rightImageView.backgroundColor = [UIColor greenColor];
+//            rightImageView.backgroundColor = [UIColor greenColor];
             
             bottomLeftImageView.frame = CGRectMake(-self.frame.size.width/3, self.frame.size.height, self.frame.size.width/3, self.frame.size.height * 2/5);
-            bottomLeftImageView.backgroundColor = [UIColor greenColor];
+//            bottomLeftImageView.backgroundColor = [UIColor greenColor];
             
             bottomCenterImageView.frame = CGRectMake(self.frame.size.width/3, self.frame.size.height, self.frame.size.width/3, self.frame.size.height * 2/5);
-            bottomCenterImageView.backgroundColor = [UIColor greenColor];
+//            bottomCenterImageView.backgroundColor = [UIColor greenColor];
             
             bottomRightImageView.frame = CGRectMake(self.frame.size.width*1.3, self.frame.size.height, self.frame.size.width/3, self.frame.size.height * 2/5);
-            bottomRightImageView.backgroundColor = [UIColor greenColor];
+//            bottomRightImageView.backgroundColor = [UIColor greenColor];
             
+            topLeftImageView.alpha = 0.0;
+            topCenterImageView.alpha = 0.0;
+            topRightImageView.alpha = 0.0;
+            leftImageView.alpha = 0.0;
+            rightImageView.alpha = 0.0;
+            bottomLeftImageView.alpha = 0.0;
+            bottomCenterImageView.alpha = 0.0;
+            bottomRightImageView.alpha = 0.0;
             
         } completion: ^(BOOL finished) {
             // remove from superview

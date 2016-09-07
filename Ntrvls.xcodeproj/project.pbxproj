@@ -173,8 +173,8 @@
 			children = (
 				1BFB03831D3B375000E54FF7 /* JNKeychainWrapper.h */,
 				1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */,
-				1B0319361D10AFA6003C06CE /* AppDelegate.m */,
 				1B0319351D10AFA6003C06CE /* AppDelegate.h */,
+				1B0319361D10AFA6003C06CE /* AppDelegate.m */,
 				1BFB03661D2C747300E54FF7 /* UIColor+UIColorExtension.h */,
 				1BFB03671D2C747300E54FF7 /* UIColor+UIColorExtension.m */,
 				1BFB03611D2C67A100E54FF7 /* Constants.h */,

@@ -6,6 +6,7 @@
 @interface TimerPlayVC : UIViewController
 
 @property (strong, nonatomic) NtrvlWorkout *selectedWorkout;
+
 @property (strong, nonatomic) NSString *workoutTitle;
 
 @end

@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UITextView *descriptionTextView;
 @property (strong, nonatomic) UITextField *minutesTextField;
 @property (strong, nonatomic) UITextField *secondsTextField;
+@property (strong, nonatomic) UILabel *colonLabel;
 @property (strong, nonatomic) UILabel *intervalDurationLabel;
 
 @property (strong, nonatomic) UIButton *deleteButton;
@@ -27,6 +28,7 @@
 @property (strong, nonatomic) UIButton *yellowButton;
 @property (strong, nonatomic) UIButton *greenButton;
 @property (strong, nonatomic) UIButton *greyButton;
+@property (strong, nonatomic) UIButton *orangeButton;
 
 @property (strong, nonatomic) NSString *screenColor;
 
@@ -34,6 +36,8 @@
 @property (strong, nonatomic) UIView *selectColorsView;
 
 - (instancetype)initWithFrame:(CGRect)frame intervalDescription:(NSString *)intervalDescription andDuration:(NSUInteger)duration;
+
+- (void)hideSelectColorsViewAndButtons;
 
 - (NSString *)timeStringFromSecondsCount:(NSUInteger)secondsCount;
 

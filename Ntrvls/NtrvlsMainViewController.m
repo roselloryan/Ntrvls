@@ -20,12 +20,14 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (strong, nonatomic) NSArray *presetWorkoutTitles;
 
 @end
 
 
 
 @implementation NtrvlsMainViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +48,9 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     else {
         self.tableView.rowHeight = self.tableView.frame.size.height / 8;
     }
+
 }
+
 
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -61,15 +65,29 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
     }
     
-    // TODO: decide when to write saved workouts
+    // TODO: decide when to write saved workouts maybe only one method?
     if (self.sharedNtrvlsDataStore.workoutsArray.count == 0) {
         [self.sharedNtrvlsDataStore createTabataWorkoutWithCompletionBlock:^(BOOL complete) {
             if (complete) {
-                
                 [self.sharedNtrvlsDataStore fetchWorkouts];
-
-//                NSLog(@"ShareDataStore.workoutsArray: %@", self.sharedNtrvlsDataStore.workoutsArray);
-                
+                [self.tableView reloadData];
+            }
+        }];
+        [self.sharedNtrvlsDataStore createNewWorkoutWithCompletionBlock:^(BOOL complete) {
+           if (complete) {
+               [self.sharedNtrvlsDataStore fetchWorkouts];
+               [self.tableView reloadData];
+           }
+        }];
+        [self.sharedNtrvlsDataStore createOverUndersWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                [self.sharedNtrvlsDataStore fetchWorkouts];
+                [self.tableView reloadData];
+            }
+        }];
+        [self.sharedNtrvlsDataStore createDemoWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                [self.sharedNtrvlsDataStore fetchWorkouts];
                 [self.tableView reloadData];
             }
         }];
@@ -100,42 +118,55 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workoutCell" forIndexPath:indexPath];
     
-    // Configure the cell...
     NtrvlWorkout *cellWorkout = self.sharedNtrvlsDataStore.workoutsArray[indexPath.row];
     
     cell.textLabel.text = cellWorkout.workoutTitle;
+    
+    if ([cellWorkout.workoutTitle isEqualToString:@"TABATA"] || [cellWorkout.workoutTitle isEqualToString:@"New Workout"] || [cellWorkout.workoutTitle isEqualToString:@"Over/Unders"]) {
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.detailTextLabel.textColor = [UIColor whiteColor];
+    }
+    else {
+        cell.textLabel.textColor =  [UIColor ntrvlsBlue];
+        cell.detailTextLabel.textColor = [UIColor ntrvlsBlue];
+    }
+    
     cell.backgroundColor = [UIColor clearColor];
     cell.detailTextLabel.text = [self timeStringFromSecondsCount: cellWorkout.totalTime];
     
     UIView *selectedView = [UIView new];
-    selectedView.backgroundColor = [[UIColor ntrvlsRed] colorWithAlphaComponent:0.5];
+    selectedView.backgroundColor = [[UIColor ntrvlsGrey] colorWithAlphaComponent:0.3];
     cell.selectedBackgroundView = selectedView;
     
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+    NtrvlWorkout *cellWorkout = self.sharedNtrvlsDataStore.workoutsArray[indexPath.row];
+    
+    if ([cellWorkout.workoutTitle isEqualToString:@"TABATA"] || [cellWorkout.workoutTitle isEqualToString:@"New Workout"] || [cellWorkout.workoutTitle isEqualToString:@"Over/Unders"]) {
+        return NO;
+    }
+    else {
+        return YES;
+    }
+}
 
-// TODO: allow editing of user created workouts!
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
  - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     
+     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+         NtrvlWorkout *workoutToDelete = self.sharedNtrvlsDataStore.workoutsArray[indexPath.row];
+         [[NtrvlsDataStore sharedNtrvlsDataStore] deleteWorkoutWithTitle: workoutToDelete.workoutTitle];
+         [tableView deleteRowsAtIndexPaths: @[indexPath] withRowAnimation: UITableViewRowAnimationFade];
+     }
+     else if (editingStyle == UITableViewCellEditingStyleInsert) {
+         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+         // TODO: Add empty workout?
+     }
+     [self.tableView reloadData];
  }
- }
- */
 
 /*
  // Override to support rearranging the table view.
@@ -150,7 +181,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
  return YES;
  }
  */
-
 
 
 #pragma mark - Navigation
