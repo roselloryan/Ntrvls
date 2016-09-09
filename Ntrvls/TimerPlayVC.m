@@ -134,7 +134,7 @@
         [self.labelTimer invalidate];
         
         [self.pauseButton setTitle:@"-Go-" forState:UIControlStateNormal];
-        [self flashButton: self.pauseButton];
+//        [self flashButton: self.pauseButton];
     }
     
     // play again from being paused

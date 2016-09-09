@@ -20,12 +20,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "494915435.29846"
+            timestampString = "495135306.754602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "670"
-            endingLineNumber = "670"
-            landmarkName = "-showTextInputAlert"
+            startingLineNumber = "684"
+            endingLineNumber = "684"
+            landmarkName = "-presentTextInputAlert"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "494903973.320386"
+            timestampString = "495130156.240319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-shareOnStravaButtonTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,12 +84,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "494915435.29846"
+            timestampString = "495135306.754602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "671"
-            endingLineNumber = "671"
-            landmarkName = "-showTextInputAlert"
+            startingLineNumber = "685"
+            endingLineNumber = "685"
+            landmarkName = "-presentTextInputAlert"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -100,12 +100,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "494915435.29846"
+            timestampString = "495135306.754602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "676"
-            endingLineNumber = "676"
-            landmarkName = "-showTextInputAlert"
+            startingLineNumber = "690"
+            endingLineNumber = "690"
+            landmarkName = "-presentTextInputAlert"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "494915435.29846"
+            timestampString = "495135306.754602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "728"
-            endingLineNumber = "728"
+            startingLineNumber = "742"
+            endingLineNumber = "742"
             landmarkName = "-presentTitleAlreadySavedAlert"
             landmarkType = "5">
          </BreakpointContent>
@@ -148,11 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "494915435.29846"
+            timestampString = "495135306.754602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "528"
-            endingLineNumber = "528"
+            startingLineNumber = "539"
+            endingLineNumber = "539"
             landmarkName = "-copyInfoToNtrvlModelFromCustomNtrvlView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -164,11 +164,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "494915435.29846"
+            timestampString = "495135306.754602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "544"
-            endingLineNumber = "544"
+            startingLineNumber = "555"
+            endingLineNumber = "555"
             landmarkName = "-copyInfoToNtrvlModelFromCustomNtrvlView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -180,11 +180,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "494915435.29846"
+            timestampString = "495135306.754602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
             landmarkName = "-deselectNtrvlView:"
             landmarkType = "5">
          </BreakpointContent>

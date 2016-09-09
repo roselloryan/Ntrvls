@@ -31,7 +31,7 @@
 
 
         
-        self.minutesTextField = [[UITextField alloc]initWithFrame:CGRectMake(8, self.descriptionTextView.frame.size.height + 24, frame.size.width / 2 - 16, frame.size.height / 4)];
+        self.minutesTextField = [[UITextField alloc]initWithFrame:CGRectMake(8, self.descriptionTextView.frame.size.height + 20, frame.size.width / 2 - 16, frame.size.height / 4)];
         
         self.minutesTextField.placeholder = @"min";
         self.minutesTextField.textAlignment = NSTextAlignmentCenter;
@@ -41,7 +41,7 @@
         self.minutesTextField.hidden = YES;
         self.minutesTextField.keyboardType = UIKeyboardTypeNumberPad;
         
-        self.secondsTextField = [[UITextField alloc]initWithFrame:CGRectMake(self.minutesTextField.frame.size.width + 24, self.descriptionTextView.frame.size.height + 24, frame.size.width / 2 - 16, frame.size.height / 4)];
+        self.secondsTextField = [[UITextField alloc]initWithFrame:CGRectMake(self.minutesTextField.frame.size.width + 24, self.descriptionTextView.frame.size.height + 20, frame.size.width / 2 - 16, frame.size.height / 4)];
         self.secondsTextField.placeholder = @"sec";
         self.secondsTextField.textAlignment = NSTextAlignmentCenter;
         self.secondsTextField.text = [self.intervalDurationLabel.text componentsSeparatedByString:@":"][1];
@@ -50,7 +50,7 @@
         self.secondsTextField.hidden = YES;
         self.secondsTextField.keyboardType = UIKeyboardTypeNumberPad;
         
-        UILabel *colonLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.descriptionTextView.frame.size.height + 20, frame.size.width, frame.size.height / 4)];
+        UILabel *colonLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.descriptionTextView.frame.size.height + 16, frame.size.width, frame.size.height / 4)];
         colonLabel.font = [UIFont systemFontOfSize: 30.0];
         colonLabel.text = @":";
         colonLabel.textColor = [UIColor whiteColor];

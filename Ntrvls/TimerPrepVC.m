@@ -114,7 +114,7 @@
 #pragma mark - Buttons
 
 - (IBAction)menuButtonTapped:(UIButton *)sender {
-    [self deselectOtherSelectedCustomNtrvlViews];
+    
     [self showAskSaveAlert];
 }
 
@@ -123,9 +123,19 @@
 }
 
 - (IBAction)saveButtonTapped:(UIButton *)sender {
-    
     // TODO: handle save so that user doesn't have to try to exit before knowing they can save
-    [self showTextInputAlert];
+    
+    if (self.workoutWasEdited) {
+        if (!self.selectedWorkout.workoutType) {
+            [self presentWorkoutTypeAlertControllerfromButton: sender];
+        }
+        else {
+            [self presentTextInputAlert];
+        }
+    }
+    else {
+        [self presentNoChangesToSave];
+    }
 }
 
 - (IBAction)shareOnStravaButtonTapped:(UIButton *)sender {
@@ -148,6 +158,7 @@
 }
 
 - (IBAction)startButtonTapped:(UIButton *)sender {
+    [self deselectOtherSelectedCustomNtrvlViews];
     // should segue checks for activity type before segue to player
 
 }
@@ -567,6 +578,9 @@
     else if ([interval.screenColor isEqualToString:@"grey"]) {
         intervalView.backgroundColor = [UIColor ntrvlsDarkGrey];
     }
+    else if ([interval.screenColor isEqualToString:@"orange"]) {
+        intervalView.backgroundColor = [UIColor ntrvlsOrange];
+    }
     else {
         intervalView.backgroundColor = [UIColor ntrvlsRed];
     }
@@ -644,7 +658,7 @@
         UIAlertController *saveAlertController = [UIAlertController alertControllerWithTitle: @"We saw you made some changes!" message: @"Do you want to save this workout?" preferredStyle: UIAlertControllerStyleAlert];
         UIAlertAction *yesAction = [UIAlertAction actionWithTitle: @"Yes" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [self showTextInputAlert];
+            [self presentTextInputAlert];
         }];
         
         UIAlertAction *noAction = [UIAlertAction actionWithTitle: @"No" style: UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -664,7 +678,7 @@
     }
 }
 
-- (void)showTextInputAlert {
+- (void)presentTextInputAlert {
     
     UIAlertController *textInputAlertController = [UIAlertController alertControllerWithTitle: @"Title your workout" message:@"" preferredStyle: UIAlertControllerStyleAlert];
     
@@ -747,6 +761,9 @@
         if (button == self.startButton) {
             [self performSegueWithIdentifier:@"TimerPlaySegue" sender:self];
         }
+        else if (button == self.saveButton) {
+            [self presentTextInputAlert];
+        }
     }];
     UIAlertAction *rideAction = [UIAlertAction actionWithTitle:@"Ride" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -758,6 +775,9 @@
         }
         if (button == self.startButton) {
                 [self performSegueWithIdentifier:@"TimerPlaySegue" sender:self];
+        }
+        else if (button == self.saveButton) {
+            [self presentTextInputAlert];
         }
     }];
     UIAlertAction *rowAction = [UIAlertAction actionWithTitle:@"Row" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -771,6 +791,9 @@
         if (button == self.startButton) {
                 [self performSegueWithIdentifier:@"TimerPlaySegue" sender:self];
         }
+        else if (button == self.saveButton) {
+            [self presentTextInputAlert];
+        }
     }];
     UIAlertAction *walkAction = [UIAlertAction actionWithTitle:@"Walk" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     
@@ -782,6 +805,9 @@
         }
         if (button == self.startButton) {
                 [self performSegueWithIdentifier:@"TimerPlaySegue" sender:self];
+        }
+        else if (button == self.saveButton) {
+            [self presentTextInputAlert];
         }
     }];
     UIAlertAction *swimAction = [UIAlertAction actionWithTitle:@"Swim" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -795,7 +821,11 @@
         if (button == self.startButton) {
                 [self performSegueWithIdentifier:@"TimerPlaySegue" sender:self];
         }
+        else if (button == self.saveButton) {
+            [self presentTextInputAlert];
+        }
     }];
+    
     [workoutTypeAlertController addAction: runAction];
     [workoutTypeAlertController addAction: rideAction];
     [workoutTypeAlertController addAction: rowAction];
@@ -830,6 +860,17 @@
             [self dismissViewControllerAnimated: YES completion: nil];
         });
     }];
+}
+
+- (void)presentNoChangesToSave {
+    UIAlertController *noChangesToSaveAlertController = [UIAlertController alertControllerWithTitle: @"No changes to save" message: @"" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // anything else?
+    }];
+    
+    [noChangesToSaveAlertController addAction: okAction];
+    [self presentViewController: noChangesToSaveAlertController animated: NO completion:nil];
 }
 
 
