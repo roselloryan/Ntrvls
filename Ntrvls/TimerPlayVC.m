@@ -5,6 +5,8 @@
 #import "NtrvlsAPIClient.h"
 #import "NtrvlsDataStore.h"
 
+@import AVFoundation;
+
 @interface TimerPlayVC ()
 
 @property (weak, nonatomic) IBOutlet UILabel *workoutLabel;
@@ -32,6 +34,9 @@
 
 @property (assign, nonatomic) CGRect pauseButtonOriginalFrame;
 @property (assign, nonatomic) CGRect stopButtonOriginalFrame;
+
+@property (assign, nonatomic) SystemSoundID threeTwoOneSoundID;
+@property (assign, nonatomic) SystemSoundID completedNtrvlSoundID;
 
 @end
 
@@ -89,7 +94,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
+    [self configureSystemSounds];
+
     
 }
 
@@ -159,6 +165,7 @@
 
 
 - (IBAction)stopButtonTapped:(UIButton *)sender {
+
     
     [self showQuitAlert];
     
@@ -313,12 +320,16 @@
         self.timeLeftInInterval --;
     }
     
+    [self playSoundsFor321Done];
+    
     self.timeIntervalLabel.text = [self timeStringFromSecondsCount: self.timeLeftInInterval];
     self.totalTimeElapsedLabel.text = [self timeStringFromSecondsCount: self.totalTimeElapsed];
     
     if (self.intervalNumber == self.selectedWorkout.interval.count && self.timeLeftInInterval == 0){
         self.timeIntervalLabel.text = @"Finished!";
     }
+    
+ 
 }
 
 // TODO: Add completed workout logic and alert to post to Strava athlete feed
@@ -580,6 +591,34 @@
 //        });
     }];
 }
+
+# pragma mark - Sounds 
+
+- (void)configureSystemSounds {
+    // respects the mute switch
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error:nil];
+
+    NSURL *threeTwoOnePathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/short_double_low.caf"];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)threeTwoOnePathURL, &_threeTwoOneSoundID);
+    
+    NSURL *completedNtrvlPathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/long_low_short_high.caf"];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)completedNtrvlPathURL, &_completedNtrvlSoundID);
+}
+
+
+- (void)playSoundsFor321Done {
+    
+    if (self.timeLeftInInterval == 3 || self.timeLeftInInterval == 2 || self.timeLeftInInterval == 1) {
+        AudioServicesPlaySystemSound(self.threeTwoOneSoundID);
+    }
+    else if (self.timeLeftInInterval == 0) {
+        AudioServicesPlaySystemSound(self.completedNtrvlSoundID);
+    }
+    else if (self.timeLeftInInterval == self.selectedWorkout.interval[self.intervalNumber].intervalDuration) {
+        AudioServicesPlaySystemSound(self.completedNtrvlSoundID );
+    }
+}
+
 
 #pragma mark - Navigation
 

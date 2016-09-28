@@ -87,6 +87,7 @@
 		1B58DCC71D1F62FD0031EE94 /* BreakAwayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakAwayView.h; sourceTree = "<group>"; };
 		1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakAwayView.m; sourceTree = "<group>"; };
 		1B8818A9C280394CAEB57622 /* Pods-NtrvlsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1B92B9451D99F48800F996DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1BFB03611D2C67A100E54FF7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../../../../.Trash/Constants.h; sourceTree = "<group>"; };
 		1BFB03621D2C67A100E54FF7 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ../../../../.Trash/Constants.m; sourceTree = "<group>"; };
 		1BFB03661D2C747300E54FF7 /* UIColor+UIColorExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+UIColorExtension.h"; sourceTree = "<group>"; };
@@ -268,6 +269,7 @@
 		585D9A8E12C400E3823C9B18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B92B9451D99F48800F996DE /* AudioToolbox.framework */,
 				1BFB037E1D3AD22700E54FF7 /* Security.framework */,
 				C465709F70A6CECD465B2A35 /* libPods-Ntrvls.a */,
 				1CFABEAE4C23C83B2913CA9A /* libPods-NtrvlsTests.a */,
@@ -359,7 +361,7 @@
 		1B0319271D10AFA6003C06CE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "RYAN ROSELLO";
 				TargetAttributes = {
 					1B03192E1D10AFA6003C06CE = {
@@ -639,8 +641,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -684,8 +688,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

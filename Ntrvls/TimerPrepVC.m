@@ -140,6 +140,15 @@
 
 - (IBAction)shareOnStravaButtonTapped:(UIButton *)sender {
     
+    if (self.workoutWasEdited) {
+        if (!self.selectedWorkout.workoutType) {
+            [self presentWorkoutTypeAlertControllerfromButton: sender];
+        }
+        else {
+            [self presentTextInputAlert];
+        }
+    }
+    
     [NtrvlsAPIClient loginIntoStravaWithSuccessBlock:^(BOOL success) {
         
         if (success){
@@ -160,7 +169,6 @@
 - (IBAction)startButtonTapped:(UIButton *)sender {
     [self deselectOtherSelectedCustomNtrvlViews];
     // should segue checks for activity type before segue to player
-
 }
 
 - (IBAction)addIntervalButtonTapped:(UIButton *)sender {

@@ -20,29 +20,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "495135306.754602"
+            timestampString = "495334124.592208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "684"
-            endingLineNumber = "684"
+            startingLineNumber = "693"
+            endingLineNumber = "693"
             landmarkName = "-presentTextInputAlert"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "495130156.240319"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "-shareOnStravaButtonTapped:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -84,13 +68,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "495135306.754602"
+            timestampString = "495334124.592208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "685"
-            endingLineNumber = "685"
+            startingLineNumber = "694"
+            endingLineNumber = "694"
             landmarkName = "-presentTextInputAlert"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -100,13 +84,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "495135306.754602"
+            timestampString = "495334124.592208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
+            startingLineNumber = "699"
+            endingLineNumber = "699"
             landmarkName = "-presentTextInputAlert"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -116,13 +100,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPlayVC.m"
-            timestampString = "494923747.178736"
+            timestampString = "496713063.366926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "-labelTimerFired:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -132,13 +116,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "495135306.754602"
+            timestampString = "495334124.592208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "742"
-            endingLineNumber = "742"
+            startingLineNumber = "751"
+            endingLineNumber = "751"
             landmarkName = "-presentTitleAlreadySavedAlert"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -148,13 +132,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "495135306.754602"
+            timestampString = "495334124.592208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
             landmarkName = "-copyInfoToNtrvlModelFromCustomNtrvlView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -164,13 +148,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "495135306.754602"
+            timestampString = "495334124.592208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "555"
-            endingLineNumber = "555"
+            startingLineNumber = "564"
+            endingLineNumber = "564"
             landmarkName = "-copyInfoToNtrvlModelFromCustomNtrvlView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -180,13 +164,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "495135306.754602"
+            timestampString = "495334124.592208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
+            startingLineNumber = "479"
+            endingLineNumber = "479"
             landmarkName = "-deselectNtrvlView:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -202,7 +186,7 @@
             startingLineNumber = "58"
             endingLineNumber = "58"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -212,13 +196,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPlayVC.m"
-            timestampString = "494923747.178736"
+            timestampString = "496713063.366926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-shareOnStravaButtonTapped:"
-            landmarkType = "5">
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "-stopButtonTapped:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -228,45 +212,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPlayVC.m"
-            timestampString = "494923747.178736"
+            timestampString = "496713063.366926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "575"
-            endingLineNumber = "575"
-            landmarkName = "-presentSuccessfulStravaUploadAlert"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TimerPlayVC presentSuccessfulStravaUploadAlert]"
-                  moduleName = "Ntrvls"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roselloryan/Documents/development/Ntrvls/Ntrvls/TimerPlayVC.m"
-                  timestampString = "494921013.733171"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "570"
-                  endingLineNumber = "570"
-                  offsetFromSymbolStart = "274">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__49-[TimerPlayVC presentSuccessfulStravaUploadAlert]_block_invoke.372"
-                  moduleName = "Ntrvls"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roselloryan/Documents/development/Ntrvls/Ntrvls/TimerPlayVC.m"
-                  timestampString = "494921013.733496"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "576"
-                  endingLineNumber = "576"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
+            startingLineNumber = "598"
+            endingLineNumber = "598"
+            landmarkName = "-configureSystemSounds"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
