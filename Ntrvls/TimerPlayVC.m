@@ -4,19 +4,13 @@
 #import "UIColor+UIColorExtension.h"
 #import "NtrvlsAPIClient.h"
 #import "NtrvlsDataStore.h"
+#import "CustomPlayerView.h"
 
 @import AVFoundation;
 
 @interface TimerPlayVC ()
 
-@property (weak, nonatomic) IBOutlet UILabel *workoutLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeIntervalLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nextIntervalDescriptionLabel;
-
-
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeElapsedLabel;
-@property (weak, nonatomic) IBOutlet UILabel *currentIntervalDescriptionLabel;
-@property (weak, nonatomic) IBOutlet UIView *currentIntervalView;
 
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
@@ -38,6 +32,10 @@
 @property (assign, nonatomic) SystemSoundID threeTwoOneSoundID;
 @property (assign, nonatomic) SystemSoundID completedNtrvlSoundID;
 
+@property (strong, nonatomic) CustomPlayerView *viewOne;
+@property (strong, nonatomic) CustomPlayerView *viewTwo;
+@property (strong, nonatomic) CustomPlayerView *viewThree;
+
 @end
 
 
@@ -46,23 +44,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.workoutLabel.text = self.workoutTitle;
-    
-//    self.startButton.layer.borderWidth = 1.0;
-//    self.startButton.layer.borderColor = [UIColor ntrvlsGreen].CGColor;
-//    self.startButton.layer.cornerRadius = 5.0f;
-//    self.startButton.layer.masksToBounds = YES;
-//    
-//    self.pauseButton.layer.borderWidth = 1.0;
-//    self.pauseButton.layer.borderColor = [UIColor ntrvlsYellow].CGColor;
-//    self.pauseButton.layer.cornerRadius = 5.0f;
-//    self.pauseButton.layer.masksToBounds = YES;
-//    
-//    self.stopButton.layer.borderWidth = 1.0;
-//    self.stopButton.layer.borderColor = [UIColor ntrvlsRed].CGColor;
-//    self.stopButton.layer.cornerRadius = 5.0f;
-//    self.stopButton.layer.masksToBounds = YES;
     
     self.startButton.backgroundColor = [UIColor ntrvlsGreen];
     self.pauseButton.backgroundColor = [UIColor ntrvlsYellow];
@@ -96,6 +77,13 @@
     
     [self configureSystemSounds];
 
+    // draw view one and two
+    self.viewOne = [self buildViewOffScreenForNtrvl: self.selectedWorkout.interval[0]];
+    self.viewTwo = [self buildViewOffScreenForNtrvl: self.selectedWorkout.interval[1]];
+    self.viewOne.alpha = 0.0;
+    self.viewTwo.alpha = 0.0;
+    [self.view addSubview: self.viewOne];
+    [self.view addSubview: self.viewTwo];
     
 }
 
@@ -110,8 +98,6 @@
     
     [self animatePauseAndStopButtons];
     
-    self.currentIntervalView.backgroundColor = [UIColor ntrvlsYellow];
-    
     if (!self.playerIsPaused) {
         
         NSTimer *labelTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target: self selector:@selector(labelTimerFired:) userInfo:nil repeats:YES];
@@ -119,16 +105,13 @@
     
         Ntrvl *currentInterval = self.selectedWorkout.interval[self.intervalNumber];
         self.timeLeftInInterval = currentInterval.intervalDuration;
-        
-        // update labels
-        self.timeIntervalLabel.text = [self timeStringFromSecondsCount: currentInterval.intervalDuration];
-        self.currentIntervalDescriptionLabel.text = [NSString stringWithFormat:@"%@", currentInterval.intervalDescription];
-        self.nextIntervalDescriptionLabel.text = [NSString stringWithFormat:@"Next: %@", self.selectedWorkout.interval[self.intervalNumber + 1].intervalDescription];
     }
     
     [self hideBackButton];
     
-    
+    [self animateViewToCurrentIntervalPosition: self.viewOne];
+    [self animateViewToNextIntervalPosition: self.viewTwo];
+
 }
 
 - (IBAction)pauseButtonTapped:(UIButton *)sender {
@@ -314,6 +297,7 @@
     
     if (self.timeLeftInInterval == 1) {
         self.timeLeftInInterval --;
+        self.viewOne.timeLabel.text = [self timeStringFromSecondsCount: self.timeLeftInInterval];
         [self intervalCompleted];
     }
     else {
@@ -322,111 +306,105 @@
     
     [self playSoundsFor321Done];
     
-    self.timeIntervalLabel.text = [self timeStringFromSecondsCount: self.timeLeftInInterval];
+    self.viewOne.timeLabel.text = [self timeStringFromSecondsCount: self.timeLeftInInterval];
     self.totalTimeElapsedLabel.text = [self timeStringFromSecondsCount: self.totalTimeElapsed];
     
     if (self.intervalNumber == self.selectedWorkout.interval.count && self.timeLeftInInterval == 0){
-        self.timeIntervalLabel.text = @"Finished!";
+        self.viewOne.timeLabel.text = @"Finished!";
     }
     
  
 }
 
-// TODO: Add completed workout logic and alert to post to Strava athlete feed
 -(void)intervalCompleted {
-    
-    [self takeScreenShotAndInitializeBreakAwayView];
     
     // proceed to next interval
     self.intervalNumber += 1;
-    
-    // Check for zero time and skip intervals without duration
-    if (self.intervalNumber != self.selectedWorkout.interval.count) {
-        while (self.selectedWorkout.interval[self.intervalNumber].intervalDuration == 0) {
-            self.intervalNumber ++;
-        }
-    }
+
     // last interval
     if (self.intervalNumber == self.selectedWorkout.interval.count) {
         
         [self.labelTimer invalidate];
     
         // update label text. Timer still executes remaining code setting timeLabel text to "Finished!"
-        self.currentIntervalDescriptionLabel.text = @"";
-        self.nextIntervalDescriptionLabel.text = @"";
-        self.currentIntervalView.backgroundColor = [UIColor ntrvlsOrange];
+        self.viewOne.descriptionLabel.text = @"Finished";
         
         [self displayDoneBackButton];
         [self animateButtonsForFinishedWorkout];
-        
-        // TODO: reset start/stop/pause buttons or make them a post to strava button?
-        // TODO: check if completing last interval and if yes prompt post to Strava if not proceed
     }
+    
     // 2nd to last interval
-    else if (self.intervalNumber == self.selectedWorkout.interval.count -1){
+    else if (self.intervalNumber == self.selectedWorkout.interval.count - 1){
         
         Ntrvl *currentInterval = self.selectedWorkout.interval[self.intervalNumber];
         self.timeLeftInInterval = currentInterval.intervalDuration;
         
-        self.timeIntervalLabel.text = [self timeStringFromSecondsCount: self.timeLeftInInterval];
-        self.currentIntervalDescriptionLabel.text = currentInterval.intervalDescription;
-        self.nextIntervalDescriptionLabel.text = @"Next: FINSHED";
-        
-        [self updateIntervalScreenColorforNtrvl:currentInterval];
+        [self animateViewToFinishedIntervalPosition: self.viewOne];
+        [self animateViewToCurrentIntervalPosition: self.viewTwo];
+        self.viewOne = self.viewTwo;
     }
+    
     // all other intervals
     else {
-        
         Ntrvl *currentInterval = self.selectedWorkout.interval[self.intervalNumber];
         self.timeLeftInInterval = currentInterval.intervalDuration;
+
+        [self animateViewToFinishedIntervalPosition: self.viewOne];
+        [self animateViewToCurrentIntervalPosition: self.viewTwo];
         
-        self.timeIntervalLabel.text = [self timeStringFromSecondsCount: self.timeLeftInInterval];
-        self.currentIntervalDescriptionLabel.text = currentInterval.intervalDescription;
-        self.nextIntervalDescriptionLabel.text = [NSString stringWithFormat:@"Next: %@",((Ntrvl *)self.selectedWorkout.interval[self.intervalNumber + 1]).intervalDescription];
+        // Check for zero time and skip intervals without duration
+        while (self.selectedWorkout.interval[self.intervalNumber + 1].intervalDuration == 0) {
+            self.intervalNumber ++;
+        }
         
-        [self updateIntervalScreenColorforNtrvl: currentInterval];
+        self.viewThree = [self buildViewOffScreenForNtrvl: self.selectedWorkout.interval[self.intervalNumber + 1]];
+        [self.view addSubview:self.viewThree];
+        [self animateViewToNextIntervalPosition: self.viewThree];
+        self.viewOne = self.viewTwo;
+        self.viewTwo = self.viewThree;
+        
     }
 }
 
 
-- (void)takeScreenShotAndInitializeBreakAwayView {
-    
-    // stole this. Learn it!!!
-//    UIGraphicsBeginImageContext(self.view.frame.size);
-    UIGraphicsBeginImageContext(self.currentIntervalView.frame.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [self.currentIntervalView.layer renderInContext: context];
-    UIImage *screenShot = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-//    BreakAwayView *viewToFlash = [[BreakAwayView alloc]initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) andImage:screenShot];
+//- (void)takeScreenShotAndInitializeBreakAwayView {
+//    
+//    // stole this. Learn it!!!
+////    UIGraphicsBeginImageContext(self.view.frame.size);
+//    UIGraphicsBeginImageContext(self.currentIntervalView.frame.size);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    [self.currentIntervalView.layer renderInContext: context];
+//    UIImage *screenShot = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+////    BreakAwayView *viewToFlash = [[BreakAwayView alloc]initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) andImage:screenShot];
+//
+//    BreakAwayView *viewToFlash = [[BreakAwayView alloc]initWithFrame: self.currentIntervalView.frame andImage:screenShot];
+//    
+//    [self.view addSubview:viewToFlash];
+//}
 
-    BreakAwayView *viewToFlash = [[BreakAwayView alloc]initWithFrame: self.currentIntervalView.frame andImage:screenShot];
-    
-    [self.view addSubview:viewToFlash];
-}
-
-- (void)updateIntervalScreenColorforNtrvl:(Ntrvl *)ntrvl {
-        
-    if ([ntrvl.screenColor isEqualToString:@"red"]) {
-        self.currentIntervalView.backgroundColor = [UIColor ntrvlsRed];
-    }
-    else if ([ntrvl.screenColor isEqualToString:@"blue"]) {
-        self.currentIntervalView.backgroundColor = [UIColor ntrvlsBlue];
-    }
-    else if ([ntrvl.screenColor isEqualToString:@"green"]) {
-        self.currentIntervalView.backgroundColor = [UIColor ntrvlsGreen];
-    }
-    else if ([ntrvl.screenColor isEqualToString:@"grey"]) {
-        self.currentIntervalView.backgroundColor = [UIColor ntrvlsGrey];
-    }
-    else if ([ntrvl.screenColor isEqualToString:@"orange"]) {
-        self.currentIntervalView.backgroundColor = [UIColor ntrvlsOrange];
-    }
-    else {
-        self.currentIntervalView.backgroundColor = [UIColor ntrvlsYellow];
-    }
-}
+//- (void)updateIntervalScreenColorforNtrvl:(Ntrvl *)ntrvl {
+//        
+//    if ([ntrvl.screenColor isEqualToString:@"red"]) {
+//        self.currentIntervalView.backgroundColor = [UIColor ntrvlsRed];
+//    }
+//    else if ([ntrvl.screenColor isEqualToString:@"blue"]) {
+//        self.currentIntervalView.backgroundColor = [UIColor ntrvlsBlue];
+//    }
+//    else if ([ntrvl.screenColor isEqualToString:@"green"]) {
+//        self.currentIntervalView.backgroundColor = [UIColor ntrvlsGreen];
+//    }
+//    else if ([ntrvl.screenColor isEqualToString:@"grey"]) {
+//        self.currentIntervalView.backgroundColor = [UIColor ntrvlsGrey];
+//    }
+//    else if ([ntrvl.screenColor isEqualToString:@"orange"]) {
+//        self.currentIntervalView.backgroundColor = [UIColor ntrvlsOrange];
+//    }
+//    else {
+//        self.currentIntervalView.backgroundColor = [UIColor ntrvlsYellow];
+//    }
+//}
 
 
 - (NSString *)timeStringFromSecondsCount:(NSUInteger)secondsCount {
@@ -531,9 +509,42 @@
     [[NSNotificationCenter defaultCenter] removeObserver: self name: @"deniedAccess" object: nil];
     [[NSNotificationCenter defaultCenter] removeObserver: self name: @"allowedAccess" object: nil];
 }
+# pragma mark - Play view methods
 
+- (CustomPlayerView *)buildViewOffScreenForNtrvl:(Ntrvl *)ntrvl {
+    
+    CustomPlayerView *firstCell = [[CustomPlayerView alloc]initWithFrame: CGRectMake(self.view.frame.size.width, self.view.frame.size.height/5, self.view.frame.size.width * 3/4, self.view.frame.size.height/2)intervalDescription: ntrvl.intervalDescription duration: ntrvl.intervalDuration andBackgroundColor:ntrvl.screenColor];
 
+    return firstCell;
+}
 
+- (void)animateViewToCurrentIntervalPosition:(UIView *)view {
+    [UIView animateWithDuration: 0.5 delay: 0.0 options: 0 animations:^{
+        view.frame = CGRectMake(8, self.view.frame.size.height/5, self.view.frame.size.width * 3/4,self.view.frame.size.height/2);
+        view.alpha = 1.0;
+        view.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    } completion:^(BOOL finished) {
+        // anything else?
+    }];
+}
+
+- (void)animateViewToNextIntervalPosition:(UIView *)view {
+    [UIView animateWithDuration: 0.25 delay: 0.25 options: 0 animations:^{
+        view.frame = CGRectMake(self.view.frame.size.width * 3/4 + 28 , self.view.frame.size.height/5, self.view.frame.size.width * 3/4,self.view.frame.size.height/2);
+        view.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        // anything else?
+    }];
+}
+- (void)animateViewToFinishedIntervalPosition:(UIView *)view {
+    [UIView animateWithDuration: 0.5 delay: 0.0 options: 0 animations:^{
+        view.frame = CGRectMake(-view.frame.size.width  , self.view.frame.size.height/5, self.view.frame.size.width * 3/4,self.view.frame.size.height/2);
+        view.alpha = 0.0;
+                view.transform = CGAffineTransformMakeScale(1, 1);
+    } completion:^(BOOL finished) {
+        // anything else?
+    }];
+}
 #pragma mark - String methods
 
 - (NSString *)stringForCurrentTimeAndDateIOS8601Format {
@@ -595,14 +606,20 @@
 # pragma mark - Sounds 
 
 - (void)configureSystemSounds {
+    //TODO: figure out catch for url not setting SoundID
+    
     // respects the mute switch
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error:nil];
 
-    NSURL *threeTwoOnePathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/short_double_low.caf"];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)threeTwoOnePathURL, &_threeTwoOneSoundID);
-    
-    NSURL *completedNtrvlPathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/long_low_short_high.caf"];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)completedNtrvlPathURL, &_completedNtrvlSoundID);
+//    NSURL *threeTwoOnePathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/short_double_low.caf"];
+//    if (threeTwoOnePathURL) {
+//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)threeTwoOnePathURL, &_threeTwoOneSoundID);
+//    }
+//
+//    NSURL *completedNtrvlPathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/long_low_short_high.caf"];
+//    if (completedNtrvlPathURL) {
+//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)completedNtrvlPathURL, &_completedNtrvlSoundID);
+//    }
 }
 
 

@@ -42,13 +42,9 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     if (self.view.frame.size.height == iPhone4sHeight) {
         self.tableViewTopConstraint.constant = topConstraintConstantFor4s;
         self.tableViewBottomConstraint.constant = bottomConstraintConstantFor4s;
-        // makes shorter row heights for 4s
-        self.tableView.rowHeight = self.tableView.frame.size.height / 9;
     }
-    else {
-        self.tableView.rowHeight = self.tableView.frame.size.height / 8;
-    }
-
+    self.tableView.estimatedRowHeight = 40.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 
@@ -59,10 +55,11 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     [self.navigationController setNavigationBarHidden:YES];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.toolbar.tintColor = [UIColor whiteColor];
+
     
     NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
     if (selectedIndexPath) {
-        [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
+        [self.tableView deselectRowAtIndexPath: selectedIndexPath animated:YES];
     }
     
     // TODO: decide when to write saved workouts maybe only one method?
@@ -98,7 +95,10 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    
     [self.tableView reloadData];
+    NSLog(@"self.view.frame = %@", NSStringFromCGRect(self.view.frame));
+    NSLog(@"self.tableView.frame = %@", NSStringFromCGRect(self.tableView.frame));
 }
 
 

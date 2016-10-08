@@ -12,7 +12,6 @@
     if (self) {
         self.frame = frame;
         
-
         self.descriptionTextView = [[UITextView alloc]initWithFrame:CGRectMake(8, 8, frame.size.width - 16, frame.size.height / 2.5)];
         self.userInteractionEnabled = YES;
         

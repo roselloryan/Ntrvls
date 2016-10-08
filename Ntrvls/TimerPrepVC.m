@@ -7,8 +7,6 @@
 #import "JNKeychainWrapper.h"
 #import "CustomNtrvlView.h"
 #import "IntervalLabel.h"
-#include "Ntrvl.h"
-
 
 
 @interface TimerPrepVC () <UIGestureRecognizerDelegate, UITextFieldDelegate, DeleteButtonProtocol, UITextViewDelegate>
@@ -38,6 +36,8 @@
 @property (assign, nonatomic) CGFloat screenHeight;
 @property (assign, nonatomic) CGFloat screenWidth;
 
+@property (strong, nonatomic) UIView *fadeOutView;
+
 @end
 
 
@@ -62,6 +62,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    // remove fadeOutView if returning from PlayerVC
+    if (self.fadeOutView) {
+        [self.fadeOutView removeFromSuperview];
+    }
     
     // add gestureRecognizer to close selected cells when screen tapped
     UITapGestureRecognizer *backgroundTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget: self action: @selector(deselectOtherSelectedCustomNtrvlViews)];
@@ -168,7 +172,14 @@
 
 - (IBAction)startButtonTapped:(UIButton *)sender {
     [self deselectOtherSelectedCustomNtrvlViews];
+    
     // should segue checks for activity type before segue to player
+    if (self.selectedWorkout.workoutType) {
+        [self fadeScreenAndSegueToPlayVCWhenComplete];
+    }
+    else {
+        [self presentWorkoutTypeAlertControllerfromButton: sender];
+    }
 }
 
 - (IBAction)addIntervalButtonTapped:(UIButton *)sender {
@@ -594,29 +605,6 @@
     }
 }
 
-- (void)drawXOverView:(UIView *)view {
-    
-    UIBezierPath *xPathOne = [UIBezierPath bezierPath];
-    [xPathOne moveToPoint:CGPointMake(0, 0)];
-    [xPathOne addLineToPoint:CGPointMake(view.frame.size.width, view.frame.size.height)];
-    
-    UIBezierPath *xPathTwo = [UIBezierPath bezierPath];
-    [xPathTwo moveToPoint:CGPointMake(view.frame.size.width, 0)];
-    [xPathTwo addLineToPoint:CGPointMake(0, view.frame.size.height)];
-    
-    CAShapeLayer *shapeLayerOne = [CAShapeLayer layer];
-    shapeLayerOne.path = [xPathOne CGPath];
-    shapeLayerOne.strokeColor = [[UIColor blackColor] colorWithAlphaComponent: 0.3].CGColor;
-    shapeLayerOne.lineWidth = 2.0;
-    [view.layer addSublayer: shapeLayerOne];
-    
-    CAShapeLayer *shapeLayerTwo = [CAShapeLayer layer];
-    shapeLayerTwo.path = [xPathTwo CGPath];
-    shapeLayerTwo.strokeColor = [[UIColor blackColor] colorWithAlphaComponent: 0.3].CGColor;
-    shapeLayerTwo.lineWidth = 2.0;
-    [view.layer addSublayer: shapeLayerTwo];
-}
-
 #pragma mark - String methods
 
 - (NSString *)stringForCurrentTimeAndDateIOS8601Format {
@@ -699,21 +687,17 @@
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        NSLog(@"Ok tapped");
         if (![[NtrvlsDataStore sharedNtrvlsDataStore] alreadySavedWorkoutWithTitle: self.alertTextField.text]) {
             [[NtrvlsDataStore sharedNtrvlsDataStore] saveCopyAsNewWorkoutWithTitle: self.alertTextField.text];
             [self dismissViewControllerAnimated: NO completion: nil];
             [self.navigationController popViewControllerAnimated: YES];
         }
         else {
-            // TODO: display choice another title alert
-            NSLog(@"Already saved that title");
             [self presentTitleAlreadySavedAlert];
         }
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         // default behavior?
-        NSLog(@"Cancel tapped");
     }];
     
     [textInputAlertController addAction: cancelAction];
@@ -833,12 +817,16 @@
             [self presentTextInputAlert];
         }
     }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        // dismiss the alertViewController
+    }];
     
     [workoutTypeAlertController addAction: runAction];
     [workoutTypeAlertController addAction: rideAction];
     [workoutTypeAlertController addAction: rowAction];
     [workoutTypeAlertController addAction: walkAction];
     [workoutTypeAlertController addAction: swimAction];
+    [workoutTypeAlertController addAction: cancelAction];
     
     [self presentViewController: workoutTypeAlertController animated: YES completion:nil];
 }
@@ -888,18 +876,29 @@
     
     if ([segue.identifier isEqualToString:@"TimerPlaySegue"]) {
         
-        NSLog(@"IN PREP---- self.selectedWorkout.workoutType: %@", self.selectedWorkout.workoutType);
-        
         TimerPlayVC *destinationVC = segue.destinationViewController;
         destinationVC.selectedWorkout = self.selectedWorkout;
-        
-        NSLog(@"IN PREP---- destinationVC.selectedWorkout.workoutType: %@", destinationVC.selectedWorkout.workoutType);
         
         // since editing a copy of workout, pass forward current title
         destinationVC.workoutTitle = self.workoutTitleLabel.text;
     }
 }
 
+- (void)fadeScreenAndSegueToPlayVCWhenComplete {
+    UIView *blackView = [[UIView alloc]initWithFrame:self.view.frame];
+    blackView.backgroundColor = [UIColor blackColor];
+    blackView.alpha = 0.0;
+    self.fadeOutView = blackView;
+    [self.view addSubview: self.fadeOutView];
+    [self.view bringSubviewToFront:self.startButton];
+    
+    [UIView animateWithDuration: 1.0 animations:^{
+        self.fadeOutView.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        [self performSegueWithIdentifier:@"TimerPlaySegue" sender:self];
+    }];
+    
+}
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender {
     
     NSLog(@"self.selectedWorkout.workoutType: %@",  self.selectedWorkout.workoutType);
