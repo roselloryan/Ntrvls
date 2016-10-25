@@ -26,31 +26,49 @@
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="45"/>
                                         <color key="textColor" red="0.81176470590000005" green="0.0" blue="0.058823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="66"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="t" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcz-6z-1uD">
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="r" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcR-3u-q7Q">
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGB-DU-EKN">
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="l" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qa5-Ef-yzq">
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LS-9P-OaG">
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
+                                        </variation>
                                     </label>
                                 </subviews>
                                 <constraints>
@@ -71,18 +89,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z8y-LU-6hd">
-                                                    <frame key="frameInset" minX="48" minY="7" width="44" height="30"/>
+                                                    <frame key="frameInset" minX="48" minY="1" width="61" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="25"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="35"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bKu-pD-Fwn">
-                                                    <frame key="frameInset" minX="672" minY="12" width="48" height="24"/>
+                                                    <frame key="frameInset" minX="638" minY="1" width="82" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="25"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="35"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -113,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n19-a5-bzb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1969" y="984"/>
+            <point key="canvasLocation" x="1967" y="984"/>
         </scene>
         <!--Timer PrepVC-->
         <scene sceneID="GQ9-E1-StQ">
@@ -127,29 +151,14 @@
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Z8-M7-SJY" userLabel="Menu Button">
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
-                                <state key="normal" title="&lt;menu">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="menuButtonTapped:" destination="HkJ-AD-fHQ" eventType="touchUpInside" id="Tgg-Vd-DAw"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4j-li-D17">
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="55"/>
+                                </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kW-Uf-iYM">
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
-                                <state key="normal" title="save">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="HkJ-AD-fHQ" eventType="touchUpInside" id="AzK-EN-qsv"/>
-                                </connections>
-                            </button>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-1L-zBN">
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJR-5Q-XGu" userLabel="Content View">
@@ -166,6 +175,30 @@
                                     <constraint firstItem="iJR-5Q-XGu" firstAttribute="trailing" secondItem="w1b-1L-zBN" secondAttribute="trailing" id="hbV-At-MLY"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Z8-M7-SJY" userLabel="Menu Button">
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                                <state key="normal" title="&lt;menu">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
+                                </variation>
+                                <connections>
+                                    <action selector="menuButtonTapped:" destination="HkJ-AD-fHQ" eventType="touchUpInside" id="Tgg-Vd-DAw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kW-Uf-iYM">
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                                <state key="normal" title="save">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
+                                </variation>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="HkJ-AD-fHQ" eventType="touchUpInside" id="AzK-EN-qsv"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcZ-zZ-Pd7" userLabel="Strava Button">
                                 <state key="normal" backgroundImage="StravaButton"/>
                                 <connections>
@@ -177,17 +210,23 @@
                                 <state key="normal" title="activity type:">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
+                                </variation>
                                 <connections>
                                     <action selector="activityTypeButtonTapped:" destination="HkJ-AD-fHQ" eventType="touchUpInside" id="1Ct-72-UQE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Jv-Fu-NKs">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Jv-Fu-NKs">
                                 <color key="backgroundColor" red="0.12156862745098039" green="0.75294117647058822" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="36"/>
                                 <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                                 <state key="normal" title="Start Workout">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="51"/>
+                                </variation>
                                 <connections>
                                     <action selector="startButtonTapped:" destination="HkJ-AD-fHQ" eventType="touchUpInside" id="ehW-nG-P0f"/>
                                 </connections>
@@ -210,7 +249,9 @@
                             <constraint firstItem="w1b-1L-zBN" firstAttribute="leading" secondItem="VQt-Fj-66J" secondAttribute="leading" id="gYJ-Ys-qzu"/>
                             <constraint firstItem="8kW-Uf-iYM" firstAttribute="trailing" secondItem="VQt-Fj-66J" secondAttribute="trailing" constant="-8" id="ik5-cO-ijU"/>
                             <constraint firstItem="9Jv-Fu-NKs" firstAttribute="width" secondItem="VQt-Fj-66J" secondAttribute="width" id="k1P-7y-dQ8"/>
-                            <constraint firstItem="QcZ-zZ-Pd7" firstAttribute="width" secondItem="VQt-Fj-66J" secondAttribute="width" multiplier="0.6" id="niz-bH-LJ1"/>
+                            <constraint firstItem="QcZ-zZ-Pd7" firstAttribute="width" secondItem="VQt-Fj-66J" secondAttribute="width" multiplier="0.6" id="niz-bH-LJ1">
+                                <variation key="heightClass=regular-widthClass=regular" constant="-125"/>
+                            </constraint>
                             <constraint firstItem="w1b-1L-zBN" firstAttribute="trailing" secondItem="VQt-Fj-66J" secondAttribute="trailing" id="ome-xw-kFJ"/>
                             <constraint firstItem="QcZ-zZ-Pd7" firstAttribute="bottom" secondItem="HV5-Ic-pKt" secondAttribute="top" constant="-24" id="rTY-hK-bAy"/>
                             <constraint firstItem="w1b-1L-zBN" firstAttribute="height" secondItem="VQt-Fj-66J" secondAttribute="height" multiplier="1/2" id="tYW-se-x8S"/>
@@ -230,7 +271,7 @@
                         <outlet property="startButton" destination="9Jv-Fu-NKs" id="BGO-9x-fhR"/>
                         <outlet property="stravaButton" destination="QcZ-zZ-Pd7" id="TO0-l7-L7o"/>
                         <outlet property="workoutTitleLabel" destination="j4j-li-D17" id="gFW-O3-mRL"/>
-                        <segue destination="uG8-w0-2sc" kind="show" identifier="TimerPlaySegue" id="wgo-xz-bPX"/>
+                        <segue destination="uG8-w0-2sc" kind="show" identifier="TimerPlaySegue" animates="NO" id="wgo-xz-bPX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z9J-rD-YxZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,6 +296,9 @@
                                 <state key="normal" title="Stop">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="52"/>
+                                </variation>
                                 <connections>
                                     <action selector="stopButtonTapped:" destination="uG8-w0-2sc" eventType="touchUpInside" id="LrU-MM-wrP"/>
                                 </connections>
@@ -265,6 +309,9 @@
                                 <state key="normal" title="Pause">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="51"/>
+                                </variation>
                                 <connections>
                                     <action selector="pauseButtonTapped:" destination="uG8-w0-2sc" eventType="touchUpInside" id="rJA-dn-Wn6"/>
                                 </connections>
@@ -274,6 +321,9 @@
                                 <state key="normal" title="&lt;back">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
+                                </variation>
                                 <connections>
                                     <action selector="backButtonTapped:" destination="uG8-w0-2sc" eventType="touchUpInside" id="VtN-Yy-J6M"/>
                                 </connections>
@@ -287,28 +337,36 @@
                                     <action selector="shareOnStravaButtonTapped:" destination="uG8-w0-2sc" eventType="touchUpInside" id="t9y-p8-K6a"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FX-hH-Bo2">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FX-hH-Bo2">
                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="36"/>
                                 <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                                 <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
-                                <state key="normal" title="Start">
+                                <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="51"/>
+                                </variation>
                                 <connections>
                                     <action selector="startButtonTapped:" destination="uG8-w0-2sc" eventType="touchUpInside" id="nOk-js-Q6W"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5FL-aM-evB">
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5FL-aM-evB">
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="QSa-dj-tfg" firstAttribute="top" secondItem="T69-ET-tpN" secondAttribute="topMargin" constant="8" id="1EH-lc-OyX"/>
-                            <constraint firstItem="cl4-qt-GDc" firstAttribute="width" secondItem="T69-ET-tpN" secondAttribute="width" multiplier="0.6" id="CVB-l2-FcC"/>
+                            <constraint firstItem="cl4-qt-GDc" firstAttribute="width" secondItem="T69-ET-tpN" secondAttribute="width" multiplier="0.6" id="CVB-l2-FcC">
+                                <variation key="heightClass=regular-widthClass=regular" constant="-125"/>
+                            </constraint>
                             <constraint firstItem="kTt-fe-8cf" firstAttribute="centerX" secondItem="T69-ET-tpN" secondAttribute="centerX" id="DAP-Zd-7Ve"/>
                             <constraint firstItem="3FX-hH-Bo2" firstAttribute="centerX" secondItem="T69-ET-tpN" secondAttribute="centerX" id="DsC-Jv-zc6"/>
                             <constraint firstItem="5FL-aM-evB" firstAttribute="leading" secondItem="T69-ET-tpN" secondAttribute="leadingMargin" id="IM0-Ea-1E3"/>
@@ -341,7 +399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ay-0I-hpu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3429" y="994"/>
+            <point key="canvasLocation" x="3405" y="984"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jYc-ca-hjg">

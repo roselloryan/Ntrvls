@@ -17,10 +17,9 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (strong, nonatomic) NSArray *presetWorkoutTitles;
+@property (assign, nonatomic) BOOL deviceIsIpad;
 
 @end
 
@@ -52,6 +51,12 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.deviceIsIpad = [self thisDeviceAnIpad];
+    NSLog(@"---------------------- self.deviceIsIpad = %d ----------------------", self.deviceIsIpad);
+    if (self.deviceIsIpad) {
+        self.tableView.rowHeight = 80.0;
+    }
+    
     [self.navigationController setNavigationBarHidden:YES];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.toolbar.tintColor = [UIColor whiteColor];
@@ -62,33 +67,8 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         [self.tableView deselectRowAtIndexPath: selectedIndexPath animated:YES];
     }
     
-    // TODO: decide when to write saved workouts maybe only one method?
-    if (self.sharedNtrvlsDataStore.workoutsArray.count == 0) {
-        [self.sharedNtrvlsDataStore createTabataWorkoutWithCompletionBlock:^(BOOL complete) {
-            if (complete) {
-                [self.sharedNtrvlsDataStore fetchWorkouts];
-                [self.tableView reloadData];
-            }
-        }];
-        [self.sharedNtrvlsDataStore createNewWorkoutWithCompletionBlock:^(BOOL complete) {
-           if (complete) {
-               [self.sharedNtrvlsDataStore fetchWorkouts];
-               [self.tableView reloadData];
-           }
-        }];
-        [self.sharedNtrvlsDataStore createOverUndersWorkoutWithCompletionBlock:^(BOOL complete) {
-            if (complete) {
-                [self.sharedNtrvlsDataStore fetchWorkouts];
-                [self.tableView reloadData];
-            }
-        }];
-        [self.sharedNtrvlsDataStore createDemoWorkoutWithCompletionBlock:^(BOOL complete) {
-            if (complete) {
-                [self.sharedNtrvlsDataStore fetchWorkouts];
-                [self.tableView reloadData];
-            }
-        }];
-    }
+    [self createPresetWorkouts];
+    
 }
 
 
@@ -182,6 +162,34 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
  }
  */
 
+- (void)createPresetWorkouts {
+    if (self.sharedNtrvlsDataStore.workoutsArray.count == 0) {
+        [self.sharedNtrvlsDataStore createTabataWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                [self.sharedNtrvlsDataStore fetchWorkouts];
+                [self.tableView reloadData];
+            }
+        }];
+        [self.sharedNtrvlsDataStore createNewWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                [self.sharedNtrvlsDataStore fetchWorkouts];
+                [self.tableView reloadData];
+            }
+        }];
+        [self.sharedNtrvlsDataStore createOverUndersWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                [self.sharedNtrvlsDataStore fetchWorkouts];
+                [self.tableView reloadData];
+            }
+        }];
+        [self.sharedNtrvlsDataStore createDemoWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                [self.sharedNtrvlsDataStore fetchWorkouts];
+                [self.tableView reloadData];
+            }
+        }];
+    }
+}
 
 #pragma mark - Navigation
 
@@ -192,6 +200,18 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
         
         destinationVC.selectedWorkout = self.sharedNtrvlsDataStore.workoutsArray[selectedIndexPath.row];
+        destinationVC.deviceIsIpad = self.deviceIsIpad;
+    }
+}
+
+#pragma mark - iPad check
+
+- (BOOL)thisDeviceAnIpad {
+    if (self.view.frame.size.height > 736.0 || self.view.frame.size.width > 736.0) {
+        return YES;
+    }
+    else {
+        return NO;
     }
 }
 

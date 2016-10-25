@@ -38,6 +38,9 @@
 
 @property (strong, nonatomic) UIView *fadeOutView;
 
+@property (assign, nonatomic) CGRect customViewFrame;
+@property (assign, nonatomic) CGFloat bufferWidth;
+
 @end
 
 
@@ -65,6 +68,25 @@
     // remove fadeOutView if returning from PlayerVC
     if (self.fadeOutView) {
         [self.fadeOutView removeFromSuperview];
+        self.startButton.titleLabel.alpha = 1.0;
+    }
+    
+    NSLog(@"ARE WE AN IPAD??? %d", self.deviceIsIpad);
+    if (self.deviceIsIpad) {
+        self.bufferWidth = 8;
+        NSUInteger labelWidth = self.screenWidth / 5;
+        NSUInteger labelHeight = self.screenHeight / 5;
+        NSUInteger xCoordonate = self.contentView.frame.size.width - (labelWidth + labelWidth/2 + self.bufferWidth);
+        NSUInteger yCoordinate = 0.7 * labelHeight;
+        self.customViewFrame = CGRectMake(xCoordonate, yCoordinate, labelWidth, labelHeight);
+    }
+    else {
+        self.bufferWidth = 4;
+        NSUInteger labelWidth = self.screenWidth / 4;
+        NSUInteger labelHeight = self.screenHeight / 5;
+        NSUInteger xCoordonate = self.contentView.frame.size.width - (labelWidth + labelWidth/2 + self.bufferWidth);
+        NSUInteger yCoordinate = 0.7 * labelHeight;
+        self.customViewFrame = CGRectMake(xCoordonate, yCoordinate, labelWidth, labelHeight);
     }
     
     // add gestureRecognizer to close selected cells when screen tapped
@@ -75,18 +97,16 @@
         [self.activityTypeButton setTitle: self.selectedWorkout.workoutType forState: UIControlStateNormal];
     }
     
-    // TODO: how should this really be done?
     if (self.contentView.subviews.count < 1) {
         [self addIntervalLabelCellsToContentView];
     }
+    
 }
 
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-
-    // keychain tests
+        // keychain tests
 //    NSLog(@"Running generic Keychain test");
 //    [self testKeychain:@"genericTestValue" forKey:@"genericTestKey" andAccessGroup:nil];
 //    [self testKeychain:@"1234567" forKey:@"access_token" andAccessGroup:nil];
@@ -144,30 +164,12 @@
 
 - (IBAction)shareOnStravaButtonTapped:(UIButton *)sender {
     
-    if (self.workoutWasEdited) {
-        if (!self.selectedWorkout.workoutType) {
-            [self presentWorkoutTypeAlertControllerfromButton: sender];
-        }
-        else {
-            [self presentTextInputAlert];
-        }
+    if (!self.selectedWorkout.workoutType) {
+        [self presentWorkoutTypeAlertControllerfromButton: sender];
     }
-    
-    [NtrvlsAPIClient loginIntoStravaWithSuccessBlock:^(BOOL success) {
-        
-        if (success){
-            [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessDenied) name: @"deniedAccess" object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessAllowed) name: @"allowedAccess" object:nil];
-        }
-        else {
-            NSLog(@"NO CONNECTION :(   :(    :(    :(");
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [self presentNoInternetAlert];
-            });
-        }
-    }];
+    else {
+        [self presentNameWorkoutToPostToStravaAlert];
+    }
 }
 
 - (IBAction)startButtonTapped:(UIButton *)sender {
@@ -238,7 +240,26 @@
     self.saveButton.enabled = YES;
     self.activityTypeButton.enabled = YES;
 }
-#pragma mark - Strava Access Methods
+#pragma mark - Strava Methods
+
+- (void)loginToStrava {
+    // TODO: Just try to post without auth, then Authorize if needed
+    [NtrvlsAPIClient loginIntoStravaWithSuccessBlock:^(BOOL success) {
+        
+        if (success){
+            [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessDenied) name: @"deniedAccess" object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessAllowed) name: @"allowedAccess" object:nil];
+        }
+        else {
+            NSLog(@"NO CONNECTION :(   :(    :(    :(");
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self presentNoInternetAlert];
+            });
+        }
+    }];
+}
 
 - (void)stravaAccessAllowed {
     
@@ -290,28 +311,25 @@
 # pragma mark - CustomNtrvlViews Methods
 
 - (void)addNewCustomNtrvlViewToContentView {
+
+    NSUInteger xCoordonate = self.contentView.frame.size.width - (self.customViewFrame.size.width + self.customViewFrame.size.width/2 + self.bufferWidth);
     
-    NSUInteger labelWidth = self.screenWidth / 4;
-    NSUInteger labelHeight = self.screenHeight / 5;
-    NSUInteger bufferWidth = 4;
-    NSUInteger xCoordonate = self.contentView.frame.size.width - (labelWidth + labelWidth/2 + bufferWidth);
-    NSUInteger yCoordinate = 0.7 * labelHeight;
-    
-    CustomNtrvlView *newIntervalView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordonate, yCoordinate, labelWidth, labelHeight) intervalDescription:@"" andDuration: 0];
+//    CustomNtrvlView *newIntervalView = [[CustomNtrvlView alloc]initWithFrame: CGRectMake(xCoordonate, self.customViewFrame.origin.y, self.customViewFrame.size.width, self.customViewFrame.size.height)intervalDescription:@"" andDuration: 0];
+    CustomNtrvlView *newIntervalView = [[CustomNtrvlView alloc]initWithFrame: CGRectMake(xCoordonate, self.customViewFrame.origin.y, self.customViewFrame.size.width, self.customViewFrame.size.height)intervalDescription:@"" andDuration: 0 isIPad: self.deviceIsIpad];
     newIntervalView.positionInWorkout = self.selectedWorkout.interval.count - 1;
     newIntervalView.backgroundColor = [UIColor ntrvlsRed];
     newIntervalView.screenColor = @"red";
     newIntervalView.delegate = self;
     
-    self.contentView.frame = CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width + labelWidth, self.contentView.frame.size.height);
+    self.contentView.frame = CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width + newIntervalView.frame.size.width, self.contentView.frame.size.height);
     
-    self.contentViewWidth.constant = self.contentViewWidth.constant + labelWidth + bufferWidth;
+    self.contentViewWidth.constant = self.contentViewWidth.constant + newIntervalView.frame.size.width + self.bufferWidth;
     
-    // move cooldown cell to right & increment position in workout number
+    // move cooldown cell and add button to right & increment position in workout number
     for (CustomNtrvlView *customView in self.contentView.subviews) {
         
         if (customView.tag == 1) {
-            customView.frame = CGRectMake(customView.frame.origin.x + labelWidth + bufferWidth, customView.frame.origin.y, customView.frame.size.width, customView.frame.size.height);
+            customView.frame = CGRectMake(customView.frame.origin.x + self.customViewFrame.size.width + self.bufferWidth, customView.frame.origin.y, customView.frame.size.width, customView.frame.size.height);
             customView.positionInWorkout ++;
         }
     }
@@ -320,23 +338,17 @@
     [self addGestureRecognizerToView: newIntervalView];
     [self selectNtrvlView: newIntervalView];
     
-    if (self.contentView.subviews.count > 4) {
-        [self.scrollView setContentOffset:CGPointMake(self.contentView.frame.size.width - self.view.frame.size.width, 0) animated:YES];   
-    }
+    [self panScrollViewToShowNewCellsIfNecessary ];
 }
 
 - (void)deleteNrtvlView:(CustomNtrvlView *)deletedNtrvlView {
-    
-    // use width from unselected cells to contract cgAffine transform made for complications
-    NSUInteger unselectedWidth = self.view.frame.size.width / 4;
-    NSUInteger bufferWidth = 4;
-    
+
     for (CustomNtrvlView *ntrvlView in self.contentView.subviews) {
         
         if (ntrvlView.positionInWorkout > deletedNtrvlView.positionInWorkout || ntrvlView.tag == 1) {
             
             [UIView animateWithDuration: 0.3 animations:^{
-                ntrvlView.frame = CGRectMake(ntrvlView.frame.origin.x - (unselectedWidth + bufferWidth), ntrvlView.frame.origin.y, ntrvlView.frame.size.width, ntrvlView.frame.size.height);
+                ntrvlView.frame = CGRectMake(ntrvlView.frame.origin.x - (self.customViewFrame.size.width + self.bufferWidth), ntrvlView.frame.origin.y, ntrvlView.frame.size.width, ntrvlView.frame.size.height);
                 
                 self.workoutTitleLabel.alpha = 1;
                 self.menuButton.alpha = 1;
@@ -349,28 +361,24 @@
     [deletedNtrvlView removeFromSuperview];
     
     // contract contentView width
-    self.contentViewWidth.constant =  self.contentViewWidth.constant - unselectedWidth - bufferWidth;
+    self.contentViewWidth.constant =  self.contentViewWidth.constant - self.customViewFrame.size.width - self.bufferWidth;
     
     [[NtrvlsDataStore sharedNtrvlsDataStore] deleteNtrvl: self.selectedWorkout.interval[deletedNtrvlView.positionInWorkout] fromNtrvlWorkout: self.selectedWorkout];
 }
 
 - (void)addIntervalLabelCellsToContentView {
     
-    NSUInteger labelWidth = self.screenWidth / 4;
-    NSUInteger labelHeight = self.screenHeight / 5;
-    NSUInteger bufferWidth = 4;
-    
-    
-    self.contentViewWidth.constant = labelWidth * self.selectedWorkout.interval.count + (bufferWidth * self.selectedWorkout.interval.count)+ (labelWidth /2);
+    self.contentViewWidth.constant = self.customViewFrame.size.width * self.selectedWorkout.interval.count + (self.bufferWidth * self.selectedWorkout.interval.count)+ (self.customViewFrame.size.width /2);
     
     for (NSInteger i = 0; i < self.selectedWorkout.interval.count; i ++) {
         
         Ntrvl *interval = self.selectedWorkout.interval[i];
         
-        NSUInteger xCoordinte = i * labelWidth + i * bufferWidth;
-        NSUInteger yCoordinte = 0.7 * labelHeight;
+        NSUInteger xCoordinte = i * self.customViewFrame.size.width + i * self.bufferWidth;
+        NSUInteger yCoordinte = 0.7 * self.customViewFrame.size.height;
         
-        CustomNtrvlView *intervalView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, labelWidth, labelHeight) intervalDescription: interval.intervalDescription andDuration: interval.intervalDuration];
+//        CustomNtrvlView *intervalView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, self.customViewFrame.size.width, self.customViewFrame.size.height) intervalDescription: interval.intervalDescription andDuration: interval.intervalDuration];
+        CustomNtrvlView *intervalView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, self.customViewFrame.size.width, self.customViewFrame.size.height) intervalDescription: interval.intervalDescription andDuration: interval.intervalDuration isIPad: self.deviceIsIpad];
         intervalView.delegate = self;
         intervalView.secondsTextField.delegate = self;
         intervalView.minutesTextField.delegate = self;
@@ -388,12 +396,13 @@
         else if (i == self.selectedWorkout.interval.count - 1) {
             
             // build customview for add button cell 1/2 width
-            CustomNtrvlView *addCellView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, labelWidth/2, labelHeight) intervalDescription: @"" andDuration: 0];
+//            CustomNtrvlView *addCellView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, self.customViewFrame.size.width/2, self.customViewFrame.size.height) intervalDescription: @"" andDuration: 0];
+            CustomNtrvlView *addCellView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, self.customViewFrame.size.width/2, self.customViewFrame.size.height) intervalDescription: @"" andDuration: 0 isIPad: self.deviceIsIpad];
             addCellView.intervalDurationLabel.hidden = YES;
             addCellView.tag = 1;
             
             //build button view
-            UIButton *addCellButton = [[UIButton alloc]initWithFrame: CGRectMake(0, 8, labelWidth/2, labelHeight - 16)];
+            UIButton *addCellButton = [[UIButton alloc]initWithFrame: CGRectMake(0, 2 * self.bufferWidth, self.customViewFrame.size.width/2, self.customViewFrame.size.height - 4 * self.bufferWidth)];
             addCellButton.titleLabel.font = [UIFont systemFontOfSize:50 weight:UIFontWeightThin];
             [addCellButton setTitle:@"+" forState:UIControlStateNormal];
             addCellButton.backgroundColor = [UIColor ntrvlsGrey];
@@ -402,7 +411,7 @@
             [addCellView addSubview: addCellButton];
             
             // move cool down interval over
-            intervalView.frame = CGRectMake(intervalView.frame.origin.x + labelWidth/2 + bufferWidth, intervalView.frame.origin.y, intervalView.frame.size.width, intervalView.frame.size.height);
+            intervalView.frame = CGRectMake(intervalView.frame.origin.x + self.customViewFrame.size.width/2 + self.bufferWidth, intervalView.frame.origin.y, intervalView.frame.size.width, intervalView.frame.size.height);
             intervalView.tag = 1;
             intervalView.descriptionTextView.textColor = [UIColor lightTextColor];
             intervalView.intervalDurationLabel.textColor = [UIColor lightTextColor];
@@ -417,6 +426,19 @@
             [self applyScreenColorToCustomNtrvlView:intervalView fromNtrvl:interval];
         }
         [self.contentView addSubview:intervalView];
+    }
+}
+
+- (void)panScrollViewToShowNewCellsIfNecessary {
+    if (self.deviceIsIpad) {
+        if (self.contentView.subviews.count > 6) {
+            [self.scrollView setContentOffset:CGPointMake(self.contentView.frame.size.width - self.view.frame.size.width, 0) animated:YES];
+        }
+    }
+    else {
+        if (self.contentView.subviews.count > 4) {
+            [self.scrollView setContentOffset:CGPointMake(self.contentView.frame.size.width - self.view.frame.size.width, 0) animated:YES];
+        }
     }
 }
 
@@ -511,7 +533,7 @@
     [deselectedView.minutesTextField resignFirstResponder];
     [deselectedView.secondsTextField resignFirstResponder];
 
-    [UITextField animateWithDuration: 0.3 animations:^{
+    [UITextField animateWithDuration: 0.5 animations:^{
     
         NSLog(@"\ndesc: %@\n min: %@\n sec: %@\n", self.descriptionTextView.text, self.minutesTextField.text, self.secondsTextField.text);
         deselectedView.transform = CGAffineTransformMakeScale(1, 1);
@@ -670,6 +692,7 @@
     }
     else {
         [[NtrvlsDataStore sharedNtrvlsDataStore] deleteWorkoutWithTitle: kWorkoutCopyName];
+        [self.scrollView setContentOffset: CGPointMake(0, 0) animated: NO];
         [self.navigationController popViewControllerAnimated: YES];
     }
 }
@@ -739,6 +762,35 @@
     }];
 }
 
+- (void)presentNameWorkoutToPostToStravaAlert {
+    
+    UIAlertController *textInputAlertController = [UIAlertController alertControllerWithTitle: @"Title your workout to post on Strava" message:@"" preferredStyle: UIAlertControllerStyleAlert];
+    
+    [textInputAlertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.delegate = self;
+        textField.placeholder = @"workout title";
+        textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        self.alertTextField = textField;
+    }];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (self.alertTextField.text.length > 0) {
+            [self loginToStrava];
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // default behavior?
+    }];
+    
+    [textInputAlertController addAction: cancelAction];
+    [textInputAlertController addAction: okAction];
+    [self presentViewController: textInputAlertController animated: YES completion:^{
+        // anything else?
+    }];
+}
+
+
 - (void)presentWorkoutTypeAlertControllerfromButton:(UIButton *)button{
     
     UIAlertController *workoutTypeAlertController = [UIAlertController alertControllerWithTitle:@"Choose activity" message: nil preferredStyle: UIAlertControllerStyleActionSheet];
@@ -756,6 +808,9 @@
         else if (button == self.saveButton) {
             [self presentTextInputAlert];
         }
+        else if (button == self.stravaButton) {
+            [self loginToStrava];
+        }
     }];
     UIAlertAction *rideAction = [UIAlertAction actionWithTitle:@"Ride" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -770,6 +825,9 @@
         }
         else if (button == self.saveButton) {
             [self presentTextInputAlert];
+        }
+        else if (button == self.stravaButton) {
+            [self loginToStrava];
         }
     }];
     UIAlertAction *rowAction = [UIAlertAction actionWithTitle:@"Row" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -786,6 +844,9 @@
         else if (button == self.saveButton) {
             [self presentTextInputAlert];
         }
+        else if (button == self.stravaButton) {
+            [self loginToStrava];
+        }
     }];
     UIAlertAction *walkAction = [UIAlertAction actionWithTitle:@"Walk" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     
@@ -800,6 +861,9 @@
         }
         else if (button == self.saveButton) {
             [self presentTextInputAlert];
+        }
+        else if (button == self.stravaButton) {
+            [self loginToStrava];
         }
     }];
     UIAlertAction *swimAction = [UIAlertAction actionWithTitle:@"Swim" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -816,6 +880,9 @@
         else if (button == self.saveButton) {
             [self presentTextInputAlert];
         }
+        else if (button == self.stravaButton) {
+            [self loginToStrava];
+        }
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         // dismiss the alertViewController
@@ -827,6 +894,10 @@
     [workoutTypeAlertController addAction: walkAction];
     [workoutTypeAlertController addAction: swimAction];
     [workoutTypeAlertController addAction: cancelAction];
+    
+    
+    workoutTypeAlertController.popoverPresentationController.sourceRect = button.bounds;
+    workoutTypeAlertController.popoverPresentationController.sourceView = button;
     
     [self presentViewController: workoutTypeAlertController animated: YES completion:nil];
 }
@@ -878,6 +949,7 @@
         
         TimerPlayVC *destinationVC = segue.destinationViewController;
         destinationVC.selectedWorkout = self.selectedWorkout;
+        destinationVC.deviceIsIpad = self.deviceIsIpad;
         
         // since editing a copy of workout, pass forward current title
         destinationVC.workoutTitle = self.workoutTitleLabel.text;
@@ -892,8 +964,10 @@
     [self.view addSubview: self.fadeOutView];
     [self.view bringSubviewToFront:self.startButton];
     
-    [UIView animateWithDuration: 1.0 animations:^{
+    [UIView animateWithDuration: 0.5 animations:^{
         self.fadeOutView.alpha = 1.0;
+        self.startButton.titleLabel.alpha = 0.0;
+        
     } completion:^(BOOL finished) {
         [self performSegueWithIdentifier:@"TimerPlaySegue" sender:self];
     }];

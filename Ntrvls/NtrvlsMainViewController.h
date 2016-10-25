@@ -5,5 +5,6 @@
 
 extern CGFloat const iPhone4sHeight;
 
+- (BOOL)thisDeviceAnIpad;
 
 @end

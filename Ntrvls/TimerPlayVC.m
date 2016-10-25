@@ -32,9 +32,12 @@
 @property (assign, nonatomic) SystemSoundID threeTwoOneSoundID;
 @property (assign, nonatomic) SystemSoundID completedNtrvlSoundID;
 
+@property (strong, nonatomic) UIView *fadeInView;
 @property (strong, nonatomic) CustomPlayerView *viewOne;
 @property (strong, nonatomic) CustomPlayerView *viewTwo;
 @property (strong, nonatomic) CustomPlayerView *viewThree;
+
+@property (assign, nonatomic) CGFloat buffer;
 
 @end
 
@@ -67,6 +70,13 @@
     
     [self.navigationController setNavigationBarHidden:YES];
     
+    if (self.deviceIsIpad) {
+        self.buffer = 48.0;
+    }
+    else {
+        self.buffer = 28.0;
+    }
+    
     NSLog(@"IN PLAY----- self.selectedWorkout.workoutType: %@", self.selectedWorkout.workoutType);
     
 }
@@ -85,6 +95,27 @@
     [self.view addSubview: self.viewOne];
     [self.view addSubview: self.viewTwo];
     
+    UIView *fadeInView = [[UIView alloc]initWithFrame: self.view.frame];
+    fadeInView.backgroundColor = [UIColor blackColor];
+    self.fadeInView = fadeInView;
+    [self.view addSubview: self.fadeInView];
+    [self.view bringSubviewToFront: self.startButton];
+    
+    [self hideBackButton];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [UIView animateWithDuration: 0.5 delay: 0.25 options: 0 animations:^{
+        self.fadeInView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [self.fadeInView removeFromSuperview];
+        // TODO: Take this out?
+        [self startButtonTapped: self.startButton];
+        [self animatePauseAndStopButtons];
+    }];
 }
 
 #pragma mark - Buttons and button methods
@@ -96,22 +127,13 @@
 
 - (IBAction)startButtonTapped:(UIButton *)sender {
     
-    [self animatePauseAndStopButtons];
-    
-    if (!self.playerIsPaused) {
-        
-        NSTimer *labelTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target: self selector:@selector(labelTimerFired:) userInfo:nil repeats:YES];
-        self.labelTimer = labelTimer;
-    
-        Ntrvl *currentInterval = self.selectedWorkout.interval[self.intervalNumber];
-        self.timeLeftInInterval = currentInterval.intervalDuration;
-    }
-    
-    [self hideBackButton];
-    
-    [self animateViewToCurrentIntervalPosition: self.viewOne];
-    [self animateViewToNextIntervalPosition: self.viewTwo];
+    [self performSelector: @selector(animateViewToCurrentIntervalPosition:) withObject: self.viewOne afterDelay: 1.0];
+    [self performSelector: @selector(animateViewToNextIntervalPosition:) withObject: self.viewTwo afterDelay: 1.0];
+    [self performSelector: @selector(startLabelTimer) withObject: nil afterDelay: 1.5];
+//    [self animateViewToCurrentIntervalPosition: self.viewOne];
+//    [self animateViewToNextIntervalPosition: self.viewTwo];
 
+    
 }
 
 - (IBAction)pauseButtonTapped:(UIButton *)sender {
@@ -148,8 +170,6 @@
 
 
 - (IBAction)stopButtonTapped:(UIButton *)sender {
-
-    
     [self showQuitAlert];
     
     self.intervalNumber = 0;
@@ -157,7 +177,6 @@
 }
 
 - (IBAction)shareOnStravaButtonTapped:(UIButton *)sender {
-    
     NSLog(@"STRAVA button tapped");
     [NtrvlsAPIClient loginIntoStravaWithSuccessBlock:^(BOOL success) {
         
@@ -169,7 +188,6 @@
             NSLog(@"NO CONNECTION :(   :(    :(    :(");
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 //TODO: BUild this alert
 //                [self presentNoInternetAlert];
             });
@@ -180,31 +198,23 @@
 
 - (void)animateButtonsForFinishedWorkout {
     
-    [UIButton animateKeyframesWithDuration: 1.0 delay: 1.0 options: 0 animations:^{
+    [UIButton animateKeyframesWithDuration: 1.0 delay: 0.5 options: 0 animations:^{
         
-        [UIButton addKeyframeWithRelativeStartTime: 0.0 relativeDuration: 0.25 animations:^{
-            self.pauseButton.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width * 3/5 - self.pauseButton.frame.size.width, -60);
-            self.stopButton.transform = CGAffineTransformMakeTranslation(-self.view.frame.size.width * 3/5 + self.stopButton.frame.size.width, -60);
-        }];
-        [UIButton addKeyframeWithRelativeStartTime: 0.25 relativeDuration: 0.25 animations:^{
-            self.pauseButton.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width * 3/5 - self.pauseButton.frame.size.width, 0);
-            self.stopButton.transform = CGAffineTransformMakeTranslation(-self.view.frame.size.width * 3/5 + self.stopButton.frame.size.width, 0);
-        }];
-        [UIButton addKeyframeWithRelativeStartTime: 0.5 relativeDuration: 0.25 animations:^{
+        [UIButton addKeyframeWithRelativeStartTime: 0.0 relativeDuration: 0.60 animations:^{
+//        [UIButton addKeyframeWithRelativeStartTime: 0.5 relativeDuration: 0.25 animations:^{
             self.pauseButton.transform = CGAffineTransformMakeTranslation(0, 0);
             self.stopButton.transform = CGAffineTransformMakeTranslation(0, 0);
             self.pauseButton.alpha = 0.0;
             self.stopButton.alpha = 0.0;
             self.shareOnStravaButton.alpha = 0.20;
         }];
-        [UIButton addKeyframeWithRelativeStartTime: 0.75 relativeDuration: 0.25 animations:^{
+        [UIButton addKeyframeWithRelativeStartTime: 0.6 relativeDuration: 0.4 animations:^{
             self.shareOnStravaButton.alpha = 1.0;
             self.shareOnStravaButton.hidden = NO;
             self.shareOnStravaButton.enabled = YES;
-            self.shareOnStravaButton.transform = CGAffineTransformMakeTranslation(0, - self.view.frame.size.height / 4);
+            self.shareOnStravaButton.transform = CGAffineTransformMakeTranslation(0, - self.view.frame.size.height / 8);
             NSLog(@"self.view.frame.size.height = %f", self.view.frame.size.height);
         }];
-        
     } completion:^(BOOL finished) {
         [self flashButton: self.shareOnStravaButton];
     }];
@@ -216,12 +226,10 @@
     self.backButton.enabled = NO;
 }
 
-
 - (void)displayDoneBackButton {
     self.backButton.enabled = YES;
     self.backButton.hidden = NO;
 }
-
 
 - (void)animatePauseAndStopButtons {
     
@@ -232,29 +240,21 @@
     self.stopButton.enabled = YES;
     self.stopButton.hidden = NO;
     
-    [UIButton animateKeyframesWithDuration: 0.5 delay: 0.0 options: 0 animations:^{
+    [UIButton animateKeyframesWithDuration: 1.0 delay: 0.0 options: 0 animations:^{
         
-        [UIButton addKeyframeWithRelativeStartTime: 0.0 relativeDuration: 0.40 animations:^{
-            
+        [UIButton addKeyframeWithRelativeStartTime: 0.0 relativeDuration: 0.70 animations:^{
             self.startButton.alpha = 0.0;
             self.startButton.enabled = NO;
             
             self.stopButton.alpha = 1.0;
             self.pauseButton.alpha = 1.0;
+            self.stopButton.transform = CGAffineTransformMakeTranslation(-self.view.frame.size.width * 4/5 + self.stopButton.frame.size.width, 0);
+            self.pauseButton.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width * 4/5 - self.pauseButton.frame.size.width, 0);
+        }];
+        
+        [UIButton addKeyframeWithRelativeStartTime: 0.75 relativeDuration: 0.30 animations:^{
             self.pauseButton.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width * 3/5 - self.pauseButton.frame.size.width, 0);
             self.stopButton.transform = CGAffineTransformMakeTranslation(-self.view.frame.size.width * 3/5 + self.stopButton.frame.size.width, 0);
-        }];
-        
-        [UIButton addKeyframeWithRelativeStartTime: 0.40 relativeDuration: 0.40 animations:^{
-            
-            self.pauseButton.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width * 3/5 - self.pauseButton.frame.size.width, -60);
-            self.stopButton.transform = CGAffineTransformMakeTranslation(-self.view.frame.size.width * 3/5 + self.stopButton.frame.size.width, -60);
-        }];
-        
-        [UIButton addKeyframeWithRelativeStartTime: 0.8 relativeDuration: 0.20 animations:^{
-            
-            self.pauseButton.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width / 4, -60);
-            self.stopButton.transform = CGAffineTransformMakeTranslation(-self.view.frame.size.width / 4, -60);
         }];
     } completion:^(BOOL finished) {
         // anything else?
@@ -288,6 +288,14 @@
 
 # pragma mark - timer methods
 
+- (void)startLabelTimer {
+    NSTimer *labelTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target: self selector:@selector(labelTimerFired:) userInfo:nil repeats:YES];
+    self.labelTimer = labelTimer;
+    
+    Ntrvl *currentInterval = self.selectedWorkout.interval[self.intervalNumber];
+    self.timeLeftInInterval = currentInterval.intervalDuration;
+}
+
 -(void)labelTimerFired:(NSTimer *)timer {
     
     // don't increment total time during warm up
@@ -310,7 +318,7 @@
     self.totalTimeElapsedLabel.text = [self timeStringFromSecondsCount: self.totalTimeElapsed];
     
     if (self.intervalNumber == self.selectedWorkout.interval.count && self.timeLeftInInterval == 0){
-        self.viewOne.timeLabel.text = @"Finished!";
+        self.viewOne.timeLabel.text = @"Complete";
     }
     
  
@@ -327,7 +335,7 @@
         [self.labelTimer invalidate];
     
         // update label text. Timer still executes remaining code setting timeLabel text to "Finished!"
-        self.viewOne.descriptionLabel.text = @"Finished";
+        self.viewOne.descriptionLabel.text = @"Workout";
         
         [self displayDoneBackButton];
         [self animateButtonsForFinishedWorkout];
@@ -340,7 +348,7 @@
         self.timeLeftInInterval = currentInterval.intervalDuration;
         
         [self animateViewToFinishedIntervalPosition: self.viewOne];
-        [self animateViewToCurrentIntervalPosition: self.viewTwo];
+        [self animateLastViewToCurrentIntervalPosition: self.viewTwo];
         self.viewOne = self.viewTwo;
     }
     
@@ -362,7 +370,6 @@
         [self animateViewToNextIntervalPosition: self.viewThree];
         self.viewOne = self.viewTwo;
         self.viewTwo = self.viewThree;
-        
     }
 }
 
@@ -418,7 +425,7 @@
         secondsCount = secondsCount - (hours * 3600);
     }
     
-    if (secondsCount > 60) {
+    if (secondsCount >= 60) {
         minutes = secondsCount / 60;
         seconds = secondsCount % 60;
     }
@@ -513,7 +520,8 @@
 
 - (CustomPlayerView *)buildViewOffScreenForNtrvl:(Ntrvl *)ntrvl {
     
-    CustomPlayerView *firstCell = [[CustomPlayerView alloc]initWithFrame: CGRectMake(self.view.frame.size.width, self.view.frame.size.height/5, self.view.frame.size.width * 3/4, self.view.frame.size.height/2)intervalDescription: ntrvl.intervalDescription duration: ntrvl.intervalDuration andBackgroundColor:ntrvl.screenColor];
+//    CustomPlayerView *firstCell = [[CustomPlayerView alloc]initWithFrame: CGRectMake(self.view.frame.size.width, self.view.frame.size.height/5, self.view.frame.size.width * 3/4, self.view.frame.size.height/2)intervalDescription: ntrvl.intervalDescription duration: ntrvl.intervalDuration andBackgroundColor:ntrvl.screenColor];
+    CustomPlayerView *firstCell = [[CustomPlayerView alloc]initWithFrame: CGRectMake(self.view.frame.size.width, self.view.frame.size.height/5, self.view.frame.size.width * 3/4, self.view.frame.size.height/2)intervalDescription: ntrvl.intervalDescription duration: ntrvl.intervalDuration andBackgroundColor:ntrvl.screenColor isIpad:self.deviceIsIpad];
 
     return firstCell;
 }
@@ -529,8 +537,9 @@
 }
 
 - (void)animateViewToNextIntervalPosition:(UIView *)view {
+    
     [UIView animateWithDuration: 0.25 delay: 0.25 options: 0 animations:^{
-        view.frame = CGRectMake(self.view.frame.size.width * 3/4 + 28 , self.view.frame.size.height/5, self.view.frame.size.width * 3/4,self.view.frame.size.height/2);
+        view.frame = CGRectMake(self.view.frame.size.width * 3/4 + self.buffer , self.view.frame.size.height/5, self.view.frame.size.width * 3/4,self.view.frame.size.height/2);
         view.alpha = 1.0;
     } completion:^(BOOL finished) {
         // anything else?
@@ -543,6 +552,17 @@
                 view.transform = CGAffineTransformMakeScale(1, 1);
     } completion:^(BOOL finished) {
         // anything else?
+    }];
+}
+
+- (void)animateLastViewToCurrentIntervalPosition:(CustomPlayerView *)view {
+    
+    [UIView animateWithDuration: 0.5 delay: 0.0 options: 0 animations:^{
+        view.frame = CGRectMake(0, self.view.frame.size.height/5, self.view.frame.size.width, self.view.frame.size.height/2);
+        view.alpha = 1.0;
+//        view.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    } completion:^(BOOL finished) {
+        // anything?
     }];
 }
 #pragma mark - String methods
@@ -609,8 +629,8 @@
     //TODO: figure out catch for url not setting SoundID
     
     // respects the mute switch
-    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error:nil];
-
+//    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error:nil];
+//
 //    NSURL *threeTwoOnePathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/short_double_low.caf"];
 //    if (threeTwoOnePathURL) {
 //        AudioServicesCreateSystemSoundID((__bridge CFURLRef)threeTwoOnePathURL, &_threeTwoOneSoundID);
@@ -624,6 +644,8 @@
 
 
 - (void)playSoundsFor321Done {
+    
+    NSLog(@"self.timeLeftInInterval= %lu", self.timeLeftInInterval);
     
     if (self.timeLeftInInterval == 3 || self.timeLeftInInterval == 2 || self.timeLeftInInterval == 1) {
         AudioServicesPlaySystemSound(self.threeTwoOneSoundID);

@@ -37,6 +37,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame intervalDescription:(NSString *)intervalDescription andDuration:(NSUInteger)duration;
 
+- (instancetype)initWithFrame:(CGRect)frame intervalDescription:(NSString *)intervalDescription andDuration:(NSUInteger)duration isIPad:(BOOL)isIPad;
+
 - (void)hideSelectColorsViewAndButtons;
 
 - (NSString *)timeStringFromSecondsCount:(NSUInteger)secondsCount;

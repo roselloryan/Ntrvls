@@ -9,4 +9,6 @@
 
 @property (strong, nonatomic) NSString *workoutTitle;
 
+@property (assign, nonatomic) BOOL deviceIsIpad;
+
 @end

@@ -6,6 +6,6 @@
 
 
 @property (strong, nonatomic) NtrvlWorkout *selectedWorkout;
-
+@property (assign, nonatomic) BOOL deviceIsIpad;
 
 @end
