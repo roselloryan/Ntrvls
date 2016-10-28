@@ -52,7 +52,7 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     [super viewWillAppear:animated];
     
     self.deviceIsIpad = [self thisDeviceAnIpad];
-    NSLog(@"---------------------- self.deviceIsIpad = %d ----------------------", self.deviceIsIpad);
+    
     if (self.deviceIsIpad) {
         self.tableView.rowHeight = 80.0;
     }
@@ -75,10 +75,7 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    
     [self.tableView reloadData];
-    NSLog(@"self.view.frame = %@", NSStringFromCGRect(self.view.frame));
-    NSLog(@"self.tableView.frame = %@", NSStringFromCGRect(self.tableView.frame));
 }
 
 
@@ -147,20 +144,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
      }
      [self.tableView reloadData];
  }
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 - (void)createPresetWorkouts {
     if (self.sharedNtrvlsDataStore.workoutsArray.count == 0) {

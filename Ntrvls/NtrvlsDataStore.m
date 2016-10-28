@@ -281,11 +281,7 @@
         
         // TODO: Clean this up
         if (interval == ntrvlWorkout.interval.firstObject || interval == ntrvlWorkout.interval.lastObject) {
-//            // skip warm up and cool down intervals
-//            NSString *titleString = [NSString stringWithFormat: @"Ntrvls Workout: %@\n", ntrvlWorkout.workoutTitle];
-//            
-//            NSString *escapedTitleString = [titleString stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLQueryAllowedCharacterSet]];
-//            [workoutDescriptionString appendString: escapedTitleString];
+            // skip warm up and cool down intervals
         }
         
         else {

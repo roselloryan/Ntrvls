@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSString *screenColorOfDeselectedNtrvlView;
 
 @property (weak, nonatomic)  UITextField *alertTextField;
+@property (strong, nonatomic)  NSString *alertControllerName;
 
 @property (assign, nonatomic) BOOL workoutWasEdited;
 @property (assign, nonatomic) BOOL workoutWasSaved;
@@ -70,8 +71,7 @@
         [self.fadeOutView removeFromSuperview];
         self.startButton.titleLabel.alpha = 1.0;
     }
-    
-    NSLog(@"ARE WE AN IPAD??? %d", self.deviceIsIpad);
+    //iPad customView configurations
     if (self.deviceIsIpad) {
         self.bufferWidth = 8;
         NSUInteger labelWidth = self.screenWidth / 5;
@@ -107,7 +107,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
         // keychain tests
-//    NSLog(@"Running generic Keychain test");
+//    NSLog(@"Running generic Keychain test+++++++++++++++++++++++++++++++++++++++++++++++++");
 //    [self testKeychain:@"genericTestValue" forKey:@"genericTestKey" andAccessGroup:nil];
 //    [self testKeychain:@"1234567" forKey:@"access_token" andAccessGroup:nil];
 }
@@ -117,6 +117,11 @@
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (textField == self.alertTextField && [self.alertControllerName isEqualToString:@"stravaTextInputAlertController"]) {
+        // TODO: post the workout
+        NSLog(@"\n\n---------POST TO STRAVA-------------%@\n\n\n", self.alertControllerName);
+    }
     
     if (textField == self.alertTextField) {
 
@@ -175,7 +180,6 @@
 - (IBAction)startButtonTapped:(UIButton *)sender {
     [self deselectOtherSelectedCustomNtrvlViews];
     
-    // should segue checks for activity type before segue to player
     if (self.selectedWorkout.workoutType) {
         [self fadeScreenAndSegueToPlayVCWhenComplete];
     }
@@ -197,7 +201,6 @@
     [self deselectNtrvlView: deletedView];
     [self deleteNrtvlView: deletedView];
     self.workoutWasEdited = YES;
-
 }
 
 - (void)customNtrvlViewTappedFromGestureRecognizer:(UITapGestureRecognizer *)gestureRecongnizer {
@@ -214,38 +217,56 @@
                 [self.contentView bringSubviewToFront: gestureRecongnizer.view];
                 [self selectNtrvlView: selectedNtrvlView];
             }
-            
             else {
                 [self deselectNtrvlView: selectedNtrvlView];
                 [self copyInfoToNtrvlModelFromCustomNtrvlView:selectedNtrvlView];
             }
         }
-//        else if (gestureRecongnizer.view == self.view) {
-//            NSLog(@"Screen tapping? Anyone??? Beuller?");
-//            [self deselectOtherSelectedCustomNtrvlViews];
-//        }
     }
 }
 
 - (void)disableMenuActivtyAndSaveButtons {
-    
     self.menuButton.enabled = NO;
     self.saveButton.enabled = NO;
     self.activityTypeButton.enabled = NO;
 }
 
 - (void)enableMenuActivtyAndSaveButtons {
-    
     self.menuButton.enabled = YES;
     self.saveButton.enabled = YES;
     self.activityTypeButton.enabled = YES;
 }
+
 #pragma mark - Strava Methods
 
-- (void)loginToStrava {
-    // TODO: Just try to post without auth, then Authorize if needed
-    [NtrvlsAPIClient loginIntoStravaWithSuccessBlock:^(BOOL success) {
+- (void)postToStrava {
+   
+    [[NtrvlsDataStore sharedNtrvlsDataStore] workoutDescriptionStringForNtrvlWorkout: self.selectedWorkout withCompletionBlock:^(BOOL complete, NSString *workoutDescriptionString) {
         
+        if (complete) {
+            NSString *startDate = [self stringForCurrentTimeAndDateIOS8601Format];
+            
+            // TODO: Title and save wokout if posting to strava
+            NSString *titleString = [NSString stringWithFormat:@"Ntrvls Workout - %@", self.workoutTitleLabel.text];
+            NSString *escapedTitleString = [titleString stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLQueryAllowedCharacterSet]];
+            
+            [NtrvlsAPIClient postNtrvlWorkoutToStravaWithname: escapedTitleString type: self.selectedWorkout.workoutType startDateLocal: startDate elapsedTime: self.selectedWorkout.totalTime description: workoutDescriptionString withCompletionBlock:^(BOOL success) {
+                
+                if (success){
+                    [self presentSuccessfulStravaUploadAlert];
+                    NSLog(@"Posted Ntrvls Workout!!!");
+                }
+                else {
+                    NSLog(@"Posting failed :( Try loging in now....................");
+                    [self loginToStrava];
+                }
+            }];
+        }
+    }];
+}
+
+- (void)loginToStrava {
+    [NtrvlsAPIClient loginIntoStravaWithSuccessBlock:^(BOOL success) {
         if (success){
             [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessDenied) name: @"deniedAccess" object:nil];
             [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessAllowed) name: @"allowedAccess" object:nil];
@@ -314,7 +335,6 @@
 
     NSUInteger xCoordonate = self.contentView.frame.size.width - (self.customViewFrame.size.width + self.customViewFrame.size.width/2 + self.bufferWidth);
     
-//    CustomNtrvlView *newIntervalView = [[CustomNtrvlView alloc]initWithFrame: CGRectMake(xCoordonate, self.customViewFrame.origin.y, self.customViewFrame.size.width, self.customViewFrame.size.height)intervalDescription:@"" andDuration: 0];
     CustomNtrvlView *newIntervalView = [[CustomNtrvlView alloc]initWithFrame: CGRectMake(xCoordonate, self.customViewFrame.origin.y, self.customViewFrame.size.width, self.customViewFrame.size.height)intervalDescription:@"" andDuration: 0 isIPad: self.deviceIsIpad];
     newIntervalView.positionInWorkout = self.selectedWorkout.interval.count - 1;
     newIntervalView.backgroundColor = [UIColor ntrvlsRed];
@@ -377,7 +397,6 @@
         NSUInteger xCoordinte = i * self.customViewFrame.size.width + i * self.bufferWidth;
         NSUInteger yCoordinte = 0.7 * self.customViewFrame.size.height;
         
-//        CustomNtrvlView *intervalView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, self.customViewFrame.size.width, self.customViewFrame.size.height) intervalDescription: interval.intervalDescription andDuration: interval.intervalDuration];
         CustomNtrvlView *intervalView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, self.customViewFrame.size.width, self.customViewFrame.size.height) intervalDescription: interval.intervalDescription andDuration: interval.intervalDuration isIPad: self.deviceIsIpad];
         intervalView.delegate = self;
         intervalView.secondsTextField.delegate = self;
@@ -396,7 +415,6 @@
         else if (i == self.selectedWorkout.interval.count - 1) {
             
             // build customview for add button cell 1/2 width
-//            CustomNtrvlView *addCellView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, self.customViewFrame.size.width/2, self.customViewFrame.size.height) intervalDescription: @"" andDuration: 0];
             CustomNtrvlView *addCellView = [[CustomNtrvlView alloc]initWithFrame:CGRectMake(xCoordinte, yCoordinte, self.customViewFrame.size.width/2, self.customViewFrame.size.height) intervalDescription: @"" andDuration: 0 isIPad: self.deviceIsIpad];
             addCellView.intervalDurationLabel.hidden = YES;
             addCellView.tag = 1;
@@ -456,10 +474,6 @@
     
     selectedView.descriptionTextView.userInteractionEnabled = YES;
     selectedView.descriptionTextView.editable = YES;
-    
-//    selectedView.descriptionTextView.textColor = [UIColor whiteColor];
-//    selectedView.minutesTextField.textColor = [UIColor whiteColor];
-//    selectedView.secondsTextField.textColor = [UIColor whiteColor];
     
     selectedView.intervalDurationLabel.hidden = YES;
     selectedView.minutesTextField.hidden = NO;
@@ -535,7 +549,7 @@
 
     [UITextField animateWithDuration: 0.5 animations:^{
     
-        NSLog(@"\ndesc: %@\n min: %@\n sec: %@\n", self.descriptionTextView.text, self.minutesTextField.text, self.secondsTextField.text);
+//        NSLog(@"\ndescription: %@\n min: %@\n sec: %@\n", self.descriptionTextView.text, self.minutesTextField.text, self.secondsTextField.text);
         deselectedView.transform = CGAffineTransformMakeScale(1, 1);
         
         self.workoutTitleLabel.alpha = 1;
@@ -590,16 +604,13 @@
     }
     if (![self.selectedWorkout.interval[customNtrvlView.positionInWorkout].screenColor isEqualToString: self.screenColorOfDeselectedNtrvlView]) {
         
-        NSLog(@"self.selectedWorkout.interval[customNtrvlView.positionInWorkout].screenColor: %@\nself.selectedWorkout.interval[customNtrvlView.positionInWorkout].positionNumberInWorkout: %lld", self.selectedWorkout.interval[customNtrvlView.positionInWorkout].screenColor, self.selectedWorkout.interval[customNtrvlView.positionInWorkout].positionNumberInWorkout);
-        NSLog(@"self.screenColorOfDeselectedNtrvlView: %@\n", self.screenColorOfDeselectedNtrvlView);
+//        NSLog(@"self.selectedWorkout.interval[customNtrvlView.positionInWorkout].screenColor: %@\nself.selectedWorkout.interval[customNtrvlView.positionInWorkout].positionNumberInWorkout: %lld", self.selectedWorkout.interval[customNtrvlView.positionInWorkout].screenColor, self.selectedWorkout.interval[customNtrvlView.positionInWorkout].positionNumberInWorkout);
         
         self.workoutWasEdited = YES;
         self.selectedWorkout.interval[customNtrvlView.positionInWorkout].screenColor = self.screenColorOfDeselectedNtrvlView;
     }
-
-    NSLog(@"self.workoutWasEdited: %d", self.workoutWasEdited);
     
-    // log out interval descriptions because debugger not po properties
+    // log out interval descriptions because debugger will not po properties
 //    for (Ntrvl *interval in self.selectedWorkout.interval) {
 //        NSLog(@"postion in workout: %lld\ndescription: %@\nduration: %lld", interval.positionNumberInWorkout, interval.intervalDescription, interval.intervalDuration);
 //    }
@@ -706,6 +717,7 @@
         textField.placeholder = @"workout title";
         textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         self.alertTextField = textField;
+        self.alertControllerName = @"textInputAlertController";
     }];
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -737,6 +749,7 @@
         textField.delegate = self;
         textField.placeholder = @"workout title";
         self.alertTextField = textField;
+        self.alertControllerName = @"titleAlreadySaveAlertController";
     }];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -764,30 +777,28 @@
 
 - (void)presentNameWorkoutToPostToStravaAlert {
     
-    UIAlertController *textInputAlertController = [UIAlertController alertControllerWithTitle: @"Title your workout to post on Strava" message:@"" preferredStyle: UIAlertControllerStyleAlert];
+    UIAlertController *stravaTextInputAlertController = [UIAlertController alertControllerWithTitle: @"Title your workout to post on Strava" message:@"" preferredStyle: UIAlertControllerStyleAlert];
     
-    [textInputAlertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [stravaTextInputAlertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.delegate = self;
         textField.placeholder = @"workout title";
         textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         self.alertTextField = textField;
+        self.alertControllerName = @"stravaTextInputAlertController";
     }];
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         if (self.alertTextField.text.length > 0) {
-            [self loginToStrava];
+//            [self loginToStrava];
+            [self postToStrava];
         }
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // default behavior?
-    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleDefault handler: nil];
     
-    [textInputAlertController addAction: cancelAction];
-    [textInputAlertController addAction: okAction];
-    [self presentViewController: textInputAlertController animated: YES completion:^{
-        // anything else?
-    }];
+    [stravaTextInputAlertController addAction: cancelAction];
+    [stravaTextInputAlertController addAction: okAction];
+    [self presentViewController: stravaTextInputAlertController animated: YES completion: nil];
 }
 
 
@@ -884,6 +895,24 @@
             [self loginToStrava];
         }
     }];
+    UIAlertAction *workoutAction = [UIAlertAction actionWithTitle:@"Workout" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (![self.selectedWorkout.workoutType isEqualToString:@"Workout"]){
+            self.workoutWasEdited = YES;
+            [self.activityTypeButton setTitle: @"Workout" forState: UIControlStateNormal];
+            [[NtrvlsDataStore sharedNtrvlsDataStore] saveWorkoutType:@"Workout" forNtrvlWorkout: self.selectedWorkout];
+            self.selectedWorkout.workoutType = @"Workout";
+        }
+        if (button == self.startButton) {
+            [self performSegueWithIdentifier:@"TimerPlaySegue" sender:self];
+        }
+        else if (button == self.saveButton) {
+            [self presentTextInputAlert];
+        }
+        else if (button == self.stravaButton) {
+            [self loginToStrava];
+        }
+    }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         // dismiss the alertViewController
     }];
@@ -893,6 +922,7 @@
     [workoutTypeAlertController addAction: rowAction];
     [workoutTypeAlertController addAction: walkAction];
     [workoutTypeAlertController addAction: swimAction];
+    [workoutTypeAlertController addAction: workoutAction];
     [workoutTypeAlertController addAction: cancelAction];
     
     

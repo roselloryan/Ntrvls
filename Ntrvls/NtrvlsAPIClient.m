@@ -122,6 +122,12 @@
                 if (httpURLResponse.statusCode == 201) {
                     completionBlock(YES);
                 }
+                else {
+                    completionBlock(NO);
+                }
+            }
+            else {
+                completionBlock(NO);
             }
         }];
         [dataTask resume];

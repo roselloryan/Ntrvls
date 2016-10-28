@@ -18,7 +18,7 @@
         self.descriptionTextView.text = intervalDescription;
         self.descriptionTextView.textColor = [UIColor whiteColor];
         self.descriptionTextView.backgroundColor = [UIColor clearColor];
-        self.descriptionTextView.textContainer.maximumNumberOfLines = 3;
+        self.descriptionTextView.textContainer.maximumNumberOfLines = 4;
         self.descriptionTextView.userInteractionEnabled = NO;
         
         self.intervalDurationLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.descriptionTextView.frame.size.height + 16, frame.size.width, frame.size.height / 4)];

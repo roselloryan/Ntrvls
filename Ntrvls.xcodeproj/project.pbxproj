@@ -89,6 +89,7 @@
 		1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakAwayView.m; sourceTree = "<group>"; };
 		1B8818A9C280394CAEB57622 /* Pods-NtrvlsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1B92B9451D99F48800F996DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		1BEE7AFA1DBFB880002C736B /* Ntrvls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ntrvls.entitlements; sourceTree = "<group>"; };
 		1BF5ABDF1DA5D5FF0051D256 /* CustomPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPlayerView.h; sourceTree = "<group>"; };
 		1BF5ABE01DA5D5FF0051D256 /* CustomPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlayerView.m; sourceTree = "<group>"; };
 		1BFB03611D2C67A100E54FF7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../../../../.Trash/Constants.h; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 		1B0319311D10AFA6003C06CE /* Ntrvls */ = {
 			isa = PBXGroup;
 			children = (
+				1BEE7AFA1DBFB880002C736B /* Ntrvls.entitlements */,
 				1BFB03831D3B375000E54FF7 /* JNKeychainWrapper.h */,
 				1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */,
 				1B0319351D10AFA6003C06CE /* AppDelegate.h */,
@@ -372,6 +374,11 @@
 					1B03192E1D10AFA6003C06CE = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = PZ83QFGZ4V;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					1B0319471D10AFA7003C06CE = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -727,6 +734,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Ntrvls/Ntrvls.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Ntrvls/Info.plist;
@@ -743,6 +751,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Ntrvls/Ntrvls.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Ntrvls/Info.plist;
