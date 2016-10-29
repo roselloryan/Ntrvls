@@ -1,19 +1,15 @@
 
 #import "NtrvlsAPIClient.h"
-#import "Constants.h"
+#import "NtrvlsConstants.h"
 #import "JNKeychainWrapper.h"
 
 
 @interface NtrvlsAPIClient ()
 
-
-
 @end
 
 
 @implementation NtrvlsAPIClient
-
-
 
 + (void)loginIntoStravaWithSuccessBlock:(void(^)(BOOL success))successBlock {
     
@@ -24,7 +20,6 @@
         
         // handle http error here if wanted
         if (!data) {
-            
             successBlock(NO);
         }
         else {
@@ -45,12 +40,10 @@
         // handle access denied error
         NSLog(@"ACCESS DENIED: handle this issue");
     }
-    
     else {
     
         NSString *urlString = [NSString stringWithFormat:@"%@%@%@&code=%@", BaseStravaTokenURL, ClientID, ClientSecret, codeString];
         NSURL *url = [NSURL URLWithString: urlString];
-        
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL: url];
         urlRequest.HTTPMethod = @"POST";
         

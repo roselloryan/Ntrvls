@@ -119,11 +119,13 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if (textField == self.alertTextField && [self.alertControllerName isEqualToString:@"stravaTextInputAlertController"]) {
-        // TODO: post the workout
-        NSLog(@"\n\n---------POST TO STRAVA-------------%@\n\n\n", self.alertControllerName);
+    
+        [self postToStrava];
+        self.alertControllerName = nil;
+        [self dismissViewControllerAnimated: NO completion: nil];
     }
     
-    if (textField == self.alertTextField) {
+    else if (textField == self.alertTextField) {
 
         if (![[NtrvlsDataStore sharedNtrvlsDataStore] alreadySavedWorkoutWithTitle: self.alertTextField.text]) {
             
@@ -790,7 +792,6 @@
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         if (self.alertTextField.text.length > 0) {
-//            [self loginToStrava];
             [self postToStrava];
         }
     }];
@@ -820,7 +821,7 @@
             [self presentTextInputAlert];
         }
         else if (button == self.stravaButton) {
-            [self loginToStrava];
+            [self presentNameWorkoutToPostToStravaAlert];
         }
     }];
     UIAlertAction *rideAction = [UIAlertAction actionWithTitle:@"Ride" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -838,7 +839,8 @@
             [self presentTextInputAlert];
         }
         else if (button == self.stravaButton) {
-            [self loginToStrava];
+            //[self loginToStrava];
+            [self presentNameWorkoutToPostToStravaAlert];
         }
     }];
     UIAlertAction *rowAction = [UIAlertAction actionWithTitle:@"Row" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -856,7 +858,8 @@
             [self presentTextInputAlert];
         }
         else if (button == self.stravaButton) {
-            [self loginToStrava];
+            //[self loginToStrava];
+            [self presentNameWorkoutToPostToStravaAlert];
         }
     }];
     UIAlertAction *walkAction = [UIAlertAction actionWithTitle:@"Walk" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -874,7 +877,8 @@
             [self presentTextInputAlert];
         }
         else if (button == self.stravaButton) {
-            [self loginToStrava];
+            //[self loginToStrava];
+            [self presentNameWorkoutToPostToStravaAlert];
         }
     }];
     UIAlertAction *swimAction = [UIAlertAction actionWithTitle:@"Swim" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -892,7 +896,8 @@
             [self presentTextInputAlert];
         }
         else if (button == self.stravaButton) {
-            [self loginToStrava];
+            //[self loginToStrava];
+            [self presentNameWorkoutToPostToStravaAlert];
         }
     }];
     UIAlertAction *workoutAction = [UIAlertAction actionWithTitle:@"Workout" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -910,7 +915,8 @@
             [self presentTextInputAlert];
         }
         else if (button == self.stravaButton) {
-            [self loginToStrava];
+            //[self loginToStrava];
+            [self presentNameWorkoutToPostToStravaAlert];
         }
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {

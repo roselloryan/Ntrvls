@@ -18,12 +18,12 @@
 		1B03196F1D10B89E003C06CE /* NtrvlsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B03196E1D10B89E003C06CE /* NtrvlsMainViewController.m */; };
 		1B0319851D11C7EE003C06CE /* TimerPrepVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0319841D11C7EE003C06CE /* TimerPrepVC.m */; };
 		1B03198B1D12E68F003C06CE /* TimerPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B03198A1D12E68F003C06CE /* TimerPlayVC.m */; };
+		1B13A61B1DC3E6920048918F /* NtrvlsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B13A61A1DC3E6920048918F /* NtrvlsConstants.m */; };
 		1B2CA0DC1D412AC2008B44F4 /* CustomNtrvlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CA0DB1D412AC2008B44F4 /* CustomNtrvlView.m */; };
 		1B3577771D241BA4006E7140 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 1B3577761D241BA4006E7140 /* Podfile */; };
 		1B58DCB31D1CCEAB0031EE94 /* DescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58DCB21D1CCEAB0031EE94 /* DescriptionView.m */; };
 		1B58DCC91D1F62FD0031EE94 /* BreakAwayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */; };
 		1BF5ABE11DA5D5FF0051D256 /* CustomPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5ABE01DA5D5FF0051D256 /* CustomPlayerView.m */; };
-		1BFB03631D2C67A100E54FF7 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03621D2C67A100E54FF7 /* Constants.m */; };
 		1BFB03681D2C747300E54FF7 /* UIColor+UIColorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03671D2C747300E54FF7 /* UIColor+UIColorExtension.m */; };
 		1BFB036B1D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03691D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld */; };
 		1BFB03731D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03701D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.m */; };
@@ -80,6 +80,8 @@
 		1B0319841D11C7EE003C06CE /* TimerPrepVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerPrepVC.m; sourceTree = "<group>"; };
 		1B0319891D12E68F003C06CE /* TimerPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerPlayVC.h; sourceTree = "<group>"; };
 		1B03198A1D12E68F003C06CE /* TimerPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerPlayVC.m; sourceTree = "<group>"; };
+		1B13A6191DC3E6920048918F /* NtrvlsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NtrvlsConstants.h; sourceTree = "<group>"; };
+		1B13A61A1DC3E6920048918F /* NtrvlsConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NtrvlsConstants.m; sourceTree = "<group>"; };
 		1B2CA0DA1D412AC2008B44F4 /* CustomNtrvlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNtrvlView.h; sourceTree = "<group>"; };
 		1B2CA0DB1D412AC2008B44F4 /* CustomNtrvlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNtrvlView.m; sourceTree = "<group>"; };
 		1B3577761D241BA4006E7140 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -92,8 +94,6 @@
 		1BEE7AFA1DBFB880002C736B /* Ntrvls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ntrvls.entitlements; sourceTree = "<group>"; };
 		1BF5ABDF1DA5D5FF0051D256 /* CustomPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPlayerView.h; sourceTree = "<group>"; };
 		1BF5ABE01DA5D5FF0051D256 /* CustomPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlayerView.m; sourceTree = "<group>"; };
-		1BFB03611D2C67A100E54FF7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../../../../.Trash/Constants.h; sourceTree = "<group>"; };
-		1BFB03621D2C67A100E54FF7 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ../../../../.Trash/Constants.m; sourceTree = "<group>"; };
 		1BFB03661D2C747300E54FF7 /* UIColor+UIColorExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+UIColorExtension.h"; sourceTree = "<group>"; };
 		1BFB03671D2C747300E54FF7 /* UIColor+UIColorExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+UIColorExtension.m"; sourceTree = "<group>"; };
 		1BFB036A1D2C90DA00E54FF7 /* NtrvlModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NtrvlModel.xcdatamodel; sourceTree = "<group>"; };
@@ -176,6 +176,8 @@
 		1B0319311D10AFA6003C06CE /* Ntrvls */ = {
 			isa = PBXGroup;
 			children = (
+				1B13A6191DC3E6920048918F /* NtrvlsConstants.h */,
+				1B13A61A1DC3E6920048918F /* NtrvlsConstants.m */,
 				1BEE7AFA1DBFB880002C736B /* Ntrvls.entitlements */,
 				1BFB03831D3B375000E54FF7 /* JNKeychainWrapper.h */,
 				1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */,
@@ -183,8 +185,6 @@
 				1B0319361D10AFA6003C06CE /* AppDelegate.m */,
 				1BFB03661D2C747300E54FF7 /* UIColor+UIColorExtension.h */,
 				1BFB03671D2C747300E54FF7 /* UIColor+UIColorExtension.m */,
-				1BFB03611D2C67A100E54FF7 /* Constants.h */,
-				1BFB03621D2C67A100E54FF7 /* Constants.m */,
 				1BFB037B1D36B12200E54FF7 /* NtrvlsAPIClient.h */,
 				1BFB037C1D36B12200E54FF7 /* NtrvlsAPIClient.m */,
 				1B03196A1D10B1B0003C06CE /* NtrvlsDataStore.h */,
@@ -568,6 +568,7 @@
 			files = (
 				1B0319851D11C7EE003C06CE /* TimerPrepVC.m in Sources */,
 				1BFB036B1D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld in Sources */,
+				1B13A61B1DC3E6920048918F /* NtrvlsConstants.m in Sources */,
 				1BF5ABE11DA5D5FF0051D256 /* CustomPlayerView.m in Sources */,
 				1B03196C1D10B1B0003C06CE /* NtrvlsDataStore.m in Sources */,
 				1BFB03681D2C747300E54FF7 /* UIColor+UIColorExtension.m in Sources */,
@@ -578,7 +579,6 @@
 				1B58DCB31D1CCEAB0031EE94 /* DescriptionView.m in Sources */,
 				1B0319371D10AFA6003C06CE /* AppDelegate.m in Sources */,
 				1BFB03731D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.m in Sources */,
-				1BFB03631D2C67A100E54FF7 /* Constants.m in Sources */,
 				1BFB03851D3B375000E54FF7 /* JNKeychainWrapper.m in Sources */,
 				1B03196F1D10B89E003C06CE /* NtrvlsMainViewController.m in Sources */,
 				1B2CA0DC1D412AC2008B44F4 /* CustomNtrvlView.m in Sources */,

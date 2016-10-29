@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "NtrvlWorkout.h"
-#import "Constants.h"
+#import "NtrvlsConstants.h"
 
 @interface NtrvlsDataStore : NSObject
 

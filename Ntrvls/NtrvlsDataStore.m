@@ -130,7 +130,7 @@
     NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
     
     NSFetchRequest *copyFetch = [NSFetchRequest fetchRequestWithEntityName: @"NtrvlWorkout"];
-    NSString *copyString = @"RARCopy";
+    NSString *copyString = kWorkoutCopyName;
     copyFetch.predicate = [NSPredicate predicateWithFormat: @"workoutTitle == %@", copyString];
     
     NSError *error;
