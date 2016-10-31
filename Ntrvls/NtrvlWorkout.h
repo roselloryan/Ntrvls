@@ -8,6 +8,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NtrvlWorkout : NSManagedObject
 
+- (void)updateTotalTime;
+
 // Insert code here to declare functionality of your managed object subclass
 
 // REMEMBER: to implement credata accessor methods if regenerating the CoreDataProperties files!!!!

@@ -4,6 +4,7 @@
 #import "JNKeychainWrapper.h"
 
 
+
 @interface NtrvlsAPIClient ()
 
 @end
@@ -51,7 +52,6 @@
         
         NSURLSessionDataTask *dataTask = [urlSession dataTaskWithRequest: urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-            
             if (data) {
                 NSError *dictionaryError = nil;
                 NSDictionary *dataResponseDict = [NSJSONSerialization JSONObjectWithData: data options: 0 error: &dictionaryError];
@@ -69,13 +69,11 @@
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName: @"allowedAccess" object: nil];
             }
-            
             else {
                 // handle response error? No internet connection?
                 [[NSNotificationCenter defaultCenter] postNotificationName: @"deniedAccess" object: nil];
             }
         }];
-        
         [dataTask resume];
     }
 }
@@ -89,10 +87,8 @@
     //name=Treadmill Run&elapsed_time=123456&start_date_local=2013-10-23T10:02:13Z&type=run
     
     if (accessToken) {
-        NSString *urlString = [NSString stringWithFormat:@"%@name=%@&elapsed_time=%lu&start_date_local=%@&type=%@&description=%@", BaseStravaPostActivitieURL, name, elapsedTime, startDateLocal, type, description];
+        NSString *urlString = [NSString stringWithFormat: @"%@name=%@&elapsed_time=%lu&start_date_local=%@&type=%@&description=%@", BaseStravaPostActivitieURL, name, elapsedTime, startDateLocal, type, description];
         
-        NSLog(@"post url: %@", urlString);
-    
         NSURL *url = [NSURL URLWithString: urlString];
     
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL: url];
@@ -128,10 +124,23 @@
     
     else {
         // TODO: handle error for nil token string or failed posting
-        
         completionBlock(NO);
     }
-    
+}
+
+# pragma mark - Internet Test
+
++ (BOOL)testForInternet {
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        NSLog(@"There IS NO internet connection");
+        return NO;
+    }
+    else {
+        NSLog(@"There IS internet connection");
+        return YES;
+    }
 }
 
 /*

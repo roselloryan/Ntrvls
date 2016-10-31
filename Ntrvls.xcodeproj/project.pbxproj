@@ -19,6 +19,8 @@
 		1B0319851D11C7EE003C06CE /* TimerPrepVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0319841D11C7EE003C06CE /* TimerPrepVC.m */; };
 		1B03198B1D12E68F003C06CE /* TimerPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B03198A1D12E68F003C06CE /* TimerPlayVC.m */; };
 		1B13A61B1DC3E6920048918F /* NtrvlsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B13A61A1DC3E6920048918F /* NtrvlsConstants.m */; };
+		1B13A61D1DC58DA70048918F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B13A61C1DC58DA70048918F /* SystemConfiguration.framework */; };
+		1B13A6201DC590D10048918F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B13A61F1DC590D10048918F /* Reachability.m */; };
 		1B2CA0DC1D412AC2008B44F4 /* CustomNtrvlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CA0DB1D412AC2008B44F4 /* CustomNtrvlView.m */; };
 		1B3577771D241BA4006E7140 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 1B3577761D241BA4006E7140 /* Podfile */; };
 		1B58DCB31D1CCEAB0031EE94 /* DescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58DCB21D1CCEAB0031EE94 /* DescriptionView.m */; };
@@ -82,6 +84,9 @@
 		1B03198A1D12E68F003C06CE /* TimerPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerPlayVC.m; sourceTree = "<group>"; };
 		1B13A6191DC3E6920048918F /* NtrvlsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NtrvlsConstants.h; sourceTree = "<group>"; };
 		1B13A61A1DC3E6920048918F /* NtrvlsConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NtrvlsConstants.m; sourceTree = "<group>"; };
+		1B13A61C1DC58DA70048918F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1B13A61E1DC590D10048918F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		1B13A61F1DC590D10048918F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1B2CA0DA1D412AC2008B44F4 /* CustomNtrvlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNtrvlView.h; sourceTree = "<group>"; };
 		1B2CA0DB1D412AC2008B44F4 /* CustomNtrvlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNtrvlView.m; sourceTree = "<group>"; };
 		1B3577761D241BA4006E7140 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -126,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B13A61D1DC58DA70048918F /* SystemConfiguration.framework in Frameworks */,
 				1BFB037F1D3AD22700E54FF7 /* Security.framework in Frameworks */,
 				C3D189D7B3DDD40073E84866 /* libPods-Ntrvls.a in Frameworks */,
 			);
@@ -178,6 +184,8 @@
 			children = (
 				1B13A6191DC3E6920048918F /* NtrvlsConstants.h */,
 				1B13A61A1DC3E6920048918F /* NtrvlsConstants.m */,
+				1B13A61E1DC590D10048918F /* Reachability.h */,
+				1B13A61F1DC590D10048918F /* Reachability.m */,
 				1BEE7AFA1DBFB880002C736B /* Ntrvls.entitlements */,
 				1BFB03831D3B375000E54FF7 /* JNKeychainWrapper.h */,
 				1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */,
@@ -276,6 +284,7 @@
 		585D9A8E12C400E3823C9B18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B13A61C1DC58DA70048918F /* SystemConfiguration.framework */,
 				1B92B9451D99F48800F996DE /* AudioToolbox.framework */,
 				1BFB037E1D3AD22700E54FF7 /* Security.framework */,
 				C465709F70A6CECD465B2A35 /* libPods-Ntrvls.a */,
@@ -576,6 +585,7 @@
 				1BFB037A1D2DFC5800E54FF7 /* NtrvlWorkout.m in Sources */,
 				1BFB03741D2C952F00E54FF7 /* Ntrvl.m in Sources */,
 				1BFB03881D3E78AC00E54FF7 /* IntervalLabel.m in Sources */,
+				1B13A6201DC590D10048918F /* Reachability.m in Sources */,
 				1B58DCB31D1CCEAB0031EE94 /* DescriptionView.m in Sources */,
 				1B0319371D10AFA6003C06CE /* AppDelegate.m in Sources */,
 				1BFB03731D2C952F00E54FF7 /* Ntrvl+CoreDataProperties.m in Sources */,

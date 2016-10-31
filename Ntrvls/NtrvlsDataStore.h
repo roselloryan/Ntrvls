@@ -29,6 +29,8 @@
 
 - (void)deleteWorkoutWithTitle:(NSString *)title;
 
+- (void)overwriteWorkoutWithTitle:(NSString *)title;
+
 - (BOOL)alreadySavedWorkoutWithTitle:(NSString *)title;
 
 - (void)addNewNtrvlToWorkout:(NtrvlWorkout *)ntrvlWorkout;
@@ -39,5 +41,6 @@
 
 - (void)saveWorkoutType:(NSString *)workouType forNtrvlWorkout:(NtrvlWorkout *)ntrvlWorkout;
 
+- (NSInteger)totalTimeForWorkout:(NtrvlWorkout *)ntrvlWorkout;
 
 @end

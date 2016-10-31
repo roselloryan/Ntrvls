@@ -4,6 +4,7 @@
 #import "UIColor+UIColorExtension.h"
 #import "NtrvlsDataStore.h"
 #import "NtrvlWorkout+CoreDataProperties.h"
+#import "NtrvlsConstants.h"
 
 
 CGFloat const iPhone4sHeight = 480.0f;
@@ -44,6 +45,8 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     }
     self.tableView.estimatedRowHeight = 40.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [[NtrvlsDataStore sharedNtrvlsDataStore] deleteWorkoutWithTitle: kWorkoutCopyName];
 }
 
 
@@ -60,7 +63,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     [self.navigationController setNavigationBarHidden:YES];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.toolbar.tintColor = [UIColor whiteColor];
-
     
     NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
     if (selectedIndexPath) {
@@ -68,7 +70,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     }
     
     [self createPresetWorkouts];
-    
 }
 
 
@@ -136,24 +137,28 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         
          NtrvlWorkout *workoutToDelete = self.sharedNtrvlsDataStore.workoutsArray[indexPath.row];
          [[NtrvlsDataStore sharedNtrvlsDataStore] deleteWorkoutWithTitle: workoutToDelete.workoutTitle];
-         [tableView deleteRowsAtIndexPaths: @[indexPath] withRowAnimation: UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths: @[indexPath] withRowAnimation: UITableViewRowAnimationFade];
      }
      else if (editingStyle == UITableViewCellEditingStyleInsert) {
          // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
          // TODO: Add empty workout?
      }
-     [self.tableView reloadData];
+     
+     // delay data reload
+     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.25 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+     });
  }
 
 - (void)createPresetWorkouts {
     if (self.sharedNtrvlsDataStore.workoutsArray.count == 0) {
-        [self.sharedNtrvlsDataStore createTabataWorkoutWithCompletionBlock:^(BOOL complete) {
+        [self.sharedNtrvlsDataStore createNewWorkoutWithCompletionBlock:^(BOOL complete) {
             if (complete) {
                 [self.sharedNtrvlsDataStore fetchWorkouts];
                 [self.tableView reloadData];
             }
         }];
-        [self.sharedNtrvlsDataStore createNewWorkoutWithCompletionBlock:^(BOOL complete) {
+        [self.sharedNtrvlsDataStore createTabataWorkoutWithCompletionBlock:^(BOOL complete) {
             if (complete) {
                 [self.sharedNtrvlsDataStore fetchWorkouts];
                 [self.tableView reloadData];

@@ -145,7 +145,7 @@
         [self.labelTimer invalidate];
         
         [self.pauseButton setTitle:@"-Go-" forState:UIControlStateNormal];
-//        [self flashButton: self.pauseButton];
+        self.pauseButton.backgroundColor = [UIColor ntrvlsGreen];
     }
     
     // play again from being paused
@@ -157,6 +157,7 @@
         self.labelTimer = labelTimer;
     
         [self.pauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+        self.pauseButton.backgroundColor = [UIColor ntrvlsYellow];
         
         // removes flashing view
         for (UIView *subview in self.view.subviews) {
@@ -216,7 +217,7 @@
             NSLog(@"self.view.frame.size.height = %f", self.view.frame.size.height);
         }];
     } completion:^(BOOL finished) {
-        [self flashButton: self.shareOnStravaButton];
+        //[self flashButton: self.shareOnStravaButton];
     }];
 }
 
@@ -630,12 +631,12 @@
     
     // respects the mute switch
 //    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error:nil];
-//
+
 //    NSURL *threeTwoOnePathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/short_double_low.caf"];
 //    if (threeTwoOnePathURL) {
 //        AudioServicesCreateSystemSoundID((__bridge CFURLRef)threeTwoOnePathURL, &_threeTwoOneSoundID);
 //    }
-//
+
 //    NSURL *completedNtrvlPathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/long_low_short_high.caf"];
 //    if (completedNtrvlPathURL) {
 //        AudioServicesCreateSystemSoundID((__bridge CFURLRef)completedNtrvlPathURL, &_completedNtrvlSoundID);
