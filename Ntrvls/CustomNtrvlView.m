@@ -85,31 +85,43 @@
         UIButton *redButton = [[UIButton alloc]initWithFrame: CGRectMake(0, frame.size.height / 7, frame.size.width, self.frame.size.height / 7)];
         redButton.backgroundColor = [UIColor ntrvlsRed];
         [redButton addTarget: self action:@selector(colorButtonTapped: ) forControlEvents:UIControlEventTouchUpInside];
+        redButton.titleLabel.font = [UIFont systemFontOfSize: 8 weight: UIFontWeightThin];
+        [redButton setTitle: @"Red" forState: UIControlStateNormal];
         self.redButton = redButton;
         
         UIButton *blueButton = [[UIButton alloc]initWithFrame: CGRectMake(0, 2 * frame.size.height / 7, frame.size.width, self.frame.size.height / 7)];
         blueButton.backgroundColor = [UIColor ntrvlsBlue];
         [blueButton addTarget: self action:@selector(colorButtonTapped: ) forControlEvents:UIControlEventTouchUpInside];
+        blueButton.titleLabel.font = [UIFont systemFontOfSize: 8 weight: UIFontWeightThin];
+        [blueButton setTitle: @"Blue" forState: UIControlStateNormal];
         self.blueButton = blueButton;
         
         UIButton *yellowButton = [[UIButton alloc]initWithFrame: CGRectMake(0, 3 * frame.size.height / 7, frame.size.width, self.frame.size.height / 7)];
         yellowButton.backgroundColor = [UIColor ntrvlsYellow];
         [yellowButton addTarget: self action:@selector(colorButtonTapped: ) forControlEvents: UIControlEventTouchUpInside];
+        [yellowButton setTitle: @"Yellow" forState: UIControlStateNormal];
+        yellowButton.titleLabel.font = [UIFont systemFontOfSize: 8 weight: UIFontWeightThin];
         self.yellowButton = yellowButton;
         
         UIButton *greenButton = [[UIButton alloc]initWithFrame: CGRectMake(0, 4 * frame.size.height / 7, frame.size.width, frame.size.height / 7)];
         greenButton.backgroundColor = [UIColor ntrvlsGreen];
         [greenButton addTarget: self action:@selector(colorButtonTapped: ) forControlEvents:UIControlEventTouchUpInside];
+        [greenButton setTitle: @"Green" forState: UIControlStateNormal];
+        greenButton.titleLabel.font = [UIFont systemFontOfSize: 8 weight: UIFontWeightThin];
         self.greenButton = greenButton;
         
         UIButton *greyButton = [[UIButton alloc]initWithFrame: CGRectMake(0, 5 * frame.size.height / 7, frame.size.width, frame.size.height / 7)];
         greyButton.backgroundColor = [UIColor ntrvlsGrey];
         [greyButton addTarget: self action:@selector(colorButtonTapped: ) forControlEvents:UIControlEventTouchUpInside];
+        greyButton.titleLabel.font = [UIFont systemFontOfSize: 8 weight: UIFontWeightThin];
+        [greyButton setTitle: @"Grey" forState: UIControlStateNormal];
         self.greyButton = greyButton;
         
         UIButton *orangeButton = [[UIButton alloc]initWithFrame: CGRectMake(0, 6 * frame.size.height / 7, frame.size.width, frame.size.height / 7)];
         orangeButton.backgroundColor = [UIColor ntrvlsOrange];
         [orangeButton addTarget: self action:@selector(colorButtonTapped: ) forControlEvents:UIControlEventTouchUpInside];
+        orangeButton.titleLabel.font = [UIFont systemFontOfSize: 8 weight: UIFontWeightThin];
+        [orangeButton setTitle: @"Orange" forState: UIControlStateNormal];
         self.orangeButton = orangeButton;
         
         if (isIPad) {

@@ -87,9 +87,19 @@
     
     [self configureSystemSounds];
 
+    //TODO: catch cells with no time
     // draw view one and two
     self.viewOne = [self buildViewOffScreenForNtrvl: self.selectedWorkout.interval[0]];
-    self.viewTwo = [self buildViewOffScreenForNtrvl: self.selectedWorkout.interval[1]];
+    
+    // Check for zero time and skip intervals without duration
+    for (NSInteger i = 1; i < self.selectedWorkout.interval.count; i++) {
+        if (self.selectedWorkout.interval[i].intervalDuration != 0) {
+            self.viewTwo = [self buildViewOffScreenForNtrvl: self.selectedWorkout.interval[i]];
+            break;
+        }
+    }
+    
+    //self.viewTwo = [self buildViewOffScreenForNtrvl: self.selectedWorkout.interval[1]];
     self.viewOne.alpha = 0.0;
     self.viewTwo.alpha = 0.0;
     [self.view addSubview: self.viewOne];
@@ -329,9 +339,15 @@
     
     // proceed to next interval
     self.intervalNumber += 1;
-
+    
+    // Check for zero time and skip intervals without duration
+    if (self.intervalNumber < self.selectedWorkout.interval.count) {
+        while (self.selectedWorkout.interval[self.intervalNumber].intervalDuration == 0) {
+            self.intervalNumber ++;
+        }
+    }
     // last interval
-    if (self.intervalNumber == self.selectedWorkout.interval.count) {
+    if (self.intervalNumber >= self.selectedWorkout.interval.count) {
         
         [self.labelTimer invalidate];
     
@@ -521,7 +537,6 @@
 
 - (CustomPlayerView *)buildViewOffScreenForNtrvl:(Ntrvl *)ntrvl {
     
-//    CustomPlayerView *firstCell = [[CustomPlayerView alloc]initWithFrame: CGRectMake(self.view.frame.size.width, self.view.frame.size.height/5, self.view.frame.size.width * 3/4, self.view.frame.size.height/2)intervalDescription: ntrvl.intervalDescription duration: ntrvl.intervalDuration andBackgroundColor:ntrvl.screenColor];
     CustomPlayerView *firstCell = [[CustomPlayerView alloc]initWithFrame: CGRectMake(self.view.frame.size.width, self.view.frame.size.height/5, self.view.frame.size.width * 3/4, self.view.frame.size.height/2)intervalDescription: ntrvl.intervalDescription duration: ntrvl.intervalDuration andBackgroundColor:ntrvl.screenColor isIpad:self.deviceIsIpad];
 
     return firstCell;
@@ -611,17 +626,11 @@
     UIAlertController *successfulStravaPostAlertController = [UIAlertController alertControllerWithTitle:@"Success!" message: @"Workout posted to Strava" preferredStyle: UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle: @"Ok" style: UIAlertActionStyleDefault handler: ^(UIAlertAction * _Nonnull action) {
         
-//        [self navigateBackToTimerPrepVC];
+        [self navigateBackToTimerPrepVC];
     }];
     [successfulStravaPostAlertController addAction: okAction];
     
-    [self presentViewController: successfulStravaPostAlertController animated: YES completion:^{
-        // delay one second then dismiss success alert
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//            
-//            [self dismissViewControllerAnimated: YES completion: nil];
-//        });
-    }];
+    [self presentViewController: successfulStravaPostAlertController animated: YES completion: nil];
 }
 
 # pragma mark - Sounds 

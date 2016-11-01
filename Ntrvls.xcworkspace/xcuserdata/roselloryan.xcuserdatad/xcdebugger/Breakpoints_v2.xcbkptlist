@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPlayVC.m"
-            timestampString = "499570339.381529"
+            timestampString = "499649274.684909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "-labelTimerFired:"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "499551450.358722"
+            timestampString = "499641644.649397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "609"
-            endingLineNumber = "609"
+            startingLineNumber = "614"
+            endingLineNumber = "614"
             landmarkName = "-copyInfoToNtrvlModelFromCustomNtrvlView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "499551450.358722"
+            timestampString = "499641644.649397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "626"
-            endingLineNumber = "626"
+            startingLineNumber = "631"
+            endingLineNumber = "631"
             landmarkName = "-copyInfoToNtrvlModelFromCustomNtrvlView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "499551450.358722"
+            timestampString = "499641644.649397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
+            startingLineNumber = "544"
+            endingLineNumber = "544"
             landmarkName = "-deselectNtrvlView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPlayVC.m"
-            timestampString = "499570339.381529"
+            timestampString = "499649274.684909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "-stopButtonTapped:"
             landmarkType = "7">
          </BreakpointContent>
@@ -148,27 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPlayVC.m"
-            timestampString = "499570339.381529"
+            timestampString = "499649705.636947"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
-            landmarkName = "-intervalCompleted"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ntrvls/TimerPlayVC.m"
-            timestampString = "499570339.381529"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
             landmarkName = "-intervalCompleted"
             landmarkType = "7">
          </BreakpointContent>
@@ -180,11 +164,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "499556329.12631"
+            timestampString = "499645552.435145"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1035"
-            endingLineNumber = "1035"
+            startingLineNumber = "1041"
+            endingLineNumber = "1041"
             landmarkName = "-fadeScreenAndSegueToPlayVCWhenComplete"
             landmarkType = "7">
          </BreakpointContent>
@@ -196,11 +180,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPlayVC.m"
-            timestampString = "499570339.381529"
+            timestampString = "499649705.636947"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
             landmarkName = "-intervalCompleted"
             landmarkType = "7">
          </BreakpointContent>
@@ -212,11 +196,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPlayVC.m"
-            timestampString = "499570339.381529"
+            timestampString = "499649705.636947"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "652"
-            endingLineNumber = "652"
+            startingLineNumber = "661"
+            endingLineNumber = "661"
             landmarkName = "-playSoundsFor321Done"
             landmarkType = "7">
          </BreakpointContent>
@@ -228,11 +212,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "499551450.358722"
+            timestampString = "499641644.649397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
             landmarkName = "-deleteNrtvlView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -240,7 +224,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/NtrvlsAPIClient.m"
@@ -256,7 +240,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/NtrvlsAPIClient.m"
@@ -272,7 +256,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/NtrvlsAPIClient.m"
@@ -285,34 +269,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "+[NtrvlsAPIClient completeTokenExchangeWithResponseURL:]"
                   moduleName = "Ntrvls"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/roselloryan/Documents/development/Ntrvls/Ntrvls/NtrvlsAPIClient.m"
-                  timestampString = "499580607.138411"
+                  timestampString = "499641645.711897"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "53"
                   endingLineNumber = "53"
-                  offsetFromSymbolStart = "564">
+                  offsetFromSymbolStart = "559">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__56+[NtrvlsAPIClient completeTokenExchangeWithResponseURL:]_block_invoke"
                   moduleName = "Ntrvls"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/roselloryan/Documents/development/Ntrvls/Ntrvls/NtrvlsAPIClient.m"
-                  timestampString = "499580607.139617"
+                  timestampString = "499641645.714162"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "55"
                   endingLineNumber = "55"
-                  offsetFromSymbolStart = "112">
+                  offsetFromSymbolStart = "123">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -324,11 +308,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "499551450.358722"
+            timestampString = "499641644.649397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "-postToStravaWithTitle:"
             landmarkType = "7">
             <Locations>
@@ -372,11 +356,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "499551450.358722"
+            timestampString = "499641644.649397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "-postToStravaWithTitle:"
             landmarkType = "7">
          </BreakpointContent>
@@ -484,11 +468,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ntrvls/TimerPrepVC.m"
-            timestampString = "499553385.9027"
+            timestampString = "499641644.649397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "707"
-            endingLineNumber = "707"
+            startingLineNumber = "717"
+            endingLineNumber = "717"
             landmarkName = "-showAskSaveAlert"
             landmarkType = "7">
          </BreakpointContent>
@@ -506,6 +490,38 @@
             startingLineNumber = "67"
             endingLineNumber = "67"
             landmarkName = "-fetchWorkouts"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ntrvls/TimerPlayVC.m"
+            timestampString = "499656981.618285"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
+            landmarkName = "-intervalCompleted"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ntrvls/NtrvlsMainViewController.m"
+            timestampString = "499666768.641311"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

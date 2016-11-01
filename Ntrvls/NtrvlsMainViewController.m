@@ -5,6 +5,7 @@
 #import "NtrvlsDataStore.h"
 #import "NtrvlWorkout+CoreDataProperties.h"
 #import "NtrvlsConstants.h"
+#import "NtrvlsTableViewCell.h"
 
 
 CGFloat const iPhone4sHeight = 480.0f;
@@ -15,7 +16,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 @interface NtrvlsMainViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NtrvlsDataStore *sharedNtrvlsDataStore;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -23,7 +23,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 @property (assign, nonatomic) BOOL deviceIsIpad;
 
 @end
-
 
 
 @implementation NtrvlsMainViewController
@@ -36,7 +35,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     self.tableView.dataSource = self;
     
     self.sharedNtrvlsDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
-    
     
     // adjust constraints for tiny 4s screen
     if (self.view.frame.size.height == iPhone4sHeight) {
@@ -94,27 +92,31 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"workoutCell" forIndexPath:indexPath];
+    
+    NtrvlsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NtrvlsWorkoutCell" forIndexPath:indexPath];
+    
+    NSLog(@"%@, %@", cell.titleLabel.text, cell.detailLabel.text);
     
     NtrvlWorkout *cellWorkout = self.sharedNtrvlsDataStore.workoutsArray[indexPath.row];
     
-    cell.textLabel.text = cellWorkout.workoutTitle;
+    cell.titleLabel.text = cellWorkout.workoutTitle;
     
     if ([cellWorkout.workoutTitle isEqualToString:@"TABATA"] || [cellWorkout.workoutTitle isEqualToString:@"New Workout"] || [cellWorkout.workoutTitle isEqualToString:@"Over/Unders"]) {
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.detailTextLabel.textColor = [UIColor whiteColor];
+        cell.titleLabel.textColor = [UIColor whiteColor];
+        cell.detailLabel.textColor = [UIColor whiteColor];
     }
     else {
-        cell.textLabel.textColor =  [UIColor ntrvlsBlue];
-        cell.detailTextLabel.textColor = [UIColor ntrvlsBlue];
+        cell.titleLabel.textColor =  [UIColor ntrvlsBlue];
+        cell.detailLabel.textColor = [UIColor ntrvlsBlue];
     }
     
-    cell.backgroundColor = [UIColor clearColor];
-    cell.detailTextLabel.text = [self timeStringFromSecondsCount: cellWorkout.totalTime];
+    cell.detailLabel.text = [self timeStringFromSecondsCount: cellWorkout.totalTime];
     
     UIView *selectedView = [UIView new];
     selectedView.backgroundColor = [[UIColor ntrvlsGrey] colorWithAlphaComponent:0.3];
     cell.selectedBackgroundView = selectedView;
+   
+    NSLog(@"%@, %@", cell.titleLabel.text, cell.detailLabel.text);
     
     return cell;
 }
@@ -141,7 +143,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
      }
      else if (editingStyle == UITableViewCellEditingStyleInsert) {
          // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-         // TODO: Add empty workout?
      }
      
      // delay data reload
@@ -179,6 +180,7 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     }
 }
 
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -207,10 +209,16 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
 
 - (NSString *)timeStringFromSecondsCount:(NSUInteger)secondsCount {
     
+    NSUInteger hours = 0;
     NSUInteger minutes = 0;
     NSUInteger seconds = 0;
     
-    if (secondsCount > 60) {
+    if (secondsCount >= 3600) {
+        hours = secondsCount / 3600;
+        secondsCount = secondsCount - (hours * 3600);
+    }
+    
+    if (secondsCount >= 60) {
         minutes = secondsCount / 60;
         seconds = secondsCount % 60;
     }
@@ -218,6 +226,7 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         seconds = secondsCount;
     }
     
+    NSString *hoursString =  [NSString stringWithFormat: @"%lu", hours];
     NSString *minutesString =  [NSString stringWithFormat: @"%lu", minutes];
     NSString *secondsString = @"";
     
@@ -228,7 +237,22 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         secondsString = [NSString stringWithFormat: @"%lu", seconds];
     }
     
-    NSString *timeString = [NSString stringWithFormat: @"%@:%@", minutesString, secondsString];
+    NSString *timeString = [[NSString alloc]init];
+    if (hours == 0) {
+        // set minutes without 0 buffer
+        minutesString = [NSString stringWithFormat: @"%lu", minutes];
+        timeString = [NSString stringWithFormat: @"%@:%@", minutesString, secondsString];
+    }
+    else {
+        if (minutes < 10) {
+            minutesString = [NSString stringWithFormat: @"0%lu", minutes];
+        }
+        else {
+            minutesString = [NSString stringWithFormat: @"%lu", minutes];
+        }
+        
+        timeString = [NSString stringWithFormat: @"%@:%@:%@", hoursString, minutesString, secondsString];
+    }
     
     return timeString;
 }

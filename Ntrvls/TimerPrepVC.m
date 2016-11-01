@@ -155,7 +155,12 @@
             [self presentWorkoutTypeAlertControllerfromButton: sender];
         }
         else {
-            [self presentSaveOrUpdateAlert];
+            if ([self.workoutTitleLabel.text isEqualToString: @"New Workout"]){
+                [self presentTextInputAlert];
+            }
+            else {
+                [self presentSaveOrUpdateAlert];
+            }
         }
     }
     else {
@@ -702,9 +707,15 @@
     
     if (self.workoutWasEdited && !self.workoutWasSaved) {
         UIAlertController *saveAlertController = [UIAlertController alertControllerWithTitle: @"We saw you made some changes!" message: @"Do you want to save this workout?" preferredStyle: UIAlertControllerStyleAlert];
+       
         UIAlertAction *yesAction = [UIAlertAction actionWithTitle: @"Yes" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [self presentSaveOrUpdateAlert];
+            if ([self.workoutTitleLabel.text isEqualToString:@"New Workout"]) {
+                [self presentTextInputAlert];
+            }
+            else {
+                [self presentSaveOrUpdateAlert];
+            }
         }];
         
         UIAlertAction *noAction = [UIAlertAction actionWithTitle: @"No" style: UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -725,15 +736,10 @@
     }
 }
 
-- (void)presentSaveOrUpdateAlert {
+- (void)presentSaveOrUpdateAlert{
     
     UIAlertController *saveOrUpdateAlertController = [UIAlertController alertControllerWithTitle: @"Update this workout, or save as new workout?" message: nil preferredStyle: UIAlertControllerStyleAlert];
-    
-    UIAlertAction *updateAction = [UIAlertAction actionWithTitle:@"Update" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        [[NtrvlsDataStore sharedNtrvlsDataStore] overwriteWorkoutWithTitle: self.workoutTitleLabel.text];
-        [self.navigationController popViewControllerAnimated: YES];
-    }];
+
     UIAlertAction *newWorkoutAction = [UIAlertAction actionWithTitle:@"New Workout" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self presentTextInputAlert];
     }];
@@ -741,7 +747,13 @@
         // default behavior?
         NSLog(@"Cancel tapped");
     }];
-    [saveOrUpdateAlertController addAction: updateAction];
+    
+    UIAlertAction *updateAction = [UIAlertAction actionWithTitle:@"Update" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [[NtrvlsDataStore sharedNtrvlsDataStore] overwriteWorkoutWithTitle: self.workoutTitleLabel.text];
+            [self.navigationController popViewControllerAnimated: YES];
+        }];
+        [saveOrUpdateAlertController addAction: updateAction];
     [saveOrUpdateAlertController addAction: newWorkoutAction];
     [saveOrUpdateAlertController addAction: cancelAction];
     [self presentViewController: saveOrUpdateAlertController animated: YES completion: nil];
@@ -955,18 +967,12 @@
             [self presentNameWorkoutToPostToStravaAlert];
         }
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        // dismiss the alertViewController
-    }];
-    
     [workoutTypeAlertController addAction: runAction];
     [workoutTypeAlertController addAction: rideAction];
     [workoutTypeAlertController addAction: rowAction];
     [workoutTypeAlertController addAction: walkAction];
     [workoutTypeAlertController addAction: swimAction];
     [workoutTypeAlertController addAction: workoutAction];
-    [workoutTypeAlertController addAction: cancelAction];
-    
     
     workoutTypeAlertController.popoverPresentationController.sourceRect = button.bounds;
     workoutTypeAlertController.popoverPresentationController.sourceView = button;
