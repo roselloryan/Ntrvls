@@ -23,6 +23,12 @@
 
 - (void)createDemoWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock;
 
+- (void)createMixedRPMAndPowerWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock;
+
+- (void)createPowerOverUndersWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock;
+
+- (void)createPlanksWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock;
+
 - (NtrvlWorkout *)copyNtrvlWorkout:(NtrvlWorkout *)ntrvlWorkout;
 
 - (void)saveCopyAsNewWorkoutWithTitle:(NSString *)workoutTitle;

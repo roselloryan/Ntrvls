@@ -88,8 +88,7 @@
                                             <frame key="frameInset" width="1024" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbC-iA-7gM">
-                                                    <frame key="frameInset" minX="16" minY="1" width="912" height="42"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ca6-6g-G2C">
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -97,8 +96,7 @@
                                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="35"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ca6-6g-G2C">
-                                                    <frame key="frameInset" minX="928" minY="1" width="80" height="42"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbC-iA-7gM">
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -108,10 +106,12 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="lbC-iA-7gM" firstAttribute="bottom" secondItem="3M6-X9-Gj8" secondAttribute="bottomMargin" constant="-8" id="155-PN-JbU"/>
                                                 <constraint firstItem="lbC-iA-7gM" firstAttribute="trailing" secondItem="Ca6-6g-G2C" secondAttribute="leading" constant="-4" id="BOM-vv-0xW"/>
-                                                <constraint firstItem="lbC-iA-7gM" firstAttribute="centerY" secondItem="3M6-X9-Gj8" secondAttribute="centerY" id="D4z-V5-WVv"/>
+                                                <constraint firstItem="lbC-iA-7gM" firstAttribute="centerY" secondItem="3M6-X9-Gj8" secondAttribute="centerY" id="EAr-4q-Jb1"/>
                                                 <constraint firstItem="Ca6-6g-G2C" firstAttribute="trailing" secondItem="3M6-X9-Gj8" secondAttribute="trailingMargin" constant="-4" id="Lx4-Of-15L"/>
                                                 <constraint firstItem="Ca6-6g-G2C" firstAttribute="centerY" secondItem="3M6-X9-Gj8" secondAttribute="centerY" id="WoJ-OG-YFq"/>
+                                                <constraint firstItem="lbC-iA-7gM" firstAttribute="top" secondItem="3M6-X9-Gj8" secondAttribute="topMargin" constant="8" id="erc-Ga-aGH"/>
                                                 <constraint firstItem="lbC-iA-7gM" firstAttribute="leading" secondItem="3M6-X9-Gj8" secondAttribute="leadingMargin" constant="4" id="zyw-TH-GO5"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -245,7 +245,7 @@
                             <constraint firstItem="j4j-li-D17" firstAttribute="centerX" secondItem="VQt-Fj-66J" secondAttribute="centerX" id="GEP-iG-4nD"/>
                             <constraint firstItem="9Jv-Fu-NKs" firstAttribute="centerX" secondItem="VQt-Fj-66J" secondAttribute="centerX" constant="0.5" id="GLj-4a-syb"/>
                             <constraint firstItem="9Jv-Fu-NKs" firstAttribute="height" secondItem="VQt-Fj-66J" secondAttribute="height" multiplier="1/10" id="IKm-wv-pVP"/>
-                            <constraint firstItem="j4j-li-D17" firstAttribute="width" secondItem="VQt-Fj-66J" secondAttribute="width" id="Ls0-xv-RDi"/>
+                            <constraint firstItem="j4j-li-D17" firstAttribute="width" secondItem="VQt-Fj-66J" secondAttribute="width" constant="-16" id="Ls0-xv-RDi"/>
                             <constraint firstItem="g4i-P9-mod" firstAttribute="top" secondItem="j4j-li-D17" secondAttribute="bottom" constant="-15" id="TYJ-J8-Poh"/>
                             <constraint firstItem="j4j-li-D17" firstAttribute="height" secondItem="VQt-Fj-66J" secondAttribute="height" multiplier="1/10" id="Y9F-Dp-Gat"/>
                             <constraint firstItem="9Jv-Fu-NKs" firstAttribute="bottom" secondItem="QcZ-zZ-Pd7" secondAttribute="top" constant="-8" id="Zdy-2Z-iUn"/>

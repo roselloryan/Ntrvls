@@ -353,7 +353,7 @@
     NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
     
     NtrvlWorkout *newWorkout = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
-    newWorkout.workoutTitle = @"New Workout";
+    newWorkout.workoutTitle = @"+ New Workout";
     newWorkout.creationDate = [NSDate timeIntervalSinceReferenceDate];
     
     for (NSUInteger i = 0; i < 2; i++) {
@@ -472,12 +472,303 @@
     completionBlock(YES);
 }
 
+- (void)createMixedRPMAndPowerWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock {
+    
+    NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
+    
+    NtrvlWorkout *mixedRPMAndPower = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
+    mixedRPMAndPower.workoutTitle = @"Mixed RPM & Power";
+    mixedRPMAndPower.workoutType = @"Ride";
+    mixedRPMAndPower.creationDate = [NSDate timeIntervalSinceReferenceDate];
+    
+    for (NSUInteger i = 0; i < 21; i++) {
+        if (i == 0) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 5;
+            getReadyInterval.screenColor = @"grey";
+            getReadyInterval.intervalDescription = @"Get Ready";
+            getReadyInterval.workout = mixedRPMAndPower;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 1 || i == 7) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"green";
+            newIntervel.intervalDescription = @"60 RPM at 80-85% FTP";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 2 || i == 8) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"green";
+            newIntervel.intervalDescription = @"70 RPM at 80-85% FTP";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 3 || i == 9) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"green";
+            newIntervel.intervalDescription = @"80 RPM at 80-85% FTP";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 4 || i == 10) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"green";
+            newIntervel.intervalDescription = @"90 RPM at 80-85% FTP";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 5 || i == 11) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"green";
+            newIntervel.intervalDescription = @"100 RPM at 80-85% FTP";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 6 || i == 12) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 300;
+            newIntervel.screenColor = @"blue";
+            newIntervel.intervalDescription = @"Full Rest / Eazy Spin";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 13 || i == 17) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"yellow";
+            newIntervel.intervalDescription = @"90-95 RPM at 80% FTP";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 14 || i == 18) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"orange";
+            newIntervel.intervalDescription = @"90-95 RPM at 90% FTP";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 15 || i == 19) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"red";
+            newIntervel.intervalDescription = @"90-95 RPM at 100% FTP";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 16) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 300;
+            newIntervel.screenColor = @"blue";
+            newIntervel.intervalDescription = @"Full Rest Easy Spin";
+            newIntervel.workout = mixedRPMAndPower;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 20) {
+            Ntrvl *coolDownInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            coolDownInterval.intervalDuration = 300;
+            coolDownInterval.screenColor = @"grey";
+            coolDownInterval.intervalDescription = @"Cool Down";
+            coolDownInterval.workout = mixedRPMAndPower;
+            coolDownInterval.positionNumberInWorkout = i;
+        }
+    }
+    mixedRPMAndPower.totalTime = [self totalTimeForWorkout: mixedRPMAndPower];
+    [sharedDataStore saveContext];
+    
+    completionBlock(YES);
+}
+
+- (void)createPowerOverUndersWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock {
+    
+    NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
+    
+    NtrvlWorkout *powerOverUnders = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
+    powerOverUnders.workoutTitle = @"Power Over/Unders";
+    powerOverUnders.workoutType = @"Ride";
+    powerOverUnders.creationDate = [NSDate timeIntervalSinceReferenceDate];
+    
+    for (NSUInteger i = 0; i < 25; i++) {
+        if (i == 0) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 5;
+            getReadyInterval.screenColor = @"grey";
+            getReadyInterval.intervalDescription = @"Get Ready";
+            getReadyInterval.workout = powerOverUnders;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 1 || i == 3 || i == 5 || i == 7) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 300;
+            newIntervel.screenColor = @"green";
+            newIntervel.intervalDescription = @"80% FTP";
+            newIntervel.workout = powerOverUnders;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 2 || i == 6) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 120;
+            newIntervel.screenColor = @"yellow";
+            newIntervel.intervalDescription = @"120% FTP";
+            newIntervel.workout = powerOverUnders;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 4 || i == 8) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"blue";
+            newIntervel.intervalDescription = @"Full Rest / Easy Spin";
+            newIntervel.workout = powerOverUnders;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 9 || i == 11 || i == 13 || i == 15) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"yellow";
+            newIntervel.intervalDescription = @"90% FTP";
+            newIntervel.workout = powerOverUnders;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 10 || i == 14) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 60;
+            newIntervel.screenColor = @"orange";
+            newIntervel.intervalDescription = @"135% FTP";
+            newIntervel.workout = powerOverUnders;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 12 || i == 16) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"blue";
+            newIntervel.intervalDescription = @"Full Rest / Eazy Spin";
+            newIntervel.workout = powerOverUnders;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 17 || i == 19 || i == 21 || i == 23) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"orange";
+            newIntervel.intervalDescription = @"100% FTP";
+            newIntervel.workout = powerOverUnders;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 18 || i == 22) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"red";
+            newIntervel.intervalDescription = @"150% FTP";
+            newIntervel.workout = powerOverUnders;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 20) {
+            Ntrvl *newIntervel = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            newIntervel.intervalDuration = 180;
+            newIntervel.screenColor = @"blue";
+            newIntervel.intervalDescription = @"Full Rest / Easy Spin";
+            newIntervel.workout = powerOverUnders;
+            newIntervel.positionNumberInWorkout = i;
+        }
+        else if (i == 24) {
+            Ntrvl *coolDownInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            coolDownInterval.intervalDuration = 180;
+            coolDownInterval.screenColor = @"grey";
+            coolDownInterval.intervalDescription = @"Cool Down";
+            coolDownInterval.workout = powerOverUnders;
+            coolDownInterval.positionNumberInWorkout = i;
+        }
+    }
+    powerOverUnders.totalTime = [self totalTimeForWorkout: powerOverUnders];
+    [sharedDataStore saveContext];
+    
+    completionBlock(YES);
+}
+
+- (void)createPlanksWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock {
+    
+    NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
+    
+    NtrvlWorkout *planksWorkout = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
+    planksWorkout.workoutTitle = @"Planks";
+    planksWorkout.creationDate = [NSDate timeIntervalSinceReferenceDate];
+    
+    for (NSUInteger i = 0; i < 11; i++) {
+        
+        if (i == 0) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 5;
+            getReadyInterval.screenColor = @"grey";
+            getReadyInterval.intervalDescription = @"Get Ready";
+            getReadyInterval.workout = planksWorkout;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 1 || i == 3 || i == 5) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 60;
+            getReadyInterval.screenColor = @"orange";
+            getReadyInterval.intervalDescription = @"Straight Plank";
+            getReadyInterval.workout = planksWorkout;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 2 || i == 4 || i == 6) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 60;
+            getReadyInterval.screenColor = @"blue";
+            getReadyInterval.intervalDescription = @"Rest";
+            getReadyInterval.workout = planksWorkout;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 7) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 60;
+            getReadyInterval.screenColor = @"yellow";
+            getReadyInterval.intervalDescription = @"Right Side Plank";
+            getReadyInterval.workout = planksWorkout;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 8) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 60;
+            getReadyInterval.screenColor = @"blue";
+            getReadyInterval.intervalDescription = @"Rest";
+            getReadyInterval.workout = planksWorkout;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 9) {
+            Ntrvl *getReadyInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            getReadyInterval.intervalDuration = 60;
+            getReadyInterval.screenColor = @"yellow";
+            getReadyInterval.intervalDescription = @"Left Side Plank";
+            getReadyInterval.workout = planksWorkout;
+            getReadyInterval.positionNumberInWorkout = i;
+        }
+        else if (i == 10) {
+            Ntrvl *coolDownInterval = [NSEntityDescription insertNewObjectForEntityForName:@"Ntrvl" inManagedObjectContext: sharedDataStore.managedObjectContext];
+            coolDownInterval.intervalDuration = 60;
+            coolDownInterval.screenColor = @"grey";
+            coolDownInterval.intervalDescription = @"Cool Down";
+            coolDownInterval.workout = planksWorkout;
+            coolDownInterval.positionNumberInWorkout = i;
+        }
+    }
+    planksWorkout.totalTime = [self totalTimeForWorkout: planksWorkout];
+    [sharedDataStore saveContext];
+    
+    completionBlock(YES);
+}
+
 #pragma mark - Total time calculation method
 
 - (NSInteger)totalTimeForWorkout:(NtrvlWorkout *)ntrvlWorkout {
     // skip 10 second pepare interval
     NSInteger timeSum = 0;
-    for (NSUInteger i = 1; i < ntrvlWorkout.interval.count; i++) {
+    for (NSUInteger i = 1; i < ntrvlWorkout.interval.count - 1; i++) {
         timeSum += ntrvlWorkout.interval[i].intervalDuration;
     }
     return timeSum;

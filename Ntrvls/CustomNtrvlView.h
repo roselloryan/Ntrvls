@@ -35,7 +35,6 @@
 @property (assign, nonatomic) int64_t positionInWorkout;
 @property (strong, nonatomic) UIView *selectColorsView;
 
-- (instancetype)initWithFrame:(CGRect)frame intervalDescription:(NSString *)intervalDescription andDuration:(NSUInteger)duration;
 
 - (instancetype)initWithFrame:(CGRect)frame intervalDescription:(NSString *)intervalDescription andDuration:(NSUInteger)duration isIPad:(BOOL)isIPad;
 

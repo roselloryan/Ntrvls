@@ -10,7 +10,6 @@
 		1B0319341D10AFA6003C06CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0319331D10AFA6003C06CE /* main.m */; };
 		1B0319371D10AFA6003C06CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0319361D10AFA6003C06CE /* AppDelegate.m */; };
 		1B03193D1D10AFA6003C06CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B03193B1D10AFA6003C06CE /* Main.storyboard */; };
-		1B03193F1D10AFA6003C06CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B03193E1D10AFA6003C06CE /* Assets.xcassets */; };
 		1B0319421D10AFA6003C06CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B0319401D10AFA6003C06CE /* LaunchScreen.storyboard */; };
 		1B03194D1D10AFA7003C06CE /* NtrvlsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B03194C1D10AFA7003C06CE /* NtrvlsTests.m */; };
 		1B0319581D10AFA7003C06CE /* NtrvlsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0319571D10AFA7003C06CE /* NtrvlsUITests.m */; };
@@ -26,6 +25,7 @@
 		1B3577771D241BA4006E7140 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 1B3577761D241BA4006E7140 /* Podfile */; };
 		1B58DCB31D1CCEAB0031EE94 /* DescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58DCB21D1CCEAB0031EE94 /* DescriptionView.m */; };
 		1B58DCC91D1F62FD0031EE94 /* BreakAwayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */; };
+		1B9C3A491DCA536300F45438 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B9C3A481DCA536300F45438 /* Assets.xcassets */; };
 		1BF5ABE11DA5D5FF0051D256 /* CustomPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5ABE01DA5D5FF0051D256 /* CustomPlayerView.m */; };
 		1BFB03681D2C747300E54FF7 /* UIColor+UIColorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03671D2C747300E54FF7 /* UIColor+UIColorExtension.m */; };
 		1BFB036B1D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03691D2C90DA00E54FF7 /* NtrvlModel.xcdatamodeld */; };
@@ -66,7 +66,6 @@
 		1B0319351D10AFA6003C06CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1B0319361D10AFA6003C06CE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1B03193C1D10AFA6003C06CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1B03193E1D10AFA6003C06CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B0319411D10AFA6003C06CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B0319431D10AFA6003C06CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B0319481D10AFA7003C06CE /* NtrvlsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NtrvlsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +98,7 @@
 		1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakAwayView.m; sourceTree = "<group>"; };
 		1B8818A9C280394CAEB57622 /* Pods-NtrvlsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1B92B9451D99F48800F996DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		1B9C3A481DCA536300F45438 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BEE7AFA1DBFB880002C736B /* Ntrvls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ntrvls.entitlements; sourceTree = "<group>"; };
 		1BF5ABDF1DA5D5FF0051D256 /* CustomPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPlayerView.h; sourceTree = "<group>"; };
 		1BF5ABE01DA5D5FF0051D256 /* CustomPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPlayerView.m; sourceTree = "<group>"; };
@@ -189,7 +189,6 @@
 				1B13A61A1DC3E6920048918F /* NtrvlsConstants.m */,
 				1B13A61E1DC590D10048918F /* Reachability.h */,
 				1B13A61F1DC590D10048918F /* Reachability.m */,
-				1BEE7AFA1DBFB880002C736B /* Ntrvls.entitlements */,
 				1BFB03831D3B375000E54FF7 /* JNKeychainWrapper.h */,
 				1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */,
 				1B0319351D10AFA6003C06CE /* AppDelegate.h */,
@@ -201,8 +200,9 @@
 				1B03196A1D10B1B0003C06CE /* NtrvlsDataStore.h */,
 				1B03196B1D10B1B0003C06CE /* NtrvlsDataStore.m */,
 				1B03193B1D10AFA6003C06CE /* Main.storyboard */,
-				1B03193E1D10AFA6003C06CE /* Assets.xcassets */,
+				1B9C3A481DCA536300F45438 /* Assets.xcassets */,
 				1B0319401D10AFA6003C06CE /* LaunchScreen.storyboard */,
+				1BEE7AFA1DBFB880002C736B /* Ntrvls.entitlements */,
 				1B0319431D10AFA6003C06CE /* Info.plist */,
 				1B0319691D10B126003C06CE /* Models */,
 				1B58DCB01D1CCE490031EE94 /* Views */,
@@ -430,8 +430,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B0319421D10AFA6003C06CE /* LaunchScreen.storyboard in Resources */,
-				1B03193F1D10AFA6003C06CE /* Assets.xcassets in Resources */,
 				1B3577771D241BA4006E7140 /* Podfile in Resources */,
+				1B9C3A491DCA536300F45438 /* Assets.xcassets in Resources */,
 				1B03193D1D10AFA6003C06CE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -749,7 +749,6 @@
 			baseConfigurationReference = CD690E9C954684FA2EAF9132 /* Pods-Ntrvls.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Ntrvls/Ntrvls.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -766,7 +765,6 @@
 			baseConfigurationReference = 7273701622D2FE24CB896AD0 /* Pods-Ntrvls.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Ntrvls/Ntrvls.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

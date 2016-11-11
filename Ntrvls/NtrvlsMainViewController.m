@@ -41,7 +41,7 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         self.tableViewTopConstraint.constant = topConstraintConstantFor4s;
         self.tableViewBottomConstraint.constant = bottomConstraintConstantFor4s;
     }
-    self.tableView.estimatedRowHeight = 40.0;
+    self.tableView.estimatedRowHeight = 45.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [[NtrvlsDataStore sharedNtrvlsDataStore] deleteWorkoutWithTitle: kWorkoutCopyName];
@@ -95,13 +95,11 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
     
     NtrvlsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NtrvlsWorkoutCell" forIndexPath:indexPath];
     
-    NSLog(@"%@, %@", cell.titleLabel.text, cell.detailLabel.text);
-    
     NtrvlWorkout *cellWorkout = self.sharedNtrvlsDataStore.workoutsArray[indexPath.row];
     
     cell.titleLabel.text = cellWorkout.workoutTitle;
     
-    if ([cellWorkout.workoutTitle isEqualToString:@"TABATA"] || [cellWorkout.workoutTitle isEqualToString:@"New Workout"] || [cellWorkout.workoutTitle isEqualToString:@"Over/Unders"]) {
+    if ([cellWorkout.workoutTitle isEqualToString:@"TABATA"] || [cellWorkout.workoutTitle isEqualToString:@"+ New Workout"] || [cellWorkout.workoutTitle isEqualToString:@"Over/Unders"] || [cellWorkout.workoutTitle isEqualToString:@"Mixed RPM & Power"] || [cellWorkout.workoutTitle isEqualToString: @"Power Over/Unders"] || [cellWorkout.workoutTitle isEqualToString:@"Planks"]) {
         cell.titleLabel.textColor = [UIColor whiteColor];
         cell.detailLabel.textColor = [UIColor whiteColor];
     }
@@ -109,14 +107,16 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
         cell.titleLabel.textColor =  [UIColor ntrvlsBlue];
         cell.detailLabel.textColor = [UIColor ntrvlsBlue];
     }
-    
-    cell.detailLabel.text = [self timeStringFromSecondsCount: cellWorkout.totalTime];
-    
+    if (![cellWorkout.workoutTitle isEqualToString:@"+ New Workout"]){
+        cell.detailLabel.text = [self timeStringFromSecondsCount: cellWorkout.totalTime];
+    }
+    else {
+        cell.detailLabel.text = @"";
+    }
     UIView *selectedView = [UIView new];
     selectedView.backgroundColor = [[UIColor ntrvlsGrey] colorWithAlphaComponent:0.3];
     cell.selectedBackgroundView = selectedView;
-   
-    NSLog(@"%@, %@", cell.titleLabel.text, cell.detailLabel.text);
+    //NSLog(@"cell.frame = %@", NSStringFromCGRect(cell.frame));
     
     return cell;
 }
@@ -125,7 +125,7 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
  
     NtrvlWorkout *cellWorkout = self.sharedNtrvlsDataStore.workoutsArray[indexPath.row];
     
-    if ([cellWorkout.workoutTitle isEqualToString:@"TABATA"] || [cellWorkout.workoutTitle isEqualToString:@"New Workout"] || [cellWorkout.workoutTitle isEqualToString:@"Over/Unders"]) {
+    if ([cellWorkout.workoutTitle isEqualToString:@"TABATA"] || [cellWorkout.workoutTitle isEqualToString:@"+ New Workout"] || [cellWorkout.workoutTitle isEqualToString:@"Over/Unders"] || [cellWorkout.workoutTitle isEqualToString:@"Power Over/Unders"] || [cellWorkout.workoutTitle isEqualToString:@"Mixed RPM & Power"] || [cellWorkout.workoutTitle isEqualToString:@"Planks"]) {
         return NO;
     }
     else {
@@ -140,9 +140,6 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
          NtrvlWorkout *workoutToDelete = self.sharedNtrvlsDataStore.workoutsArray[indexPath.row];
          [[NtrvlsDataStore sharedNtrvlsDataStore] deleteWorkoutWithTitle: workoutToDelete.workoutTitle];
         [tableView deleteRowsAtIndexPaths: @[indexPath] withRowAnimation: UITableViewRowAnimationFade];
-     }
-     else if (editingStyle == UITableViewCellEditingStyleInsert) {
-         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
      }
      
      // delay data reload
@@ -166,6 +163,24 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
             }
         }];
         [self.sharedNtrvlsDataStore createOverUndersWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                [self.sharedNtrvlsDataStore fetchWorkouts];
+                [self.tableView reloadData];
+            }
+        }];
+        [self.sharedNtrvlsDataStore createMixedRPMAndPowerWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                [self.sharedNtrvlsDataStore fetchWorkouts];
+                [self.tableView reloadData];
+            }
+        }];
+        [self. sharedNtrvlsDataStore createPowerOverUndersWorkoutWithCompletionBlock:^(BOOL complete) {
+            if (complete) {
+                [self.sharedNtrvlsDataStore fetchWorkouts];
+                [self.tableView reloadData];
+            }
+        }];
+        [self.sharedNtrvlsDataStore createPlanksWorkoutWithCompletionBlock:^(BOOL complete) {
             if (complete) {
                 [self.sharedNtrvlsDataStore fetchWorkouts];
                 [self.tableView reloadData];

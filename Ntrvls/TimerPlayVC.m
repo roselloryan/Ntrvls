@@ -5,10 +5,11 @@
 #import "NtrvlsAPIClient.h"
 #import "NtrvlsDataStore.h"
 #import "CustomPlayerView.h"
+#import "Reachability.h"
 
 @import AVFoundation;
 
-@interface TimerPlayVC ()
+@interface TimerPlayVC () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeElapsedLabel;
 
@@ -32,12 +33,14 @@
 @property (assign, nonatomic) SystemSoundID threeTwoOneSoundID;
 @property (assign, nonatomic) SystemSoundID completedNtrvlSoundID;
 
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
 @property (strong, nonatomic) UIView *fadeInView;
 @property (strong, nonatomic) CustomPlayerView *viewOne;
 @property (strong, nonatomic) CustomPlayerView *viewTwo;
 @property (strong, nonatomic) CustomPlayerView *viewThree;
 
 @property (assign, nonatomic) CGFloat buffer;
+@property (weak, nonatomic) UITextField *alertTextField;
 
 @end
 
@@ -76,9 +79,6 @@
     else {
         self.buffer = 28.0;
     }
-    
-    NSLog(@"IN PLAY----- self.selectedWorkout.workoutType: %@", self.selectedWorkout.workoutType);
-    
 }
 
 
@@ -87,7 +87,6 @@
     
     [self configureSystemSounds];
 
-    //TODO: catch cells with no time
     // draw view one and two
     self.viewOne = [self buildViewOffScreenForNtrvl: self.selectedWorkout.interval[0]];
     
@@ -99,7 +98,6 @@
         }
     }
     
-    //self.viewTwo = [self buildViewOffScreenForNtrvl: self.selectedWorkout.interval[1]];
     self.viewOne.alpha = 0.0;
     self.viewTwo.alpha = 0.0;
     [self.view addSubview: self.viewOne];
@@ -122,7 +120,7 @@
         self.fadeInView.alpha = 0.0;
     } completion:^(BOOL finished) {
         [self.fadeInView removeFromSuperview];
-        // TODO: Take this out?
+    
         [self startButtonTapped: self.startButton];
         [self animatePauseAndStopButtons];
     }];
@@ -140,18 +138,12 @@
     [self performSelector: @selector(animateViewToCurrentIntervalPosition:) withObject: self.viewOne afterDelay: 1.0];
     [self performSelector: @selector(animateViewToNextIntervalPosition:) withObject: self.viewTwo afterDelay: 1.0];
     [self performSelector: @selector(startLabelTimer) withObject: nil afterDelay: 1.5];
-//    [self animateViewToCurrentIntervalPosition: self.viewOne];
-//    [self animateViewToNextIntervalPosition: self.viewTwo];
-
-    
 }
 
 - (IBAction)pauseButtonTapped:(UIButton *)sender {
     
     if (!self.playerIsPaused) {
-        
         self.playerIsPaused = YES;
-        
         [self.labelTimer invalidate];
         
         [self.pauseButton setTitle:@"-Go-" forState:UIControlStateNormal];
@@ -163,47 +155,28 @@
         self.playerIsPaused = NO;
         
         NSTimer *labelTimer = [NSTimer scheduledTimerWithTimeInterval: 1 target: self selector:@selector(labelTimerFired:) userInfo:nil repeats:YES];
-
         self.labelTimer = labelTimer;
     
         [self.pauseButton setTitle:@"Pause" forState:UIControlStateNormal];
         self.pauseButton.backgroundColor = [UIColor ntrvlsYellow];
-        
-        // removes flashing view
-        for (UIView *subview in self.view.subviews) {
-            if (subview.tag == 1) {
-                [subview removeFromSuperview];
-                break;
-            }
-        }
     }
 }
 
 
 - (IBAction)stopButtonTapped:(UIButton *)sender {
-    [self showQuitAlert];
     
-    self.intervalNumber = 0;
+    [self showQuitAlert];
     [self.labelTimer invalidate];
 }
 
 - (IBAction)shareOnStravaButtonTapped:(UIButton *)sender {
-    NSLog(@"STRAVA button tapped");
-    [NtrvlsAPIClient loginIntoStravaWithSuccessBlock:^(BOOL success) {
-        
-        if (success){
-            [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessDenied) name: @"deniedAccess" object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessAllowed) name: @"allowedAccess" object:nil];
-        }
-        else {
-            NSLog(@"NO CONNECTION :(   :(    :(    :(");
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //TODO: BUild this alert
-//                [self presentNoInternetAlert];
-            });
-        }
-    }];
+    
+    if ([NtrvlsAPIClient testForInternet]) {
+        [self presentNameWorkoutToPostToStravaAlert];
+    }
+    else {
+        [self presentNoInternetAlert];
+    }
 }
 
 
@@ -212,7 +185,6 @@
     [UIButton animateKeyframesWithDuration: 1.0 delay: 0.5 options: 0 animations:^{
         
         [UIButton addKeyframeWithRelativeStartTime: 0.0 relativeDuration: 0.60 animations:^{
-//        [UIButton addKeyframeWithRelativeStartTime: 0.5 relativeDuration: 0.25 animations:^{
             self.pauseButton.transform = CGAffineTransformMakeTranslation(0, 0);
             self.stopButton.transform = CGAffineTransformMakeTranslation(0, 0);
             self.pauseButton.alpha = 0.0;
@@ -224,7 +196,6 @@
             self.shareOnStravaButton.hidden = NO;
             self.shareOnStravaButton.enabled = YES;
             self.shareOnStravaButton.transform = CGAffineTransformMakeTranslation(0, - self.view.frame.size.height / 8);
-            NSLog(@"self.view.frame.size.height = %f", self.view.frame.size.height);
         }];
     } completion:^(BOOL finished) {
         //[self flashButton: self.shareOnStravaButton];
@@ -246,9 +217,7 @@
     
     self.stopButton.alpha = 0.25;
     self.pauseButton.alpha = 0.25;
-    self.pauseButton.enabled = YES;
     self.pauseButton.hidden = NO;
-    self.stopButton.enabled = YES;
     self.stopButton.hidden = NO;
     
     [UIButton animateKeyframesWithDuration: 1.0 delay: 0.0 options: 0 animations:^{
@@ -268,7 +237,7 @@
             self.stopButton.transform = CGAffineTransformMakeTranslation(-self.view.frame.size.width * 3/5 + self.stopButton.frame.size.width, 0);
         }];
     } completion:^(BOOL finished) {
-        // anything else?
+        
     }];
 }
 
@@ -305,6 +274,9 @@
     
     Ntrvl *currentInterval = self.selectedWorkout.interval[self.intervalNumber];
     self.timeLeftInInterval = currentInterval.intervalDuration;
+    
+    self.pauseButton.enabled = YES;
+    self.stopButton.enabled = YES;
 }
 
 -(void)labelTimerFired:(NSTimer *)timer {
@@ -483,9 +455,55 @@
 
 #pragma mark - Strava Access Methods
 
+- (void)postToStravaWithTitle:(NSString *)title {
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center = self.view.center;
+    [activityView startAnimating];
+    activityView.hidesWhenStopped = YES;
+    self.activityIndicatorView = activityView;
+    [self.view addSubview: self.activityIndicatorView];
+    
+    [[NtrvlsDataStore sharedNtrvlsDataStore] workoutDescriptionStringForNtrvlWorkout: self.selectedWorkout withCompletionBlock:^(BOOL complete, NSString *workoutDescriptionString) {
+        
+        if (complete) {
+            NSString *startDate = [self stringForCurrentTimeAndDateIOS8601Format];
+            
+            NSString *titleString = [NSString stringWithFormat:@"Ntrvls Workout - %@", title];
+            NSString *escapedTitleString = [titleString stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLQueryAllowedCharacterSet]];
+            
+            [NtrvlsAPIClient postNtrvlWorkoutToStravaWithname: escapedTitleString type: self.selectedWorkout.workoutType startDateLocal: startDate elapsedTime: self.selectedWorkout.totalTime description: workoutDescriptionString withCompletionBlock:^(BOOL success) {
+                
+                if (success){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSLog(@"Posted Ntrvls Workout!!!");
+                        [self.activityIndicatorView stopAnimating];
+                        [self.activityIndicatorView removeFromSuperview];
+                        self.activityIndicatorView = nil;
+                        [self presentSuccessfulStravaUploadAlert];
+                    });
+                }
+                else {
+                    //NSLog(@"Posting failed :( Try loging in now....................");
+                    [self loginToStrava];
+                }
+            }];
+        }
+    }];
+}
+
+- (void)loginToStrava {
+    [NtrvlsAPIClient loginIntoStravaWithSuccessBlock:^(BOOL success) {
+        
+        if (success){
+            [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessDenied) name: @"deniedAccess" object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(stravaAccessAllowed) name: @"allowedAccess" object:nil];
+        }
+    }];
+}
+
 - (void)stravaAccessAllowed {
     
-    NSLog(@"Strava Access allowed");
+    //NSLog(@"Strava Access allowed");
     [[NSNotificationCenter defaultCenter] removeObserver: self name: @"allowedAccess" object: nil];
     [[NSNotificationCenter defaultCenter] removeObserver: self name: @"deniedAccess" object: nil];
     
@@ -494,24 +512,28 @@
         if (complete) {
             NSString *startDate = [self stringForCurrentTimeAndDateIOS8601Format];
             
-            // TODO: Title and save wokout if posting to strava
             NSString *titleString = [NSString stringWithFormat:@"Ntrvls Workout - %@", self.workoutTitle];
             NSString *escapedTitleString = [titleString stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLQueryAllowedCharacterSet]];
             
             [NtrvlsAPIClient postNtrvlWorkoutToStravaWithname: escapedTitleString type: self.selectedWorkout.workoutType startDateLocal: startDate elapsedTime: self.selectedWorkout.totalTime description: workoutDescriptionString withCompletionBlock:^(BOOL success) {
                 
                 if (success){
-                    
                     // delay one second then present success alert?
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                    
                         [self presentSuccessfulStravaUploadAlert];
                     });
                     
-                    NSLog(@"Posted Ntrvls Workout!!!");
+                    //NSLog(@"Posted Ntrvls Workout!!!");
                 }
                 else {
-                    NSLog(@"Posting failed :(");
+                    //NSLog(@"Posting failed :(");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.activityIndicatorView stopAnimating];
+                        [self.activityIndicatorView removeFromSuperview];
+                        self.activityIndicatorView = nil;
+                        [self presentFailedToPostToStravaAlert];
+                    });
+                    
                 }
             }];
         }
@@ -519,17 +541,14 @@
 }
 
 - (void)stravaAccessDenied {
+    //NSLog(@"!!!!!!!!Strava Access Denied!!!!!!!!");
     
-    NSLog(@"!!!!!!!!Strava Access Denied!!!!!!!!");
-//    [self presentNoInternetAlert];
-    
-    //    UIAlertController *noInternetAlertController = [UIAlertController alertControllerWithTitle: @"Strava couldn't login" message: @"Maybe try again?" preferredStyle: UIAlertControllerStyleAlert];
-    //    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //        // TODO: Make sure this saves workout
-    //    }];
-    //    [noInternetAlertController addAction:okAction];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView stopAnimating];
+        [self.activityIndicatorView removeFromSuperview];
+        self.activityIndicatorView = nil;
+        [self presentFailedToPostToStravaAlert];
+    });
     [[NSNotificationCenter defaultCenter] removeObserver: self name: @"deniedAccess" object: nil];
     [[NSNotificationCenter defaultCenter] removeObserver: self name: @"allowedAccess" object: nil];
 }
@@ -547,9 +566,7 @@
         view.frame = CGRectMake(8, self.view.frame.size.height/5, self.view.frame.size.width * 3/4,self.view.frame.size.height/2);
         view.alpha = 1.0;
         view.transform = CGAffineTransformMakeScale(1.1, 1.1);
-    } completion:^(BOOL finished) {
-        // anything else?
-    }];
+    } completion: nil];
 }
 
 - (void)animateViewToNextIntervalPosition:(UIView *)view {
@@ -557,18 +574,14 @@
     [UIView animateWithDuration: 0.25 delay: 0.25 options: 0 animations:^{
         view.frame = CGRectMake(self.view.frame.size.width * 3/4 + self.buffer , self.view.frame.size.height/5, self.view.frame.size.width * 3/4,self.view.frame.size.height/2);
         view.alpha = 1.0;
-    } completion:^(BOOL finished) {
-        // anything else?
-    }];
+    } completion: nil];
 }
 - (void)animateViewToFinishedIntervalPosition:(UIView *)view {
     [UIView animateWithDuration: 0.5 delay: 0.0 options: 0 animations:^{
         view.frame = CGRectMake(-view.frame.size.width  , self.view.frame.size.height/5, self.view.frame.size.width * 3/4,self.view.frame.size.height/2);
         view.alpha = 0.0;
                 view.transform = CGAffineTransformMakeScale(1, 1);
-    } completion:^(BOOL finished) {
-        // anything else?
-    }];
+    } completion: nil];
 }
 
 - (void)animateLastViewToCurrentIntervalPosition:(CustomPlayerView *)view {
@@ -577,9 +590,7 @@
         view.frame = CGRectMake(0, self.view.frame.size.height/5, self.view.frame.size.width, self.view.frame.size.height/2);
         view.alpha = 1.0;
 //        view.transform = CGAffineTransformMakeScale(1.1, 1.1);
-    } completion:^(BOOL finished) {
-        // anything?
-    }];
+    } completion: nil];
 }
 #pragma mark - String methods
 
@@ -597,6 +608,40 @@
 
 
 #pragma mark - Alerts
+- (void)presentNameWorkoutToPostToStravaAlert {
+    
+    UIAlertController *stravaTextInputAlertController = [UIAlertController alertControllerWithTitle: @"Title your workout to post on Strava" message:@"" preferredStyle: UIAlertControllerStyleAlert];
+    
+    [stravaTextInputAlertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.delegate = self;
+        textField.placeholder = @"workout title";
+        textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        self.alertTextField = textField;
+    }];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (self.alertTextField.text.length > 0) {
+            [self postToStravaWithTitle: stravaTextInputAlertController.textFields[0].text];
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleDefault handler: nil];
+    
+    [stravaTextInputAlertController addAction: cancelAction];
+    [stravaTextInputAlertController addAction: okAction];
+    [self presentViewController: stravaTextInputAlertController animated: YES completion: nil];
+}
+
+- (void)presentFailedToPostToStravaAlert {
+    UIAlertController *failedToPostAlert = [UIAlertController alertControllerWithTitle: @"Strava access denied" message: @"Save workout and try again later" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // anything else?
+    }];
+    
+    [failedToPostAlert addAction: okAction];
+    [self presentViewController: failedToPostAlert animated: NO completion:nil];
+}
 
 - (void)showQuitAlert {
     
@@ -615,10 +660,7 @@
     
     [quitAlertController addAction: finishedAction];
     [quitAlertController addAction: dontQuitAction];
-    [self presentViewController: quitAlertController animated: YES completion:^{
-        //anything else?
-        // maybe pause here?
-    }];
+    [self presentViewController: quitAlertController animated: YES completion: nil];
 }
 
 - (void)presentSuccessfulStravaUploadAlert {
@@ -633,6 +675,20 @@
     [self presentViewController: successfulStravaPostAlertController animated: YES completion: nil];
 }
 
+- (void)presentNoInternetAlert {
+    [self.activityIndicatorView removeFromSuperview];
+    self.activityIndicatorView = nil;
+    
+    UIAlertController *noInternetAlertController = [UIAlertController alertControllerWithTitle: @"The internet can not be reached" message: @"Save workout and upload when connection is better" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *acceptDefeatAction = [UIAlertAction actionWithTitle:@"Accept your defeat" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // anything else?
+    }];
+    
+    [noInternetAlertController addAction: acceptDefeatAction];
+    [self presentViewController: noInternetAlertController animated: NO completion: nil];
+}
+
 # pragma mark - Sounds 
 
 - (void)configureSystemSounds {
@@ -640,12 +696,12 @@
     
     // respects the mute switch
 //    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error:nil];
-
+//
 //    NSURL *threeTwoOnePathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/short_double_low.caf"];
 //    if (threeTwoOnePathURL) {
 //        AudioServicesCreateSystemSoundID((__bridge CFURLRef)threeTwoOnePathURL, &_threeTwoOneSoundID);
 //    }
-
+//
 //    NSURL *completedNtrvlPathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/long_low_short_high.caf"];
 //    if (completedNtrvlPathURL) {
 //        AudioServicesCreateSystemSoundID((__bridge CFURLRef)completedNtrvlPathURL, &_completedNtrvlSoundID);
@@ -654,8 +710,7 @@
 
 
 - (void)playSoundsFor321Done {
-    
-    NSLog(@"self.timeLeftInInterval= %lu", self.timeLeftInInterval);
+    //NSLog(@"self.timeLeftInInterval= %lu", self.timeLeftInInterval);
     
     if (self.timeLeftInInterval == 3 || self.timeLeftInInterval == 2 || self.timeLeftInInterval == 1) {
         AudioServicesPlaySystemSound(self.threeTwoOneSoundID);
@@ -672,19 +727,10 @@
 #pragma mark - Navigation
 
 - (void)navigateBackToTimerPrepVC {
-    
     self.intervalNumber = 0;
     [self.labelTimer invalidate];
     
     [self.navigationController popViewControllerAnimated: YES];
 }
-
-/*
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

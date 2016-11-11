@@ -4,13 +4,8 @@
 #import "JNKeychainWrapper.h"
 
 
-
-@interface NtrvlsAPIClient ()
-
-@end
-
-
 @implementation NtrvlsAPIClient
+
 
 + (void)loginIntoStravaWithSuccessBlock:(void(^)(BOOL success))successBlock {
     
@@ -33,7 +28,7 @@
 
 
 + (void)completeTokenExchangeWithResponseURL:(NSURL *)responseURL {
-
+    
     NSString *codeString = [[[NSString stringWithFormat:@"%@", responseURL] componentsSeparatedByString:@"="] lastObject];
     
     if ([codeString isEqualToString:@"access_denied"]) {
@@ -55,7 +50,7 @@
             if (data) {
                 NSError *dictionaryError = nil;
                 NSDictionary *dataResponseDict = [NSJSONSerialization JSONObjectWithData: data options: 0 error: &dictionaryError];
-                NSLog(@"\n%@", dataResponseDict);
+//                NSLog(@"\n%@", dataResponseDict);
                 
                 // token for header
                 NSString *accessToken = dataResponseDict[@"access_token"];
@@ -64,13 +59,12 @@
                 if (![accessToken isEqualToString: [JNKeychainWrapper loadValueForKey:@"access_token"]]) {
                     
                     [JNKeychainWrapper saveValue: accessToken forKey:@"access_token"];
-                    NSLog(@"New Access Token saved!");
+                    //NSLog(@"New Access Token saved!");
                 }
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName: @"allowedAccess" object: nil];
             }
             else {
-                // handle response error? No internet connection?
                 [[NSNotificationCenter defaultCenter] postNotificationName: @"deniedAccess" object: nil];
             }
         }];
@@ -82,7 +76,7 @@
 + (void)postNtrvlWorkoutToStravaWithname:(NSString *)name type:(NSString *)type startDateLocal: (NSString *)startDateLocal elapsedTime:(NSUInteger)elapsedTime description: (NSString *)description withCompletionBlock:(void(^)(BOOL success))completionBlock {
     
     NSString *accessToken = [JNKeychainWrapper loadValueForKey: @"access_token"];
-    NSLog(@"access_token = %@", accessToken);
+    //NSLog(@"access_token = %@", accessToken);
     
     //name=Treadmill Run&elapsed_time=123456&start_date_local=2013-10-23T10:02:13Z&type=run
     
@@ -101,12 +95,12 @@
         NSURLSessionDataTask *dataTask = [urlSession dataTaskWithRequest: urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
             if (data) {
-                NSError *dictionaryError = nil;
-                NSDictionary *dataResponseDict = [NSJSONSerialization JSONObjectWithData: data options: 0 error: &dictionaryError];
-                NSLog(@"\n dataResponseDict: %@", dataResponseDict);
+//                NSError *dictionaryError = nil;
+//                NSDictionary *dataResponseDict = [NSJSONSerialization JSONObjectWithData: data options: 0 error: &dictionaryError];
+//                NSLog(@"\n dataResponseDict: %@", dataResponseDict);
                 
                 NSHTTPURLResponse *httpURLResponse = (NSHTTPURLResponse *)response;
-                NSLog(@"httpURLResponse.statusCode: %ld", (long)httpURLResponse.statusCode);
+                //NSLog(@"httpURLResponse.statusCode: %ld", (long)httpURLResponse.statusCode);
                 
                 if (httpURLResponse.statusCode == 201) {
                     completionBlock(YES);
