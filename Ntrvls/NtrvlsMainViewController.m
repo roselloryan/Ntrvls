@@ -186,12 +186,12 @@ static CGFloat const bottomConstraintConstantFor4s = -20.0f;
                 [self.tableView reloadData];
             }
         }];
-        [self.sharedNtrvlsDataStore createDemoWorkoutWithCompletionBlock:^(BOOL complete) {
-            if (complete) {
-                [self.sharedNtrvlsDataStore fetchWorkouts];
-                [self.tableView reloadData];
-            }
-        }];
+       // [self.sharedNtrvlsDataStore createDemoWorkoutWithCompletionBlock:^(BOOL complete) {
+        //  if (complete) {
+              //  [self.sharedNtrvlsDataStore fetchWorkouts];
+            //    [self.tableView reloadData];
+          //  }
+        //}];
     }
 }
 

@@ -22,7 +22,6 @@
 		1B13A61D1DC58DA70048918F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B13A61C1DC58DA70048918F /* SystemConfiguration.framework */; };
 		1B13A6201DC590D10048918F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B13A61F1DC590D10048918F /* Reachability.m */; };
 		1B2CA0DC1D412AC2008B44F4 /* CustomNtrvlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CA0DB1D412AC2008B44F4 /* CustomNtrvlView.m */; };
-		1B3577771D241BA4006E7140 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 1B3577761D241BA4006E7140 /* Podfile */; };
 		1B58DCB31D1CCEAB0031EE94 /* DescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58DCB21D1CCEAB0031EE94 /* DescriptionView.m */; };
 		1B58DCC91D1F62FD0031EE94 /* BreakAwayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */; };
 		1B9C3A491DCA536300F45438 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B9C3A481DCA536300F45438 /* Assets.xcassets */; };
@@ -37,9 +36,8 @@
 		1BFB037F1D3AD22700E54FF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BFB037E1D3AD22700E54FF7 /* Security.framework */; };
 		1BFB03851D3B375000E54FF7 /* JNKeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */; };
 		1BFB03881D3E78AC00E54FF7 /* IntervalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFB03871D3E78AC00E54FF7 /* IntervalLabel.m */; };
-		2041DFD90591EA5C01BA5199 /* libPods-NtrvlsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CFABEAE4C23C83B2913CA9A /* libPods-NtrvlsTests.a */; };
-		5E1641A88B643CF4B0F3FD02 /* libPods-NtrvlsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC3482DAAA2D92EEA6A1AC3 /* libPods-NtrvlsUITests.a */; };
-		C3D189D7B3DDD40073E84866 /* libPods-Ntrvls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C465709F70A6CECD465B2A35 /* libPods-Ntrvls.a */; };
+		C16E7C55263E8A460A672DBA /* libPods-NtrvlsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8CD5D0C4C719C316B7719C8 /* libPods-NtrvlsUITests.a */; };
+		C5ED71D01EB7E1DB252FD310 /* libPods-NtrvlsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 185A2EE02206A9745827BED6 /* libPods-NtrvlsTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		14C97EB25DE9109C6DEB5345 /* Pods-NtrvlsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0A2FA5A9347AFE6A2CFDE247 /* Pods-NtrvlsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		185A2EE02206A9745827BED6 /* libPods-NtrvlsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NtrvlsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B03192F1D10AFA6003C06CE /* Ntrvls.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ntrvls.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B0319331D10AFA6003C06CE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1B0319351D10AFA6003C06CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -91,12 +90,10 @@
 		1B13A61F1DC590D10048918F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1B2CA0DA1D412AC2008B44F4 /* CustomNtrvlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNtrvlView.h; sourceTree = "<group>"; };
 		1B2CA0DB1D412AC2008B44F4 /* CustomNtrvlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNtrvlView.m; sourceTree = "<group>"; };
-		1B3577761D241BA4006E7140 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1B58DCB11D1CCEAB0031EE94 /* DescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionView.h; sourceTree = "<group>"; };
 		1B58DCB21D1CCEAB0031EE94 /* DescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionView.m; sourceTree = "<group>"; };
 		1B58DCC71D1F62FD0031EE94 /* BreakAwayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakAwayView.h; sourceTree = "<group>"; };
 		1B58DCC81D1F62FD0031EE94 /* BreakAwayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakAwayView.m; sourceTree = "<group>"; };
-		1B8818A9C280394CAEB57622 /* Pods-NtrvlsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1B92B9451D99F48800F996DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1B9C3A481DCA536300F45438 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BEE7AFA1DBFB880002C736B /* Ntrvls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ntrvls.entitlements; sourceTree = "<group>"; };
@@ -120,13 +117,13 @@
 		1BFB03841D3B375000E54FF7 /* JNKeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNKeychainWrapper.m; sourceTree = "<group>"; };
 		1BFB03861D3E78AC00E54FF7 /* IntervalLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalLabel.h; sourceTree = "<group>"; };
 		1BFB03871D3E78AC00E54FF7 /* IntervalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalLabel.m; sourceTree = "<group>"; };
-		1CFABEAE4C23C83B2913CA9A /* libPods-NtrvlsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NtrvlsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3BC3482DAAA2D92EEA6A1AC3 /* libPods-NtrvlsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NtrvlsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7273701622D2FE24CB896AD0 /* Pods-Ntrvls.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ntrvls.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls.release.xcconfig"; sourceTree = "<group>"; };
-		995FD37EA1F8D7902E2AF155 /* Pods-NtrvlsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests.release.xcconfig"; sourceTree = "<group>"; };
-		C465709F70A6CECD465B2A35 /* libPods-Ntrvls.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ntrvls.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD690E9C954684FA2EAF9132 /* Pods-Ntrvls.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ntrvls.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls.debug.xcconfig"; sourceTree = "<group>"; };
-		F5AE2E2BBFAD5D92F8324E75 /* Pods-NtrvlsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6CEB475D2C5D507F5EAB518C /* libPods-Ntrvls.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ntrvls.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90BE550561C97B54DC9C93A9 /* Pods-Ntrvls.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ntrvls.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls.debug.xcconfig"; sourceTree = "<group>"; };
+		BA8799109A58423425E53D09 /* Pods-Ntrvls.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ntrvls.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls.release.xcconfig"; sourceTree = "<group>"; };
+		CE97A24AFF6D74EC1DBE40BA /* Pods-NtrvlsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests.release.xcconfig"; sourceTree = "<group>"; };
+		CEC5AEEAFC6A47C8279DBCD3 /* Pods-NtrvlsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests.release.xcconfig"; sourceTree = "<group>"; };
+		EED3C9E766BE344B1F0FBF91 /* Pods-NtrvlsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NtrvlsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F8CD5D0C4C719C316B7719C8 /* libPods-NtrvlsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NtrvlsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +133,6 @@
 			files = (
 				1B13A61D1DC58DA70048918F /* SystemConfiguration.framework in Frameworks */,
 				1BFB037F1D3AD22700E54FF7 /* Security.framework in Frameworks */,
-				C3D189D7B3DDD40073E84866 /* libPods-Ntrvls.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2041DFD90591EA5C01BA5199 /* libPods-NtrvlsTests.a in Frameworks */,
+				C5ED71D01EB7E1DB252FD310 /* libPods-NtrvlsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E1641A88B643CF4B0F3FD02 /* libPods-NtrvlsUITests.a in Frameworks */,
+				C16E7C55263E8A460A672DBA /* libPods-NtrvlsUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,12 +159,11 @@
 			isa = PBXGroup;
 			children = (
 				1B0319311D10AFA6003C06CE /* Ntrvls */,
-				1B3577761D241BA4006E7140 /* Podfile */,
 				1B03194B1D10AFA7003C06CE /* NtrvlsTests */,
 				1B0319561D10AFA7003C06CE /* NtrvlsUITests */,
 				1B0319301D10AFA6003C06CE /* Products */,
-				F3BD041A37876F29E0D4C389 /* Pods */,
 				585D9A8E12C400E3823C9B18 /* Frameworks */,
+				31B3EA0B20E98E0148510D31 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -286,30 +281,30 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		31B3EA0B20E98E0148510D31 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				90BE550561C97B54DC9C93A9 /* Pods-Ntrvls.debug.xcconfig */,
+				BA8799109A58423425E53D09 /* Pods-Ntrvls.release.xcconfig */,
+				0A2FA5A9347AFE6A2CFDE247 /* Pods-NtrvlsTests.debug.xcconfig */,
+				CE97A24AFF6D74EC1DBE40BA /* Pods-NtrvlsTests.release.xcconfig */,
+				EED3C9E766BE344B1F0FBF91 /* Pods-NtrvlsUITests.debug.xcconfig */,
+				CEC5AEEAFC6A47C8279DBCD3 /* Pods-NtrvlsUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		585D9A8E12C400E3823C9B18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				1B13A61C1DC58DA70048918F /* SystemConfiguration.framework */,
 				1B92B9451D99F48800F996DE /* AudioToolbox.framework */,
 				1BFB037E1D3AD22700E54FF7 /* Security.framework */,
-				C465709F70A6CECD465B2A35 /* libPods-Ntrvls.a */,
-				1CFABEAE4C23C83B2913CA9A /* libPods-NtrvlsTests.a */,
-				3BC3482DAAA2D92EEA6A1AC3 /* libPods-NtrvlsUITests.a */,
+				6CEB475D2C5D507F5EAB518C /* libPods-Ntrvls.a */,
+				185A2EE02206A9745827BED6 /* libPods-NtrvlsTests.a */,
+				F8CD5D0C4C719C316B7719C8 /* libPods-NtrvlsUITests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F3BD041A37876F29E0D4C389 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CD690E9C954684FA2EAF9132 /* Pods-Ntrvls.debug.xcconfig */,
-				7273701622D2FE24CB896AD0 /* Pods-Ntrvls.release.xcconfig */,
-				14C97EB25DE9109C6DEB5345 /* Pods-NtrvlsTests.debug.xcconfig */,
-				995FD37EA1F8D7902E2AF155 /* Pods-NtrvlsTests.release.xcconfig */,
-				F5AE2E2BBFAD5D92F8324E75 /* Pods-NtrvlsUITests.debug.xcconfig */,
-				1B8818A9C280394CAEB57622 /* Pods-NtrvlsUITests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,12 +314,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B03195C1D10AFA7003C06CE /* Build configuration list for PBXNativeTarget "Ntrvls" */;
 			buildPhases = (
-				5C58F87B26C49D04B8F8241C /* 📦 Check Pods Manifest.lock */,
+				680F0A713B41CCA50FC3C549 /* 📦 Check Pods Manifest.lock */,
 				1B03192B1D10AFA6003C06CE /* Sources */,
 				1B03192C1D10AFA6003C06CE /* Frameworks */,
 				1B03192D1D10AFA6003C06CE /* Resources */,
-				9614713BFFFCC3DBAB952D7E /* 📦 Embed Pods Frameworks */,
-				E33F4BEB8D86C95B5AFB31FA /* 📦 Copy Pods Resources */,
+				C73AD606841D4E384E2C5E90 /* 📦 Embed Pods Frameworks */,
+				487B0F8EAC1A95E9F5804F43 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -339,12 +334,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B03195F1D10AFA7003C06CE /* Build configuration list for PBXNativeTarget "NtrvlsTests" */;
 			buildPhases = (
-				705374DE7803783B876899FD /* 📦 Check Pods Manifest.lock */,
+				B746DCA8DB2DBE66004825F6 /* 📦 Check Pods Manifest.lock */,
 				1B0319441D10AFA7003C06CE /* Sources */,
 				1B0319451D10AFA7003C06CE /* Frameworks */,
 				1B0319461D10AFA7003C06CE /* Resources */,
-				7BBC39889BBE1D7A2074A611 /* 📦 Embed Pods Frameworks */,
-				EF6D5B7125E083CECEE439AA /* 📦 Copy Pods Resources */,
+				D574E1F59923D262746C2458 /* 📦 Embed Pods Frameworks */,
+				8EC974283324F465A1CC9061 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -360,11 +355,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B0319621D10AFA7003C06CE /* Build configuration list for PBXNativeTarget "NtrvlsUITests" */;
 			buildPhases = (
-				C3C469535F6F9801DC3F595F /* 📦 Check Pods Manifest.lock */,
+				77750E2F9F8F3DF04D071344 /* 📦 Check Pods Manifest.lock */,
 				1B03194F1D10AFA7003C06CE /* Sources */,
 				1B0319501D10AFA7003C06CE /* Frameworks */,
 				1B0319511D10AFA7003C06CE /* Resources */,
-				0240425AD90F611B5D8B30DF /* 📦 Copy Pods Resources */,
+				D3D03DAD4D79AC1165187970 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -388,6 +383,7 @@
 					1B03192E1D10AFA6003C06CE = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = PZ83QFGZ4V;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -396,10 +392,12 @@
 					};
 					1B0319471D10AFA7003C06CE = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = PZ83QFGZ4V;
 						TestTargetID = 1B03192E1D10AFA6003C06CE;
 					};
 					1B0319521D10AFA7003C06CE = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = PZ83QFGZ4V;
 						TestTargetID = 1B03192E1D10AFA6003C06CE;
 					};
 				};
@@ -430,7 +428,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B0319421D10AFA6003C06CE /* LaunchScreen.storyboard in Resources */,
-				1B3577771D241BA4006E7140 /* Podfile in Resources */,
 				1B9C3A491DCA536300F45438 /* Assets.xcassets in Resources */,
 				1B03193D1D10AFA6003C06CE /* Main.storyboard in Resources */,
 			);
@@ -453,97 +450,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0240425AD90F611B5D8B30DF /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5C58F87B26C49D04B8F8241C /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		705374DE7803783B876899FD /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		7BBC39889BBE1D7A2074A611 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9614713BFFFCC3DBAB952D7E /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C3C469535F6F9801DC3F595F /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		E33F4BEB8D86C95B5AFB31FA /* 📦 Copy Pods Resources */ = {
+		487B0F8EAC1A95E9F5804F43 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -558,7 +465,37 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EF6D5B7125E083CECEE439AA /* 📦 Copy Pods Resources */ = {
+		680F0A713B41CCA50FC3C549 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		77750E2F9F8F3DF04D071344 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8EC974283324F465A1CC9061 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -571,6 +508,66 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B746DCA8DB2DBE66004825F6 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C73AD606841D4E384E2C5E90 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ntrvls/Pods-Ntrvls-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3D03DAD4D79AC1165187970 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NtrvlsUITests/Pods-NtrvlsUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D574E1F59923D262746C2458 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NtrvlsTests/Pods-NtrvlsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -676,9 +673,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = PZ83QFGZ4V;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -723,9 +722,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PZ83QFGZ4V;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -746,15 +747,16 @@
 		};
 		1B03195D1D10AFA7003C06CE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD690E9C954684FA2EAF9132 /* Pods-Ntrvls.debug.xcconfig */;
+			baseConfigurationReference = 90BE550561C97B54DC9C93A9 /* Pods-Ntrvls.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Ntrvls/Ntrvls.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = PZ83QFGZ4V;
 				INFOPLIST_FILE = Ntrvls/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = RAR.Ntrvls;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RAR.Ntrvls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -762,15 +764,16 @@
 		};
 		1B03195E1D10AFA7003C06CE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7273701622D2FE24CB896AD0 /* Pods-Ntrvls.release.xcconfig */;
+			baseConfigurationReference = BA8799109A58423425E53D09 /* Pods-Ntrvls.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Ntrvls/Ntrvls.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = PZ83QFGZ4V;
 				INFOPLIST_FILE = Ntrvls/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = RAR.Ntrvls;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RAR.Ntrvls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -778,7 +781,7 @@
 		};
 		1B0319601D10AFA7003C06CE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14C97EB25DE9109C6DEB5345 /* Pods-NtrvlsTests.debug.xcconfig */;
+			baseConfigurationReference = 0A2FA5A9347AFE6A2CFDE247 /* Pods-NtrvlsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = NtrvlsTests/Info.plist;
@@ -791,7 +794,7 @@
 		};
 		1B0319611D10AFA7003C06CE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 995FD37EA1F8D7902E2AF155 /* Pods-NtrvlsTests.release.xcconfig */;
+			baseConfigurationReference = CE97A24AFF6D74EC1DBE40BA /* Pods-NtrvlsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = NtrvlsTests/Info.plist;
@@ -804,7 +807,7 @@
 		};
 		1B0319631D10AFA7003C06CE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5AE2E2BBFAD5D92F8324E75 /* Pods-NtrvlsUITests.debug.xcconfig */;
+			baseConfigurationReference = EED3C9E766BE344B1F0FBF91 /* Pods-NtrvlsUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = NtrvlsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -816,7 +819,7 @@
 		};
 		1B0319641D10AFA7003C06CE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B8818A9C280394CAEB57622 /* Pods-NtrvlsUITests.release.xcconfig */;
+			baseConfigurationReference = CEC5AEEAFC6A47C8279DBCD3 /* Pods-NtrvlsUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = NtrvlsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

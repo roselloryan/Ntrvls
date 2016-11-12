@@ -440,7 +440,7 @@
 }
 
 - (void)createDemoWorkoutWithCompletionBlock:(void (^)(BOOL complete))completionBlock {
-    
+
     NtrvlsDataStore *sharedDataStore = [NtrvlsDataStore sharedNtrvlsDataStore];
     
     NtrvlWorkout *demoWorkout = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
@@ -696,6 +696,7 @@
     
     NtrvlWorkout *planksWorkout = [NSEntityDescription insertNewObjectForEntityForName:@"NtrvlWorkout" inManagedObjectContext: sharedDataStore.managedObjectContext];
     planksWorkout.workoutTitle = @"Planks";
+    planksWorkout.workoutType = @"workout";
     planksWorkout.creationDate = [NSDate timeIntervalSinceReferenceDate];
     
     for (NSUInteger i = 0; i < 11; i++) {

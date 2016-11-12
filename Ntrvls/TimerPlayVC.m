@@ -126,6 +126,16 @@
     }];
 }
 
+#pragma mark - Text Field method
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if(textField == self.alertTextField && self.alertTextField.text.length > 0) {
+        [self postToStravaWithTitle: self.alertTextField.text];
+        [self dismissViewControllerAnimated: NO completion: nil];
+    }
+    return YES;
+}
+
 #pragma mark - Buttons and button methods
 
 
@@ -475,7 +485,7 @@
                 
                 if (success){
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        NSLog(@"Posted Ntrvls Workout!!!");
+                        //NSLog(@"Posted Ntrvls Workout!!!");
                         [self.activityIndicatorView stopAnimating];
                         [self.activityIndicatorView removeFromSuperview];
                         self.activityIndicatorView = nil;
@@ -664,6 +674,8 @@
 }
 
 - (void)presentSuccessfulStravaUploadAlert {
+    [self.activityIndicatorView removeFromSuperview];
+    self.activityIndicatorView = nil;
     
     UIAlertController *successfulStravaPostAlertController = [UIAlertController alertControllerWithTitle:@"Success!" message: @"Workout posted to Strava" preferredStyle: UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle: @"Ok" style: UIAlertActionStyleDefault handler: ^(UIAlertAction * _Nonnull action) {
@@ -692,26 +704,24 @@
 # pragma mark - Sounds 
 
 - (void)configureSystemSounds {
-    //TODO: figure out catch for url not setting SoundID
     
     // respects the mute switch
-//    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error:nil];
-//
-//    NSURL *threeTwoOnePathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/short_double_low.caf"];
-//    if (threeTwoOnePathURL) {
-//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)threeTwoOnePathURL, &_threeTwoOneSoundID);
-//    }
-//
-//    NSURL *completedNtrvlPathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/long_low_short_high.caf"];
-//    if (completedNtrvlPathURL) {
-//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)completedNtrvlPathURL, &_completedNtrvlSoundID);
-//    }
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error:nil];
+
+    NSURL *threeTwoOnePathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/short_double_low.caf"];
+    if (threeTwoOnePathURL) {
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)threeTwoOnePathURL, &_threeTwoOneSoundID);
+    }
+
+    NSURL *completedNtrvlPathURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/long_low_short_high.caf"];
+    if (completedNtrvlPathURL) {
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)completedNtrvlPathURL, &_completedNtrvlSoundID);
+    }
 }
 
 
 - (void)playSoundsFor321Done {
-    //NSLog(@"self.timeLeftInInterval= %lu", self.timeLeftInInterval);
-    
+
     if (self.timeLeftInInterval == 3 || self.timeLeftInInterval == 2 || self.timeLeftInInterval == 1) {
         AudioServicesPlaySystemSound(self.threeTwoOneSoundID);
     }

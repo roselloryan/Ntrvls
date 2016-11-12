@@ -5,9 +5,6 @@ target 'Ntrvls' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
-  pod 'AFNetworking'
-  pod 'AFOAuth2Manager'
-
   target 'NtrvlsTests' do
     inherit! :search_paths
     # Pods for testing
